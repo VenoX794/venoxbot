@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VenoX_Bot: Nutzungsbedingungen und Datenschutz</title>
+<style>
+:root {
+  --bg: #f6f4ef; --fg: #151515; --muted: #5b5853; --card: #ffffff; --line: #d9d5cc;
+  --accent: #c8102e; --ink: #0b0b0b; --on-ink: #f2f0ec;
+  --display: "Anton", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d0d0e; --fg: #f2f0ec; --muted: #a9a59d; --card: #161618; --line: #2c2c30;
+    --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d0d0e; --fg: #f2f0ec; --muted: #a9a59d; --card: #161618; --line: #2c2c30;
+  --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+header.hero {
+  background: var(--ink); color: var(--on-ink);
+  margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding: 36px max(16px, env(safe-area-inset-left, 0px)) 32px;
+  border-bottom: 6px solid var(--accent);
+}
+.kicker { color: var(--accent); letter-spacing: .22em; font-size: 13px; font-weight: 700; text-transform: uppercase; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 8vw, 52px); line-height: 1.05; margin: 6px 0 0; letter-spacing: .02em; text-wrap: balance; }
+h2 {
+  font-family: var(--display); font-weight: 400; font-size: 28px; letter-spacing: .03em;
+  text-transform: uppercase; margin: 0 0 14px; border-left: 5px solid var(--accent); padding-left: 12px;
+  text-wrap: balance;
+}
+h3 { font-size: 18px; margin: 20px 0 6px; }
+section { padding: 36px 0 0; }
+p { margin: 0 0 12px; max-width: 65ch; }
+ul { padding-left: 22px; margin: 0 0 12px; }
+li { margin: 0 0 8px; }
+code {
+  font-family: ui-monospace, "Courier New", monospace; font-size: 15px;
+  background: var(--ink); color: var(--on-ink); padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+}
+a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; overflow-wrap: anywhere; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--card); border: 1px solid var(--line); padding: 20px 22px; }
+.note { color: var(--muted); font-size: 15px; }
+footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">VenoX_Bot</div>
+    <h1>Nutzungsbedingungen und Datenschutz</h1>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Nutzungsbedingungen</h2>
+
+    <h3>1. Was der Bot ist</h3>
+    <p>Der VenoX_Bot ist ein KI-Bot für Twitch-Chats und Discord-Server. Er beantwortet Fragen, die mit <code>!ask</code> gestellt werden. Er wird von VenoX betrieben und weiterentwickelt.</p>
+
+    <h3>2. Stand der Entwicklung</h3>
+    <p>Der Bot ist noch in Entwicklung. Funktionen können sich ändern, ausfallen oder entfallen.</p>
+
+    <h3>3. Keine Verfügbarkeitsgarantie</h3>
+    <p>Der Bot läuft nur, wenn VenoX ihn eingeschaltet hat. Es gibt keine Garantie, dass er jederzeit erreichbar ist.</p>
+
+    <h3>4. Antworten der KI</h3>
+    <p>Die Antworten werden von einer KI erzeugt und können falsch, unvollständig oder unpassend sein. Sie sind keine Beratung, auch nicht zu Recht, Gesundheit oder Geld. Wichtige Dinge solltest du selbst prüfen. Für den Inhalt der Antworten wird keine Verantwortung übernommen, soweit das gesetzlich zulässig ist.</p>
+
+    <h3>5. Verantwortung des Streamers</h3>
+    <p>Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen ihn einschränken.</p>
+
+    <h3>6. Regeln für die Nutzung</h3>
+    <ul>
+      <li>Keine Beleidigungen, keine Werbung, keine Versuche, den Bot zu Verbotenem zu bringen.</li>
+      <li>Pro Person gilt eine Pause von 5 Minuten zwischen zwei Fragen.</li>
+      <li>Es gibt ein gemeinsames Tageslimit. Ist es erreicht, antwortet der Bot bis zum nächsten Tag nicht.</li>
+    </ul>
+
+    <h3>7. Ausschluss</h3>
+    <p>VenoX kann einzelne Kanäle oder Server ausschließen, zum Beispiel bei Missbrauch, ohne Angabe von Gründen.</p>
+
+    <h3>8. Daten</h3>
+    <p>Die Fragen werden zur Beantwortung an einen KI-Anbieter geschickt. Bitte schreibe keine persönlichen oder vertraulichen Daten in den Chat. Alles Weitere steht in der Datenschutzerklärung.</p>
+
+    <h3>9. Änderungen</h3>
+    <p>Diese Bedingungen können geändert werden. Bei Fragen melde dich bei VenoX: <a href="https://www.twitch.tv/venox_794" target="_blank" rel="noopener">twitch.tv/venox_794</a>.</p>
+  </section>
+
+  <section>
+    <h2>Datenschutzerklärung</h2>
+
+    <h3>1. Verantwortlicher</h3>
+    <p>VenoX (Twitch: <a href="https://www.twitch.tv/venox_794" target="_blank" rel="noopener">twitch.tv/venox_794</a>). Kontakt: venoxbot@web.de.</p>
+
+    <h3>2. Worum es geht</h3>
+    <p>Der VenoX_Bot ist ein KI-Bot für Twitch-Chats und Discord-Server. Er antwortet auf Fragen, die mit <code>!ask</code> gestellt werden.</p>
+
+    <h3>3. Welche Daten verarbeitet werden</h3>
+    <ul>
+      <li><strong>a) Chat-Nachrichten.</strong> Der Bot erhält technisch alle Nachrichten in Kanälen, in denen er aktiv ist. <strong>Er wertet nur Nachrichten aus, die mit <code>!ask</code> beginnen.</strong> Alle anderen werden sofort verworfen und nicht gespeichert.</li>
+      <li><strong>b) Deine Frage.</strong> Der Text deiner Frage wird zur Beantwortung an einen KI-Anbieter geschickt (siehe Punkt 5). Ein Benutzername wird dabei nicht mitgeschickt.</li>
+      <li><strong>c) Benutzerkennung für die Pause.</strong> Damit pro Person eine Pause von 5 Minuten gilt, merkt sich der Bot kurzzeitig deinen Twitch-Namen bzw. deine Discord-Kennung. Das geschieht nur im Arbeitsspeicher und endet spätestens, wenn der Bot neu gestartet wird.</li>
+      <li><strong>d) Zähler.</strong> Der Bot speichert Zeitpunkt und Größe der Anfragen, um Tageslimits einzuhalten, ohne Fragetext und ohne Namen. Einträge werden nach 24 Stunden gelöscht.</li>
+      <li><strong>e) Protokoll.</strong> Im Betrieb schreibt der Bot Meldungen in ein Protokoll, darunter auch dein Name, deine Frage und die Antwort. Das Protokoll wird nicht dauerhaft gespeichert.</li>
+      <li><strong>f) Kanalliste.</strong> Wenn ein Streamer den Bot einlädt, wird seine Twitch-Kanalkennung gespeichert, bis er den Bot entfernt.</li>
+      <li><strong>g) Bestätigungen von Streamern.</strong> Wenn ein Streamer die Bestätigung zur Nutzung des Bots abgibt, speichere ich seinen Namen oder Künstlernamen, Twitch-Kanal, Discord-Server, E-Mail-Adresse und das Datum. Ich bewahre sie auf, solange der Bot dort genutzt wird, und lösche sie danach.</li>
+    </ul>
+
+    <h3>4. Zweck und Rechtsgrundlage</h3>
+    <p>Zweck ist die Beantwortung deiner Fragen, der sichere Betrieb des Bots und der Nachweis, dass Streamer die Bedingungen bestätigt haben. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO.</p>
+
+    <h3>5. Empfänger und Übermittlung in Drittländer</h3>
+    <ul>
+      <li><strong>KI-Anbieter:</strong> Deine Frage geht an Groq LLC, USA. Dabei werden Daten in die USA übermittelt. Es gilt dessen Datenschutzerklärung: <a href="https://groq.com/privacy-policy" target="_blank" rel="noopener">groq.com/privacy-policy</a>. Für die Verarbeitung von Kundendaten gilt ein Vertrag zur Auftragsverarbeitung (<a href="https://console.groq.com/docs/legal/customer-data-processing-addendum" target="_blank" rel="noopener">Data Processing Addendum</a>). Er sieht für Übermittlungen in Drittländer die EU-Standardvertragsklauseln vor, soweit rechtlich erforderlich.</li>
+      <li><strong>Twitch und Discord:</strong> Der Bot nutzt deren Schnittstellen. Dort gelten deren Datenschutzerklärungen.</li>
+    </ul>
+
+    <h3>6. Speicherdauer</h3>
+    <p>Siehe Punkt 3. Die Fragetexte werden nicht dauerhaft gespeichert. Der KI-Anbieter kann Anfragen nach eigenen Regeln speichern. Groq nennt dafür keine feste Frist. Die Daten werden so lange aufbewahrt, wie es für den Zweck der Verarbeitung nötig ist.</p>
+
+    <h3>7. Deine Rechte</h3>
+    <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und <strong>Widerspruch</strong>. Du kannst dich bei einer Datenschutzaufsichtsbehörde beschweren. Schreib dafür an venoxbot@web.de.</p>
+
+    <h3>8. Hinweis für Nutzer</h3>
+    <p>Bitte schreibe keine persönlichen oder vertraulichen Angaben in deine Fragen. Die Antworten stammen von einer KI und können fehlerhaft sein.</p>
+
+    <h3>9. Jugendliche</h3>
+    <p>Der Bot richtet sich an die Nutzer von Twitch und Discord. Es gelten deren Altersgrenzen.</p>
+
+    <h3>10. Änderungen</h3>
+    <p>Diese Erklärung kann angepasst werden. Stand: 19.10.2026.</p>
+  </section>
+
+  <footer>
+    VenoX_Bot · Betrieben von VenoX · Stand 19.10.2026
+  </footer>
+</main>
+
+</body>
+</html>
