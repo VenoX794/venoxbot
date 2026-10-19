@@ -1,0 +1,179 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>VenoX_Bot Info</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #f6f4ef;
+  --fg: #151515;
+  --muted: #5b5853;
+  --card: #ffffff;
+  --line: #d9d5cc;
+  --accent: #c8102e;
+  --ink: #0b0b0b;
+  --on-ink: #f2f0ec;
+  --on-accent: #ffffff;
+  --display: "Anton", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d0d0e; --fg: #f2f0ec; --muted: #a9a59d; --card: #161618; --line: #2c2c30;
+    --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; --on-accent: #0d0d0e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d0d0e; --fg: #f2f0ec; --muted: #a9a59d; --card: #161618; --line: #2c2c30;
+  --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; --on-accent: #0d0d0e; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+header.hero {
+  background: var(--ink); color: var(--on-ink);
+  margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding: 40px max(16px, env(safe-area-inset-left, 0px)) 36px;
+  border-bottom: 6px solid var(--accent);
+}
+.kicker { color: var(--accent); letter-spacing: .22em; font-size: 13px; font-weight: 700; text-transform: uppercase; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 9vw, 64px); line-height: 1; margin: 6px 0 12px; letter-spacing: .02em; }
+.lead { margin: 0; color: #cfcac2; max-width: 46ch; }
+section { padding: 36px 0 0; }
+h2 {
+  font-family: var(--display); font-weight: 400; font-size: 28px; letter-spacing: .03em;
+  text-transform: uppercase; margin: 0 0 14px; border-left: 5px solid var(--accent); padding-left: 12px;
+  text-wrap: balance;
+}
+p { margin: 0 0 12px; max-width: 65ch; }
+ol, ul { padding-left: 22px; margin: 0 0 12px; }
+li { margin: 0 0 8px; }
+.card { background: var(--card); border: 1px solid var(--line); padding: 20px 22px; }
+code, .cmd {
+  font-family: ui-monospace, "Courier New", monospace; font-size: 15px;
+  background: var(--ink); color: var(--on-ink); padding: 2px 8px; border-radius: 4px;
+  white-space: nowrap;
+}
+a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.btn {
+  display: inline-block; background: var(--accent); color: var(--on-accent); text-decoration: none;
+  padding: 12px 18px; font-weight: 700; letter-spacing: .04em; border: 2px solid var(--accent);
+  font: inherit; font-weight: 700; cursor: pointer;
+}
+.btn.ghost { background: transparent; color: var(--fg); border: 2px solid var(--fg); }
+.btn:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.step { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; margin: 0 0 18px; align-items: start; }
+.num {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: var(--on-accent);
+  display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 20px;
+}
+.step h3 { margin: 6px 0 4px; font-size: 18px; }
+.step p { margin: 0; }
+.contact { display: flex; gap: 10px 14px; align-items: center; flex-wrap: wrap; }
+.contact .addr { font-weight: 700; font-size: 18px; overflow-wrap: anywhere; user-select: all; min-width: 0; }
+.note { color: var(--muted); font-size: 15px; }
+footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: 14px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Geheimakte 32-X</div>
+    <h1>VenoX_Bot</h1>
+    <p class="lead">Ein KI-Bot für Twitch-Chats und Discord-Server. Zuschauer schreiben <span class="cmd">!ask</span> und ihre Frage, der Bot antwortet kurz und auf Deutsch.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Was der Bot macht</h2>
+    <ul>
+      <li>Beantwortet Fragen, die mit <code>!ask</code> beginnen, kurz und auf Deutsch.</li>
+      <li>Läuft im Twitch-Chat und auf Discord.</li>
+      <li>Ist noch in Entwicklung. Funktionen und Regeln können sich ändern.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Für Streamer auf Twitch</h2>
+    <div class="card">
+      <div class="step"><div class="num">1</div><div><h3>Bot zum Moderator machen</h3><p>Schreibe in deinem eigenen Chat <span class="cmd">/mod VenoX_Bot</span>.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Beitritt im Bot-Chat</h3><p>Geh in den <a href="https://www.twitch.tv/venox_bot" target="_blank" rel="noopener">Chat des Bots (twitch.tv/venox_bot)</a> und schreibe dort <span class="cmd">!join</span> und deinen Kanalnamen. Der Bot bestätigt den Beitritt.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h3>Fertig</h3><p>In deinem Kanal kann jetzt jeder <span class="cmd">!ask</span> nutzen.</p></div></div>
+      <p class="note" style="margin:0">Mit <span class="cmd">!leave</span> im Bot-Chat verlässt der Bot deinen Kanal wieder.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Für Discord-Server</h2>
+    <p>Den Bot holst du über einen Einladungslink auf deinen Server. Dafür musst du dort Admin sein. Fragen dazu beantworten wir auf dem Discord-Server.</p>
+    <div class="btns">
+      <a class="btn" href="https://discord.gg/35yxAptEP" target="_blank" rel="noopener">Discord-Server öffnen</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Regeln für die Nutzung</h2>
+    <ul>
+      <li>Jede Person kann alle <strong>5 Minuten</strong> eine Frage stellen.</li>
+      <li>Fragen dürfen höchstens <strong>400 Zeichen</strong> lang sein.</li>
+      <li>Es gibt ein gemeinsames Tageslimit. Ist es erreicht, antwortet der Bot bis zum nächsten Tag nicht.</li>
+      <li>Keine Beleidigungen, keine Werbung und keine Versuche, den Bot zu Verbotenem zu bringen.</li>
+      <li>Antworten stammen von einer KI und können falsch sein. Wichtige Dinge bitte selbst prüfen.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Datenschutz in Kürze</h2>
+    <ul>
+      <li>Der Bot wertet nur Nachrichten aus, die mit <code>!ask</code> beginnen. Andere Nachrichten werden nicht gespeichert.</li>
+      <li>Deine Frage wird zur Beantwortung an den KI-Anbieter Groq in den USA geschickt.</li>
+      <li>Schreibe keine persönlichen oder vertraulichen Angaben in eine Frage.</li>
+    </ul>
+    <div class="btns">
+      <a class="btn ghost" href="https://claude.ai/artifact/GwNCWYAJyLBvBk5tdoHzdV" target="_blank" rel="noopener">Nutzungsbedingungen und Datenschutz</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Kontakt</h2>
+    <div class="card contact">
+      <span class="addr" id="mail">venoxbot@web.de</span>
+      <button class="btn ghost" type="button" id="copy">Adresse kopieren</button>
+      <span class="note" id="copied" role="status" aria-live="polite"></span>
+    </div>
+    <p class="note" style="margin-top:12px">Auf Twitch: <a href="https://www.twitch.tv/venox_794" target="_blank" rel="noopener">twitch.tv/venox_794</a></p>
+  </section>
+
+  <footer>
+    VenoX_Bot · Betrieben von VenoX · Stand 19.10.2026 · Der Bot ist noch in Entwicklung.
+  </footer>
+</main>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy");
+  var out = document.getElementById("copied");
+  var mail = document.getElementById("mail");
+  function select() {
+    var r = document.createRange();
+    r.selectNodeContents(mail);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    out.textContent = "Markiert. Bitte mit Strg+C oder lange drücken kopieren.";
+  }
+  btn.addEventListener("click", function () {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(mail.textContent).then(function () {
+        out.textContent = "Kopiert.";
+      }, select);
+    } else {
+      select();
+    }
+  });
+})();
+</script>
