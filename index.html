@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>VenoX_Bot Info</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap">
@@ -79,6 +84,8 @@ a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; overflow
 .note { color: var(--muted); font-size: 15px; }
 footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: 14px; }
 </style>
+</head>
+<body>
 
 <header class="hero">
   <div class="wrap">
@@ -103,7 +110,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <h2>Für Streamer auf Twitch</h2>
     <div class="card">
       <div class="step"><div class="num">1</div><div><h3>Bot zum Moderator machen</h3><p>Schreibe in deinem eigenen Chat <span class="cmd">/mod VenoX_Bot</span>.</p></div></div>
-      <div class="step"><div class="num">2</div><div><h3>Beitritt im Bot-Chat</h3><p>Geh in den <a href="https://www.twitch.tv/venox_bot" target="_blank" rel="noopener">Chat des Bots (twitch.tv/venox_bot)</a> und schreibe dort <span class="cmd">!join</span> und deinen Kanalnamen. Der Bot bestätigt den Beitritt.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Beitritt im Bot-Chat</h3><p>Geh in den <a href="https://www.twitch.tv/venox_bot" target="_blank" rel="noopener">Chat des Bots (twitch.tv/venox_bot)</a> und schreibe dort nur <span class="cmd">!join</span>. Der Bot erkennt dich an deinem Konto und bestätigt den Beitritt.</p></div></div>
       <div class="step"><div class="num">3</div><div><h3>Fertig</h3><p>In deinem Kanal kann jetzt jeder <span class="cmd">!ask</span> nutzen.</p></div></div>
       <p class="note" style="margin:0">Mit <span class="cmd">!leave</span> im Bot-Chat verlässt der Bot deinen Kanal wieder.</p>
     </div>
@@ -120,18 +127,26 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
   <section>
     <h2>Regeln für die Nutzung</h2>
     <ul>
-      <li>Jede Person kann alle <strong>10 Sekunden</strong> eine Frage stellen.</li>
+      <li>Zwischen zwei Fragen einer Person liegt eine Pause, standardmäßig <strong>10 Sekunden</strong>. Streamer, Moderatoren und Server-Betreiber können sie im eigenen Kanal ändern.</li>
       <li>Fragen dürfen höchstens <strong>400 Zeichen</strong> lang sein.</li>
-      <li>Es gibt ein gemeinsames Tageslimit. Ist es erreicht, antwortet der Bot bis zum nächsten Tag nicht.</li>
+      <li>Es gibt Tageslimits für alle Kanäle und Server zusammen. Sie zählen die letzten 24 Stunden. Ist ein Limit erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.</li>
       <li>Keine Beleidigungen, keine Werbung und keine Versuche, den Bot zu Verbotenem zu bringen.</li>
       <li>Antworten stammen von einer KI und können falsch sein. Wichtige Dinge bitte selbst prüfen.</li>
     </ul>
   </section>
 
   <section>
+    <h2>Befehle</h2>
+    <p>Alle Befehle für Zuschauer, Streamer und Server-Betreiber stehen auf einer eigenen Seite.</p>
+    <div class="btns">
+      <a class="btn ghost" href="befehle.html">Alle Befehle</a>
+    </div>
+  </section>
+
+  <section>
     <h2>Datenschutz in Kürze</h2>
     <ul>
-      <li>Der Bot wertet nur Nachrichten aus, die mit <code>!ask</code> beginnen. Andere Nachrichten werden nicht gespeichert.</li>
+      <li>Der Bot wertet nur Befehle aus, zum Beispiel <code>!ask</code> und <code>!info</code>. Andere Nachrichten werden nicht gespeichert.</li>
       <li>Deine Frage wird zur Beantwortung an den KI-Anbieter Groq in den USA geschickt.</li>
       <li>Schreibe keine persönlichen oder vertraulichen Angaben in eine Frage.</li>
     </ul>
@@ -151,7 +166,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
   </section>
 
   <footer>
-    VenoX_Bot · Betrieben von VenoX · Stand 19.10.2026 · Der Bot ist noch in Entwicklung.
+    VenoX_Bot · Betrieben von VenoX · Stand 20.10.2026 · Der Bot ist noch in Entwicklung.
   </footer>
 </main>
 
@@ -177,3 +192,5 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
   });
 })();
 </script>
+</body>
+</html>

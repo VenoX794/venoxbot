@@ -86,20 +86,20 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <p>Die Antworten werden von einer KI erzeugt und können falsch, unvollständig oder unpassend sein. Sie sind keine Beratung, auch nicht zu Recht, Gesundheit oder Geld. Wichtige Dinge solltest du selbst prüfen. Für den Inhalt der Antworten wird keine Verantwortung übernommen, soweit das gesetzlich zulässig ist.</p>
 
     <h3>5. Verantwortung des Streamers</h3>
-    <p>Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen ihn einschränken.</p>
+    <p>Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen die KI-Antworten pausieren und die Abklingzeit ändern.</p>
 
     <h3>6. Regeln für die Nutzung</h3>
     <ul>
       <li>Keine Beleidigungen, keine Werbung, keine Versuche, den Bot zu Verbotenem zu bringen.</li>
-      <li>Pro Person gilt eine Pause von 10 Sekunden zwischen zwei Fragen.</li>
-      <li>Es gibt ein gemeinsames Tageslimit. Ist es erreicht, antwortet der Bot bis zum nächsten Tag nicht.</li>
+      <li>Pro Person gilt eine Pause zwischen zwei Fragen. Standard sind 10 Sekunden. Streamer, Moderatoren und Server-Betreiber können sie im eigenen Kanal ändern.</li>
+      <li>Es gibt Tageslimits für alle Kanäle und Server zusammen. Sie zählen die letzten 24 Stunden. Ist ein Limit erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.</li>
     </ul>
 
     <h3>7. Ausschluss</h3>
     <p>VenoX kann einzelne Kanäle oder Server ausschließen, zum Beispiel bei Missbrauch, ohne Angabe von Gründen.</p>
 
     <h3>8. Daten</h3>
-    <p>Die Fragen werden zur Beantwortung an einen KI-Anbieter geschickt. Bitte schreibe keine persönlichen oder vertraulichen Daten in den Chat. Alles Weitere steht in der Datenschutzerklärung.</p>
+    <p>Die Fragen werden zur Beantwortung an einen KI-Anbieter in den USA geschickt. Bitte schreibe keine persönlichen oder vertraulichen Daten in den Chat. Alles Weitere steht in der Datenschutzerklärung.</p>
 
     <h3>9. Änderungen</h3>
     <p>Diese Bedingungen können geändert werden. Bei Fragen melde dich bei VenoX: <a href="https://www.twitch.tv/venox_794" target="_blank" rel="noopener">twitch.tv/venox_794</a>.</p>
@@ -116,12 +116,12 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
 
     <h3>3. Welche Daten verarbeitet werden</h3>
     <ul>
-      <li><strong>a) Chat-Nachrichten.</strong> Der Bot erhält technisch alle Nachrichten in Kanälen, in denen er aktiv ist. <strong>Er wertet nur Nachrichten aus, die mit <code>!ask</code> beginnen.</strong> Alle anderen werden sofort verworfen und nicht gespeichert.</li>
+      <li><strong>a) Chat-Nachrichten.</strong> Der Bot erhält technisch alle Nachrichten in Kanälen, in denen er aktiv ist. <strong>Er wertet nur Befehle aus, zum Beispiel <code>!ask</code> und <code>!info</code>.</strong> Alle anderen Nachrichten werden sofort verworfen und nicht gespeichert.</li>
       <li><strong>b) Deine Frage.</strong> Der Text deiner Frage wird zur Beantwortung an einen KI-Anbieter geschickt (siehe Punkt 5). Ein Benutzername wird dabei nicht mitgeschickt.</li>
-      <li><strong>c) Benutzerkennung für die Pause.</strong> Damit pro Person eine Pause von 10 Sekunden gilt, merkt sich der Bot kurzzeitig deinen Twitch-Namen bzw. deine Discord-Kennung. Das geschieht nur im Arbeitsspeicher und endet spätestens, wenn der Bot neu gestartet wird.</li>
-      <li><strong>d) Zähler.</strong> Der Bot speichert Zeitpunkt und Größe der Anfragen, um Tageslimits einzuhalten, ohne Fragetext und ohne Namen. Einträge werden nach 24 Stunden gelöscht.</li>
-      <li><strong>e) Protokoll.</strong> Im Betrieb schreibt der Bot Meldungen in ein Protokoll, darunter auch dein Name, deine Frage und die Antwort. Das Protokoll wird nicht dauerhaft gespeichert.</li>
-      <li><strong>f) Kanalliste.</strong> Wenn ein Streamer den Bot einlädt, wird seine Twitch-Kanalkennung gespeichert, bis er den Bot entfernt.</li>
+      <li><strong>c) Benutzerkennung für die Pause.</strong> Damit pro Person eine Pause gilt, merkt sich der Bot kurzzeitig deinen Twitch-Namen bzw. deine Discord-Kennung. Das geschieht nur im Arbeitsspeicher und endet spätestens, wenn der Bot neu gestartet wird.</li>
+      <li><strong>d) Zähler.</strong> Der Bot speichert den Zeitpunkt jeder Anfrage, auf Twitch zusätzlich die Anzahl der verbrauchten Tokens. Das dient den Tageslimits. Fragetext und Namen werden dabei nicht gespeichert. Einträge, die älter als 24 Stunden sind, werden bei der nächsten Anfrage entfernt.</li>
+      <li><strong>e) Protokoll.</strong> Während der Bot läuft, gibt er Meldungen aus, darunter deinen Namen, deine Frage und die Antwort. Das dient der Fehlersuche. Der Bot legt dafür keine eigene Datei an. Die Meldungen erscheinen in der Konsole des Rechners, auf dem der Bot läuft, bzw. im Systemprotokoll, wenn er als Dienst läuft. Wie lange sie dort bleiben, richtet sich nach den Einstellungen dieses Rechners.</li>
+      <li><strong>f) Kanalliste und Einstellungen.</strong> Lädt ein Streamer den Bot ein, werden seine Twitch-Kanalkennung und sein Kanalname gespeichert, bis er den Bot mit <code>!leave</code> wieder aus seinem Kanal entfernt. Pause- und Abklingzeit-Einstellungen bleiben auch danach gespeichert. Eine Löschung kannst du unter der Kontaktadresse in Punkt 1 verlangen.</li>
       <li><strong>g) Bestätigungen von Streamern.</strong> Wenn ein Streamer die Bestätigung zur Nutzung des Bots abgibt, speichere ich seinen Namen oder Künstlernamen, Twitch-Kanal, Discord-Server, E-Mail-Adresse und das Datum. Ich bewahre sie auf, solange der Bot dort genutzt wird, und lösche sie danach.</li>
     </ul>
 
@@ -130,12 +130,14 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
 
     <h3>5. Empfänger und Übermittlung in Drittländer</h3>
     <ul>
-      <li><strong>KI-Anbieter:</strong> Deine Frage geht an Groq LLC, USA. Dabei werden Daten in die USA übermittelt. Es gilt dessen Datenschutzerklärung: <a href="https://groq.com/privacy-policy" target="_blank" rel="noopener">groq.com/privacy-policy</a>. Für die Verarbeitung von Kundendaten gilt ein Vertrag zur Auftragsverarbeitung (<a href="https://console.groq.com/docs/legal/customer-data-processing-addendum" target="_blank" rel="noopener">Data Processing Addendum</a>). Er sieht für Übermittlungen in Drittländer die EU-Standardvertragsklauseln vor, soweit rechtlich erforderlich.</li>
+      <li><strong>KI-Anbieter:</strong> Deine Frage geht an Groq LLC, USA. Dabei werden Daten in die USA übermittelt. Es gilt dessen Datenschutzerklärung: <a href="https://groq.com/privacy-policy" target="_blank" rel="noopener">groq.com/privacy-policy</a>. Für die Verarbeitung von Kundendaten gilt ein Vertrag zur Auftragsverarbeitung (<a href="https://console.groq.com/docs/legal/customer-data-processing-addendum" target="_blank" rel="noopener">Data Processing Addendum</a>). Er sieht die EU-Standardvertragsklauseln vor, soweit das rechtlich erforderlich ist.</li>
       <li><strong>Twitch und Discord:</strong> Der Bot nutzt deren Schnittstellen. Dort gelten deren Datenschutzerklärungen.</li>
+      <li><strong>GitHub (Infoseite):</strong> Die Infoseite wird über GitHub Pages bereitgestellt. Dabei fallen technische Zugriffsdaten bei GitHub, Inc. (USA) an.</li>
+      <li><strong>Google Fonts:</strong> Die Infoseite lädt Schriftarten von Google. Dabei wird deine IP-Adresse an Google übertragen.</li>
     </ul>
 
     <h3>6. Speicherdauer</h3>
-    <p>Siehe Punkt 3. Die Fragetexte werden nicht dauerhaft gespeichert. Der KI-Anbieter kann Anfragen nach eigenen Regeln speichern. Groq nennt dafür keine feste Frist. Die Daten werden so lange aufbewahrt, wie es für den Zweck der Verarbeitung nötig ist.</p>
+    <p>Zähler: siehe Punkt 3d. Protokoll: siehe Punkt 3e. Kanalliste und Einstellungen: siehe Punkt 3f. Streamer-Bestätigungen: siehe Punkt 3g. Groq protokolliert Ein- und Ausgaben nach eigenen Angaben nur zur Fehlerdiagnose oder bei Verdacht auf Missbrauch, höchstens 30 Tage lang. Diese Protokollierung lässt sich in den Data-Controls-Einstellungen von Groq abschalten (<a href="https://console.groq.com/docs/your-data" target="_blank" rel="noopener">Groq-Dokumentation</a>).</p>
 
     <h3>7. Deine Rechte</h3>
     <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und <strong>Widerspruch</strong>. Du kannst dich bei einer Datenschutzaufsichtsbehörde beschweren. Schreib dafür an venoxbot@web.de.</p>
@@ -147,11 +149,11 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <p>Der Bot richtet sich an die Nutzer von Twitch und Discord. Es gelten deren Altersgrenzen.</p>
 
     <h3>10. Änderungen</h3>
-    <p>Diese Erklärung kann angepasst werden. Stand: 19.10.2026.</p>
+    <p>Diese Erklärung kann angepasst werden. Stand: 20.10.2026.</p>
   </section>
 
   <footer>
-    VenoX_Bot · Betrieben von VenoX · Stand 19.10.2026
+    VenoX_Bot · Betrieben von VenoX · Stand 20.10.2026
   </footer>
 </main>
 
