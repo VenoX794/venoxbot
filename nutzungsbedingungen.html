@@ -96,7 +96,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <p>Die Antworten werden von einer KI erzeugt und können falsch, unvollständig oder unpassend sein. Sie sind keine Beratung, auch nicht zu Recht, Gesundheit oder Geld. Wichtige Dinge solltest du selbst prüfen. Für den Inhalt der Antworten wird keine Verantwortung übernommen, soweit das gesetzlich zulässig ist.</p>
 
     <h3>5. Verantwortung des Streamers</h3>
-    <p>Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen die KI-Antworten pausieren, die Abklingzeit ändern und die Minispiele aus- und einschalten.</p>
+    <p>Bevor der Bot in deinen Twitch-Kanal kommt, bestätigst du diese Bedingungen mit <code>!join akzeptieren</code> im Chat des Bots. Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen die KI-Antworten pausieren, die Abklingzeit ändern und die Minispiele aus- und einschalten.</p>
 
     <h3>6. Regeln für die Nutzung</h3>
     <ul>
@@ -138,10 +138,11 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
       <li><strong>e) Protokoll.</strong> Während der Bot läuft, gibt er Meldungen aus, darunter deinen Namen, deine Frage und die Antwort. Das dient der Fehlersuche. Der Bot legt dafür keine eigene Datei an. Die Meldungen erscheinen in der Konsole des Rechners, auf dem der Bot läuft, bzw. im Systemprotokoll, wenn er als Dienst läuft. Wie lange sie dort bleiben, richtet sich nach den Einstellungen dieses Rechners.</li>
       <li><strong>f) Kanalliste und Einstellungen.</strong> Lädt ein Streamer den Bot ein, werden seine Twitch-Kanalkennung und sein Kanalname gespeichert, bis er den Bot mit <code>!leave</code> wieder aus seinem Kanal entfernt. Pause- und Abklingzeit-Einstellungen sowie die Einstellung, ob die Minispiele an oder aus sind, bleiben auch danach gespeichert. Eine Löschung kannst du unter der Kontaktadresse in Punkt 1 verlangen.</li>
       <li><strong>g) Bestätigung auf der Infoseite.</strong> Bestätigst du unten die Nutzungsbedingungen, speichert nur dein eigener Browser einen Vermerk mit dem Stand der Bedingungen (im lokalen Speicher des Browsers). Er wird nicht an uns übertragen und dient nur dazu, dass du die Befehle-Seite öffnen kannst, ohne jedes Mal neu zu bestätigen. Du kannst ihn jederzeit löschen, indem du die Websitedaten in deinem Browser löschst.</li>
+      <li><strong>h) Bestätigung durch Streamer.</strong> Bestätigst du als Streamer mit <code>!join akzeptieren</code> die Nutzungsbedingungen, speichert der Bot deine Twitch-Kennung, deinen Twitch-Namen, den Stand der Bedingungen und Datum und Uhrzeit. Verlässt du den Bot mit <code>!leave</code>, wird auch dieses Datum vermerkt. Drei Jahre danach wird der Eintrag automatisch gelöscht.</li>
     </ul>
 
     <h3>4. Zweck und Rechtsgrundlage</h3>
-    <p>Zweck ist die Beantwortung deiner Fragen, der sichere Betrieb des Bots. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO. Der Vermerk aus Punkt 3g ist für die von dir gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
+    <p>Zweck ist die Beantwortung deiner Fragen, der sichere Betrieb des Bots. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO. Die Bestätigung aus Punkt 3h dient als Nachweis, dass die Bedingungen akzeptiert wurden (ebenfalls Art. 6 Abs. 1 lit. f DSGVO). Der Vermerk aus Punkt 3g ist für die von dir gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
 
     <h3>5. Empfänger und Übermittlung in Drittländer</h3>
     <ul>
@@ -151,7 +152,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     </ul>
 
     <h3>6. Speicherdauer</h3>
-    <p>Zähler: siehe Punkt 3d. Protokoll: siehe Punkt 3e. Kanalliste und Einstellungen: siehe Punkt 3f. Bestätigung im Browser: siehe Punkt 3g. Groq protokolliert Ein- und Ausgaben nach eigenen Angaben nur zur Fehlerdiagnose oder bei Verdacht auf Missbrauch, höchstens 30 Tage lang. Diese Protokollierung lässt sich in den Data-Controls-Einstellungen von Groq abschalten (<a href="https://console.groq.com/docs/your-data" target="_blank" rel="noopener">Groq-Dokumentation</a>).</p>
+    <p>Zähler: siehe Punkt 3d. Protokoll: siehe Punkt 3e. Kanalliste und Einstellungen: siehe Punkt 3f. Bestätigung im Browser: siehe Punkt 3g. Bestätigung durch Streamer: siehe Punkt 3h. Groq protokolliert Ein- und Ausgaben nach eigenen Angaben nur zur Fehlerdiagnose oder bei Verdacht auf Missbrauch, höchstens 30 Tage lang. Diese Protokollierung lässt sich in den Data-Controls-Einstellungen von Groq abschalten (<a href="https://console.groq.com/docs/your-data" target="_blank" rel="noopener">Groq-Dokumentation</a>).</p>
 
     <h3>7. Deine Rechte</h3>
     <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und <strong>Widerspruch</strong>. Du kannst dich bei einer Datenschutzaufsichtsbehörde beschweren. Schreib dafür an venoxbot@web.de.</p>
