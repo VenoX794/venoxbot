@@ -7,19 +7,19 @@
 <style>
 :root {
   --bg: #f6f4ef; --fg: #151515; --muted: #5b5853; --card: #ffffff; --line: #d9d5cc;
-  --accent: #c8102e; --ink: #0b0b0b; --on-ink: #f2f0ec; --on-accent: #ffffff;
+  --accent: #c8102e; --ink: #0b0b0b; --on-ink: #f2f0ec;
   --display: "Anton", "Arial Narrow", Impact, sans-serif;
   --body: "Barlow", "Segoe UI", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0d0d0e; --fg: #f2f0ec; --muted: #a9a59d; --card: #161618; --line: #2c2c30;
-    --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; --on-accent: #0d0d0e; color-scheme: dark;
+    --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0d0d0e; --fg: #f2f0ec; --muted: #a9a59d; --card: #161618; --line: #2c2c30;
-  --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; --on-accent: #0d0d0e; color-scheme: dark;
+  --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body {
@@ -56,16 +56,6 @@ a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; overflow
 a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .card { background: var(--card); border: 1px solid var(--line); padding: 20px 22px; }
 .note { color: var(--muted); font-size: 15px; }
-.btn {
-  display: inline-block; background: var(--accent); color: var(--on-accent); text-decoration: none;
-  padding: 12px 18px; font: inherit; font-weight: 700; letter-spacing: .04em; border: 2px solid var(--accent); cursor: pointer;
-}
-.btn:disabled { background: transparent; color: var(--muted); border-color: var(--line); cursor: not-allowed; }
-.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.confirm { border-left: 6px solid var(--accent); }
-.check { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; align-items: start; cursor: pointer; margin: 0 0 16px; }
-.check input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--accent); cursor: pointer; }
-.status { color: var(--muted); font-size: 15px; margin: 12px 0 0; min-height: 1.5em; }
 footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: 14px; }
 </style>
 </head>
@@ -84,7 +74,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <h2>Nutzungsbedingungen</h2>
 
     <h3>1. Was der Bot ist</h3>
-    <p>Der VenoX_Bot ist ein KI-Bot für Twitch-Chats und Discord-Server. Er beantwortet Fragen, die mit <code>!ask</code> gestellt werden, und bietet Minispiele wie Würfeln, Quiz oder Lootbox. Er wird von VenoX betrieben und weiterentwickelt.</p>
+    <p>Der VenoX_Bot ist ein KI-Bot für Twitch-Chats und Discord-Server. Er beantwortet Fragen, die mit <code>!ask</code> gestellt werden. Er wird von VenoX betrieben und weiterentwickelt.</p>
 
     <h3>2. Stand der Entwicklung</h3>
     <p>Der Bot ist noch in Entwicklung. Funktionen können sich ändern, ausfallen oder entfallen.</p>
@@ -96,28 +86,23 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <p>Die Antworten werden von einer KI erzeugt und können falsch, unvollständig oder unpassend sein. Sie sind keine Beratung, auch nicht zu Recht, Gesundheit oder Geld. Wichtige Dinge solltest du selbst prüfen. Für den Inhalt der Antworten wird keine Verantwortung übernommen, soweit das gesetzlich zulässig ist.</p>
 
     <h3>5. Verantwortung des Streamers</h3>
-    <p>Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen die KI-Antworten pausieren, die Abklingzeit ändern und die Minispiele aus- und einschalten.</p>
+    <p>Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen die KI-Antworten pausieren und die Abklingzeit ändern.</p>
 
     <h3>6. Regeln für die Nutzung</h3>
     <ul>
       <li>Keine Beleidigungen, keine Werbung, keine Versuche, den Bot zu Verbotenem zu bringen.</li>
-      <li>Pro Person gilt eine Pause zwischen zwei Fragen. Standard sind 10 Sekunden. Streamer, Moderatoren und Server-Betreiber können sie im eigenen Kanal ändern. Zwischen zwei Minispielen liegen 5 Sekunden.</li>
-      <li>Eine Nachricht darf mehrere Fragen enthalten. Sie werden nummeriert beantwortet, auf Twitch in bis zu drei Nachrichten.</li>
-      <li>Pro Kanal beantwortet der Bot eine Frage nach der anderen. Bis zu drei weitere Fragen warten in einer Warteschlange. Ist sie voll, bekommst du einen Hinweis und kannst es gleich nochmal versuchen.</li>
+      <li>Pro Person gilt eine Pause zwischen zwei Fragen. Standard sind 10 Sekunden. Streamer, Moderatoren und Server-Betreiber können sie im eigenen Kanal ändern.</li>
       <li>Es gibt Tageslimits für alle Kanäle und Server zusammen. Sie zählen die letzten 24 Stunden. Ist ein Limit erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.</li>
     </ul>
 
-    <h3>7. Minispiele</h3>
-    <p>Die Minispiele (<code>!ask würfel</code>, <code>!ask münze</code>, <code>!ask orakel</code>, <code>!ask duell</code>, <code>!ask loot</code>, <code>!ask rate</code> und <code>!ask quiz</code>) dienen nur der Unterhaltung. Die Ergebnisse sind zufällig und werden ohne KI erzeugt. Es gibt keine Einsätze und keine echten Gewinne. Gegenstände aus der Lootbox und Siege im Duell sind rein virtuell und haben keinen Wert. Das Orakel ist ein Spaß und ersetzt keinen Rat. Bei ernsten Themen gibt es keine Zufallsantwort.</p>
-
-    <h3>8. Ausschluss</h3>
+    <h3>7. Ausschluss</h3>
     <p>VenoX kann einzelne Kanäle oder Server ausschließen, zum Beispiel bei Missbrauch, ohne Angabe von Gründen.</p>
 
-    <h3>9. Daten</h3>
+    <h3>8. Daten</h3>
     <p>Die Fragen werden zur Beantwortung an einen KI-Anbieter in den USA geschickt. Bitte schreibe keine persönlichen oder vertraulichen Daten in den Chat. Alles Weitere steht in der Datenschutzerklärung.</p>
 
-    <h3>10. Änderungen</h3>
-    <p>Diese Bedingungen können geändert werden. Nach einer Änderung bittet dich die Infoseite, sie erneut zu bestätigen. Bei Fragen melde dich bei VenoX: <a href="https://www.twitch.tv/venox_794" target="_blank" rel="noopener">twitch.tv/venox_794</a>.</p>
+    <h3>9. Änderungen</h3>
+    <p>Diese Bedingungen können geändert werden. Bei Fragen melde dich bei VenoX: <a href="https://www.twitch.tv/venox_794" target="_blank" rel="noopener">twitch.tv/venox_794</a>.</p>
   </section>
 
   <section>
@@ -131,27 +116,28 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
 
     <h3>3. Welche Daten verarbeitet werden</h3>
     <ul>
-      <li><strong>a) Chat-Nachrichten.</strong> Der Bot erhält technisch alle Nachrichten in Kanälen, in denen er aktiv ist. <strong>Er wertet nur Befehle aus, zum Beispiel <code>!ask</code> (auch für die Minispiele) und <code>!info</code>.</strong> Alle anderen Nachrichten werden sofort verworfen und nicht gespeichert.</li>
-      <li><strong>b) Deine Frage.</strong> Der Text deiner Frage wird zur Beantwortung an einen KI-Anbieter geschickt (siehe Punkt 5). Ein Benutzername wird dabei nicht mitgeschickt. Bis zur Antwort wartet die Frage gegebenenfalls kurz in einer Warteschlange im Arbeitsspeicher. Befehle für Minispiele gehen nicht an den KI-Anbieter.</li>
-      <li><strong>c) Benutzerkennung für Pause und Minispiele.</strong> Damit pro Person eine Pause gilt und Minispiele wie Duell oder Quiz funktionieren, merkt sich der Bot kurzzeitig deinen Twitch-Namen bzw. deine Discord-Kennung, beim Duell auch die des Gegners. Das geschieht nur im Arbeitsspeicher und endet spätestens, wenn der Bot neu gestartet wird.</li>
+      <li><strong>a) Chat-Nachrichten.</strong> Der Bot erhält technisch alle Nachrichten in Kanälen, in denen er aktiv ist. <strong>Er wertet nur Befehle aus, zum Beispiel <code>!ask</code> und <code>!info</code>.</strong> Alle anderen Nachrichten werden sofort verworfen und nicht gespeichert.</li>
+      <li><strong>b) Deine Frage.</strong> Der Text deiner Frage wird zur Beantwortung an einen KI-Anbieter geschickt (siehe Punkt 5). Ein Benutzername wird dabei nicht mitgeschickt.</li>
+      <li><strong>c) Benutzerkennung für die Pause.</strong> Damit pro Person eine Pause gilt, merkt sich der Bot kurzzeitig deinen Twitch-Namen bzw. deine Discord-Kennung. Das geschieht nur im Arbeitsspeicher und endet spätestens, wenn der Bot neu gestartet wird.</li>
       <li><strong>d) Zähler.</strong> Der Bot speichert den Zeitpunkt jeder Anfrage, auf Twitch zusätzlich die Anzahl der verbrauchten Tokens. Das dient den Tageslimits. Fragetext und Namen werden dabei nicht gespeichert. Einträge, die älter als 24 Stunden sind, werden bei der nächsten Anfrage entfernt.</li>
       <li><strong>e) Protokoll.</strong> Während der Bot läuft, gibt er Meldungen aus, darunter deinen Namen, deine Frage und die Antwort. Das dient der Fehlersuche. Der Bot legt dafür keine eigene Datei an. Die Meldungen erscheinen in der Konsole des Rechners, auf dem der Bot läuft, bzw. im Systemprotokoll, wenn er als Dienst läuft. Wie lange sie dort bleiben, richtet sich nach den Einstellungen dieses Rechners.</li>
-      <li><strong>f) Kanalliste und Einstellungen.</strong> Lädt ein Streamer den Bot ein, werden seine Twitch-Kanalkennung und sein Kanalname gespeichert, bis er den Bot mit <code>!leave</code> wieder aus seinem Kanal entfernt. Pause- und Abklingzeit-Einstellungen sowie die Einstellung, ob die Minispiele an oder aus sind, bleiben auch danach gespeichert. Eine Löschung kannst du unter der Kontaktadresse in Punkt 1 verlangen.</li>
-      <li><strong>g) Bestätigung auf der Infoseite.</strong> Bestätigst du unten die Nutzungsbedingungen, speichert nur dein eigener Browser einen Vermerk mit dem Stand der Bedingungen (im lokalen Speicher des Browsers). Er wird nicht an uns übertragen und dient nur dazu, dass du die Befehle-Seite öffnen kannst, ohne jedes Mal neu zu bestätigen. Du kannst ihn jederzeit löschen, indem du die Websitedaten in deinem Browser löschst.</li>
+      <li><strong>f) Kanalliste und Einstellungen.</strong> Lädt ein Streamer den Bot ein, werden seine Twitch-Kanalkennung und sein Kanalname gespeichert, bis er den Bot mit <code>!leave</code> wieder aus seinem Kanal entfernt. Pause- und Abklingzeit-Einstellungen bleiben auch danach gespeichert. Eine Löschung kannst du unter der Kontaktadresse in Punkt 1 verlangen.</li>
+      <li><strong>g) Bestätigungen von Streamern.</strong> Wenn ein Streamer die Bestätigung zur Nutzung des Bots abgibt, speichere ich seinen Namen oder Künstlernamen, Twitch-Kanal, Discord-Server, E-Mail-Adresse und das Datum. Ich bewahre sie auf, solange der Bot dort genutzt wird, und lösche sie danach.</li>
     </ul>
 
     <h3>4. Zweck und Rechtsgrundlage</h3>
-    <p>Zweck ist die Beantwortung deiner Fragen, der sichere Betrieb des Bots. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO. Der Vermerk aus Punkt 3g ist für die von dir gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
+    <p>Zweck ist die Beantwortung deiner Fragen, der sichere Betrieb des Bots und der Nachweis, dass Streamer die Bedingungen bestätigt haben. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO.</p>
 
     <h3>5. Empfänger und Übermittlung in Drittländer</h3>
     <ul>
       <li><strong>KI-Anbieter:</strong> Deine Frage geht an Groq LLC, USA. Dabei werden Daten in die USA übermittelt. Es gilt dessen Datenschutzerklärung: <a href="https://groq.com/privacy-policy" target="_blank" rel="noopener">groq.com/privacy-policy</a>. Für die Verarbeitung von Kundendaten gilt ein Vertrag zur Auftragsverarbeitung (<a href="https://console.groq.com/docs/legal/customer-data-processing-addendum" target="_blank" rel="noopener">Data Processing Addendum</a>). Er sieht die EU-Standardvertragsklauseln vor, soweit das rechtlich erforderlich ist.</li>
       <li><strong>Twitch und Discord:</strong> Der Bot nutzt deren Schnittstellen. Dort gelten deren Datenschutzerklärungen.</li>
       <li><strong>GitHub (Infoseite):</strong> Die Infoseite wird über GitHub Pages bereitgestellt. Dabei fallen technische Zugriffsdaten bei GitHub, Inc. (USA) an.</li>
+      <li><strong>Google Fonts:</strong> Die Infoseite lädt Schriftarten von Google. Dabei wird deine IP-Adresse an Google übertragen.</li>
     </ul>
 
     <h3>6. Speicherdauer</h3>
-    <p>Zähler: siehe Punkt 3d. Protokoll: siehe Punkt 3e. Kanalliste und Einstellungen: siehe Punkt 3f. Bestätigung im Browser: siehe Punkt 3g. Groq protokolliert Ein- und Ausgaben nach eigenen Angaben nur zur Fehlerdiagnose oder bei Verdacht auf Missbrauch, höchstens 30 Tage lang. Diese Protokollierung lässt sich in den Data-Controls-Einstellungen von Groq abschalten (<a href="https://console.groq.com/docs/your-data" target="_blank" rel="noopener">Groq-Dokumentation</a>).</p>
+    <p>Zähler: siehe Punkt 3d. Protokoll: siehe Punkt 3e. Kanalliste und Einstellungen: siehe Punkt 3f. Streamer-Bestätigungen: siehe Punkt 3g. Groq protokolliert Ein- und Ausgaben nach eigenen Angaben nur zur Fehlerdiagnose oder bei Verdacht auf Missbrauch, höchstens 30 Tage lang. Diese Protokollierung lässt sich in den Data-Controls-Einstellungen von Groq abschalten (<a href="https://console.groq.com/docs/your-data" target="_blank" rel="noopener">Groq-Dokumentation</a>).</p>
 
     <h3>7. Deine Rechte</h3>
     <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und <strong>Widerspruch</strong>. Du kannst dich bei einer Datenschutzaufsichtsbehörde beschweren. Schreib dafür an venoxbot@web.de.</p>
@@ -163,52 +149,13 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <p>Der Bot richtet sich an die Nutzer von Twitch und Discord. Es gelten deren Altersgrenzen.</p>
 
     <h3>10. Änderungen</h3>
-    <p>Diese Erklärung kann angepasst werden. Stand: 21.10.2026.</p>
-  </section>
-
-  <section id="bestaetigen">
-    <h2>Bestätigen</h2>
-    <div class="card confirm">
-      <label class="check">
-        <input type="checkbox" id="agree">
-        <span>Ich habe die Nutzungsbedingungen und die Datenschutzerklärung gelesen und bin damit einverstanden.</span>
-      </label>
-      <button class="btn" type="button" id="go" disabled>Weiter zu den Befehlen</button>
-      <p class="status" id="status" role="status" aria-live="polite">Setze zuerst den Haken, dann kannst du die Befehle öffnen.</p>
-    </div>
+    <p>Diese Erklärung kann angepasst werden. Stand: 20.10.2026.</p>
   </section>
 
   <footer>
-    VenoX_Bot · Betrieben von VenoX · Stand 21.10.2026
+    VenoX_Bot · Betrieben von VenoX · Stand 20.10.2026
   </footer>
 </main>
 
-<script>
-(function () {
-  // Stand der Bedingungen. Wird er geändert, muss man neu bestätigen.
-  var STAND = "2026-10-21";
-  var KEY = "venoxbot-bedingungen";
-  var agree = document.getElementById("agree");
-  var go = document.getElementById("go");
-  var status = document.getElementById("status");
-  var saved = null;
-  try { saved = localStorage.getItem(KEY); } catch (e) {}
-  if (saved === STAND) {
-    agree.checked = true;
-    status.textContent = "Du hast die Bedingungen schon bestätigt.";
-  }
-  go.disabled = !agree.checked;
-  agree.addEventListener("change", function () {
-    go.disabled = !agree.checked;
-    status.textContent = agree.checked ? "Danke! Jetzt kannst du die Befehle öffnen." : "Setze zuerst den Haken, dann kannst du die Befehle öffnen.";
-  });
-  go.addEventListener("click", function () {
-    if (!agree.checked) return;
-    try { localStorage.setItem(KEY, STAND); } catch (e) {}
-    try { sessionStorage.setItem(KEY, STAND); } catch (e) {}
-    location.href = "befehle.html";
-  });
-})();
-</script>
 </body>
 </html>
