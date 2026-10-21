@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VenoX_Bot Befehle</title>
+<script>
+// Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
+(function () {
+  var STAND = "2026-10-21", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
+  try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
+  // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
+  if (usable && !ok) location.replace("nutzungsbedingungen.html#bestaetigen");
+})();
+</script>
 <style>
 :root {
   --bg: #f6f4ef; --fg: #151515; --muted: #5b5853; --card: #ffffff; --line: #d9d5cc;
@@ -86,8 +96,24 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <h2>Für alle</h2>
     <div class="card">
       <div class="row"><code>!ask Frage</code><p>Stellt dem Bot eine Frage. Maximal 400 Zeichen. Zwischen zwei Fragen einer Person liegt eine Pause.</p></div>
+      <div class="row"><code>!ask Frage 1? Frage 2?</code><p>Mehrere Fragen in einer Nachricht. Der Bot beantwortet sie nummeriert, auf Twitch in bis zu drei Nachrichten.</p></div>
       <div class="row"><code>!info</code><p>Zeigt einen kurzen Hinweis mit der Pause zwischen zwei Fragen und dem Link zur Infoseite.</p></div>
     </div>
+  </section>
+
+  <section>
+    <h2>Minispiele für alle</h2>
+    <div class="card">
+      <div class="row"><code>!ask spiele</code><p>Zeigt alle Minispiele.</p></div>
+      <div class="row"><code>!ask würfel 20</code><p>Würfelt eine Zahl von 1 bis 20. Ohne Zahl ein normaler Würfel, erlaubt sind 2 bis 1000 Seiten.</p></div>
+      <div class="row"><code>!ask münze</code><p>Wirft eine Münze: Kopf oder Zahl.</p></div>
+      <div class="row"><code>!ask orakel Frage</code><p>Das Orakel beantwortet eine Ja/Nein-Frage, zum Beispiel <span class="cmd">!ask orakel Gewinne ich heute?</span></p></div>
+      <div class="row"><code>!ask duell @name</code><p>Fordert jemanden heraus. Die Person antwortet innerhalb von 60 Sekunden mit <span class="cmd">!ask annehmen</span> oder <span class="cmd">!ask ablehnen</span>.</p></div>
+      <div class="row"><code>!ask loot</code><p>Öffnet eine Lootbox: gewöhnlich, selten, episch oder legendär.</p></div>
+      <div class="row"><code>!ask rate</code><p>Startet Zahlenraten von 1 bis 100. Getippt wird mit <span class="cmd">!ask rate 50</span>.</p></div>
+      <div class="row"><code>!ask quiz</code><p>Stellt eine Quizfrage. Wer zuerst mit <span class="cmd">!ask antwort Lösung</span> richtig liegt, gewinnt. Zeit: 60 Sekunden.</p></div>
+    </div>
+    <p class="note" style="margin-top:12px">Die Spiele laufen ohne KI und zählen nicht zu den Tageslimits. Zwischen zwei Spielen einer Person liegen 5 Sekunden. Gewinne sind rein virtuell.</p>
   </section>
 
   <section>
@@ -98,9 +124,10 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
       <div class="row"><code>!ask cooldown</code><p>Zeigt die Pause zwischen zwei Fragen.</p></div>
       <div class="row"><code>!ask cooldown 20</code><p>Setzt die Pause auf 20 Sekunden. Erlaubt sind 5 bis 600 Sekunden.</p></div>
       <div class="row"><code>!ask cooldown reset</code><p>Setzt die Pause auf den Standardwert zurück.</p></div>
-      <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden. Nur du als Streamer kannst ihn in deinem eigenen Chat abrufen.</p></div>
+      <div class="row"><code>!ask spiele off</code><p>Schaltet die Minispiele in deinem Chat aus. Mit <span class="cmd">!ask spiele on</span> sind sie wieder an.</p></div>
+      <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur du als Streamer kannst ihn in deinem eigenen Chat abrufen.</p></div>
     </div>
-    <p class="note" style="margin-top:12px"><span class="cmd">!ask on</span>, <span class="cmd">!ask off</span> und <span class="cmd">!ask cooldown</span> können auch Moderatoren nutzen.</p>
+    <p class="note" style="margin-top:12px"><span class="cmd">!ask on</span>, <span class="cmd">!ask off</span>, <span class="cmd">!ask cooldown</span> und <span class="cmd">!ask spiele off/on</span> können auch Moderatoren nutzen.</p>
     <div class="card" style="margin-top:12px">
       <div class="row"><code>!join</code><p>Schreibst du im <a href="https://www.twitch.tv/venox_bot" target="_blank" rel="noopener">Chat des Bots</a>. Der Bot kommt dann in deinen Chat. Vorher musst du in deinem Chat <span class="cmd">/mod VenoX_Bot</span> schreiben.</p></div>
       <div class="row"><code>!leave</code><p>Schreibst du im Chat des Bots. Der Bot verlässt dann deinen Chat.</p></div>
@@ -113,7 +140,8 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
       <div class="row"><code>!ask on</code><p>Schaltet die KI-Antworten im Kanal ein. Erlaubt für den Server-Eigentümer und alle mit der Berechtigung „Nachrichten verwalten“.</p></div>
       <div class="row"><code>!ask off</code><p>Pausiert die KI-Antworten im Kanal. Gleiche Berechtigung wie bei <span class="cmd">!ask on</span>.</p></div>
       <div class="row"><code>!ask cooldown</code><p>Zeigt die Pause zwischen zwei Fragen. Mit einer Zahl von 5 bis 600 setzt du sie, mit <span class="cmd">reset</span> setzt du sie zurück.</p></div>
-      <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden. Nur der Server-Eigentümer.</p></div>
+      <div class="row"><code>!ask spiele off</code><p>Schaltet die Minispiele im Kanal aus, <span class="cmd">!ask spiele on</span> wieder ein. Gleiche Berechtigung wie bei <span class="cmd">!ask on</span>.</p></div>
+      <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur der Server-Eigentümer.</p></div>
     </div>
     <p class="note" style="margin-top:12px">Discord hat ein Tageslimit für alle Server zusammen. Es zählt die letzten 24 Stunden. Ist es erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.</p>
   </section>
@@ -124,13 +152,14 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
       <li>Groß- und Kleinschreibung spielt keine Rolle.</li>
       <li><span class="cmd">!info</span>, <span class="cmd">!askstats</span>, <span class="cmd">!join</span> und <span class="cmd">!leave</span> müssen allein in der Nachricht stehen.</li>
       <li>Die Antworten kommen von einer KI und können falsch sein.</li>
+      <li>Pro Kanal beantwortet der Bot eine Frage nach der anderen. Bis zu drei weitere warten in einer Warteschlange.</li>
       <li>Jeder Kanal bzw. Server legt die Pause selbst fest. Auf Twitch gilt sie pro Person und Kanal, auf Discord pro Person über alle Server hinweg.</li>
     </ul>
     <p class="note">Mehr dazu auf der <a href="index.html">Startseite</a> und in den <a href="nutzungsbedingungen.html">Nutzungsbedingungen und dem Datenschutz</a>.</p>
   </section>
 
   <footer>
-    VenoX_Bot · Betrieben von VenoX · Stand 20.10.2026
+    VenoX_Bot · Betrieben von VenoX · Stand 21.10.2026
   </footer>
 </main>
 

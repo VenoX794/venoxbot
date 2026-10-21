@@ -100,6 +100,8 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <h2>Was der Bot macht</h2>
     <ul>
       <li>Beantwortet Fragen, die mit <code>!ask</code> beginnen, kurz und auf Deutsch.</li>
+      <li>Beantwortet auch mehrere Fragen in einer Nachricht, nummeriert.</li>
+      <li>Hat Minispiele wie Würfel, Münze, Orakel, Duell, Lootbox, Zahlenraten und Quiz. Alle zeigt <code>!ask spiele</code>.</li>
       <li>Läuft im Twitch-Chat und auf Discord.</li>
       <li>Ist noch in Entwicklung. Funktionen und Regeln können sich ändern.</li>
     </ul>
@@ -126,7 +128,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
   <section>
     <h2>Regeln für die Nutzung</h2>
     <ul>
-      <li>Zwischen zwei Fragen einer Person liegt eine Pause, standardmäßig <strong>10 Sekunden</strong>. Streamer, Moderatoren und Server-Betreiber können sie im eigenen Kanal ändern.</li>
+      <li>Zwischen zwei Fragen einer Person liegt eine Pause, standardmäßig <strong>10 Sekunden</strong>. Streamer, Moderatoren und Server-Betreiber können sie im eigenen Kanal ändern. Zwischen zwei Minispielen liegen 5 Sekunden.</li>
       <li>Fragen dürfen höchstens <strong>400 Zeichen</strong> lang sein.</li>
       <li>Es gibt Tageslimits für alle Kanäle und Server zusammen. Sie zählen die letzten 24 Stunden. Ist ein Limit erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.</li>
       <li>Keine Beleidigungen, keine Werbung und keine Versuche, den Bot zu Verbotenem zu bringen.</li>
@@ -136,9 +138,9 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
 
   <section>
     <h2>Befehle</h2>
-    <p>Alle Befehle für Zuschauer, Streamer und Server-Betreiber stehen auf einer eigenen Seite.</p>
+    <p>Alle Befehle für Zuschauer, Streamer und Server-Betreiber stehen auf einer eigenen Seite. Vorher bestätigst du einmal die Nutzungsbedingungen.</p>
     <div class="btns">
-      <a class="btn ghost" href="befehle.html">Alle Befehle</a>
+      <a class="btn ghost" href="nutzungsbedingungen.html#bestaetigen" id="befehle-link">Nutzungsbedingungen bestätigen und Befehle ansehen</a>
     </div>
   </section>
 
@@ -165,11 +167,21 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
   </section>
 
   <footer>
-    VenoX_Bot · Betrieben von VenoX · Stand 20.10.2026 · Der Bot ist noch in Entwicklung.
+    VenoX_Bot · Betrieben von VenoX · Stand 21.10.2026 · Der Bot ist noch in Entwicklung.
   </footer>
 </main>
 
 <script>
+(function () {
+  // Schon bestätigt? Dann führt der Knopf direkt zu den Befehlen.
+  var ok = false;
+  try { ok = localStorage.getItem("venoxbot-bedingungen") === "2026-10-21"; } catch (e) {}
+  if (ok) {
+    var link = document.getElementById("befehle-link");
+    link.href = "befehle.html";
+    link.textContent = "Alle Befehle";
+  }
+})();
 (function () {
   var btn = document.getElementById("copy");
   var out = document.getElementById("copied");
