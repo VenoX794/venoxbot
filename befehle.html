@@ -7,7 +7,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-23-2", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-23-3", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -130,6 +130,7 @@ code, .cmd { background: var(--card); border: 1px solid var(--line); color: #e8a
       <div class="row"><code>!ask clips on</code><p>Schaltet Clips und Roast-Sammlung im Kanal ein (<span class="cmd">!ask clips off</span> wieder aus, Standard: aus). Roast-Antworten landen dann ohne Namen bei VenoX für kurze Videos.</p></div>
       <div class="row"><code>!ask clip</code><p>Erstellt einen Twitch-Clip der letzten Sekunden (nur live, höchstens alle 30 Sekunden). Der Link erscheint im Chat und geht an VenoX.</p></div>
       <div class="row"><code>!ask spiele off</code><p>Schaltet die Minispiele in deinem Chat aus. Mit <span class="cmd">!ask spiele on</span> sind sie wieder an.</p></div>
+      <div class="row"><code>!ask liste aus</code><p>Nimmt deinen Kanal aus der öffentlichen Streamer-Liste auf der Befehle-Website. Mit <span class="cmd">!ask liste an</span> steht er wieder drin.</p></div>
       <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur du als Streamer kannst ihn in deinem eigenen Chat abrufen.</p></div>
     </div>
     <p class="note" style="margin-top:12px"><span class="cmd">!ask on</span>, <span class="cmd">!ask off</span>, <span class="cmd">!ask cooldown</span> und <span class="cmd">!ask spiele off/on</span> können auch Moderatoren nutzen.</p>
@@ -158,9 +159,10 @@ code, .cmd { background: var(--card); border: 1px solid var(--line); color: #e8a
       <div class="row"><code>!ask befehl add !name --mod Text</code><p>Wie oben, aber nur Streamer und Mods dürfen ihn auslösen.</p></div>
       <div class="row"><code>!ask befehl edit !name Text</code><p>Ändert den Text. Ohne <span class="cmd">--mod</span> ist der Befehl danach wieder für alle.</p></div>
       <div class="row"><code>!ask befehl del !name</code><p>Löscht den Befehl.</p></div>
+      <div class="row"><code>!ask befehl aus !name</code><p>Schaltet einen eigenen Befehl kurz aus, ohne ihn zu löschen. Mit <span class="cmd">!ask befehl an !name</span> ist er wieder an.</p></div>
       <div class="row"><code>!ask befehle</code><p>Zeigt allen die Liste der eigenen Befehle.</p></div>
     </div>
-    <p class="note" style="margin-top:12px">Platzhalter im Text: <span class="cmd">{user}</span> (wer den Befehl schreibt), <span class="cmd">{touser}</span> (Name nach dem Befehl, z. B. <span class="cmd">!hug @tom</span>), <span class="cmd">{count}</span> (zählt bei jedem Aufruf hoch), <span class="cmd">{game}</span>, <span class="cmd">{title}</span>, <span class="cmd">{uptime}</span> (nur Twitch) und <span class="cmd">{random 1-100}</span>. Höchstens 50 Befehle pro Kanal bzw. Server, 400 Zeichen pro Text, jeder Befehl höchstens alle 5 Sekunden. Texte mit gesperrten Begriffen werden nicht gespeichert.</p>
+    <p class="note" style="margin-top:12px">Platzhalter im Text: <span class="cmd">{user}</span> (wer den Befehl schreibt), <span class="cmd">{touser}</span> (Name nach dem Befehl, z. B. <span class="cmd">!hug @tom</span>), <span class="cmd">{count}</span> (zählt bei jedem Aufruf hoch), <span class="cmd">{game}</span>, <span class="cmd">{title}</span>, <span class="cmd">{uptime}</span> (nur Twitch) und <span class="cmd">{random 1-100}</span>. Höchstens 50 Befehle pro Kanal bzw. Server, 400 Zeichen pro Text, jeder Befehl höchstens alle 5 Sekunden. Texte mit gesperrten Begriffen werden nicht gespeichert. Für Twitch-Kanäle geht alles auch bequem auf der <a href="https://befehle.venoxbot.workers.dev" target="_blank" rel="noopener">Befehle-Website</a>, mit Emote-Auswahl (Anmeldung mit Twitch, für Streamer und Mods).</p>
   </section>
 
   <section>
