@@ -7,27 +7,11 @@
 <title>VenoX_Bot Info</title>
 <style>
 :root {
-  --bg: #f6f4ef;
-  --fg: #151515;
-  --muted: #5b5853;
-  --card: #ffffff;
-  --line: #d9d5cc;
-  --accent: #c8102e;
-  --ink: #0b0b0b;
-  --on-ink: #f2f0ec;
-  --on-accent: #ffffff;
-  --display: "Anton", "Arial Narrow", Impact, sans-serif;
-  --body: "Barlow", "Segoe UI", system-ui, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0d0d0e; --fg: #f2f0ec; --muted: #a9a59d; --card: #161618; --line: #2c2c30;
-    --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; --on-accent: #0d0d0e; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0d0d0e; --fg: #f2f0ec; --muted: #a9a59d; --card: #161618; --line: #2c2c30;
-  --accent: #ff3a4a; --ink: #000000; --on-ink: #f2f0ec; --on-accent: #0d0d0e; color-scheme: dark;
+  --bg: #0b0b0b; --fg: #f2f0ec; --muted: #9a958d; --card: #151413; --line: #2a2724;
+  --accent: #c8102e; --ink: #0b0b0b; --on-ink: #f2f0ec; --on-accent: #ffffff;
+  --display: system-ui, "Segoe UI", sans-serif;
+  --body: system-ui, "Segoe UI", sans-serif;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body {
@@ -82,6 +66,15 @@ a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; overflow
 .contact .addr { font-weight: 700; font-size: 18px; overflow-wrap: anywhere; user-select: all; min-width: 0; }
 .note { color: var(--muted); font-size: 15px; }
 footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: 14px; }
+/* Stil wie die Befehle-Website (befehle.venoxbot.workers.dev) */
+header.hero { border-bottom: 1px solid var(--line); padding-top: 26px; padding-bottom: 24px; }
+.kicker::before { content: "💀🎧 "; letter-spacing: 0; }
+h1 { font-weight: 800; letter-spacing: -.01em; line-height: 1.1; font-size: clamp(30px, 6vw, 40px); }
+h2 { font-weight: 800; font-size: 24px; letter-spacing: -.005em; text-transform: none; border-left: 0; padding-left: 0; }
+.card { border-radius: 8px; }
+code, .cmd { background: var(--card); border: 1px solid var(--line); color: #e8a0aa; }
+.btn { border-radius: 6px; }
+.btn.ghost { border-color: var(--line); }
 </style>
 </head>
 <body>
