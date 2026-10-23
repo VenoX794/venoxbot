@@ -7,7 +7,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-21", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-23", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -98,6 +98,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
       <div class="row"><code>!ask Frage</code><p>Stellt dem Bot eine Frage. Maximal 400 Zeichen. Zwischen zwei Fragen einer Person liegt eine Pause.</p></div>
       <div class="row"><code>!ask Frage 1? Frage 2?</code><p>Mehrere Fragen in einer Nachricht. Der Bot beantwortet sie nummeriert, auf Twitch in bis zu drei Nachrichten.</p></div>
       <div class="row"><code>!info</code><p>Zeigt einen kurzen Hinweis mit der Pause zwischen zwei Fragen und dem Link zur Infoseite.</p></div>
+      <div class="row"><code>!ask feedback Text</code><p>Schickt VenoX dein Feedback zum Bot (höchstens 300 Zeichen, einmal pro Stunde). Geht auch, wenn die KI pausiert ist.</p></div>
     </div>
   </section>
 
@@ -112,8 +113,10 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
       <div class="row"><code>!ask loot</code><p>Öffnet eine Lootbox: gewöhnlich, selten, episch oder legendär.</p></div>
       <div class="row"><code>!ask rate</code><p>Startet Zahlenraten von 1 bis 100. Getippt wird mit <span class="cmd">!ask rate 50</span>.</p></div>
       <div class="row"><code>!ask quiz</code><p>Stellt eine Quizfrage. Wer zuerst mit <span class="cmd">!ask antwort Lösung</span> richtig liegt, gewinnt. Zeit: 60 Sekunden.</p></div>
+      <div class="row"><code>!ask rangliste</code><p>Zeigt die besten fünf des Monats. Punkte gibt es für Quiz und Zahlenraten (je 3) und Duelle (1, höchstens 10 pro Tag).</p></div>
+      <div class="row"><code>!ask punkte</code><p>Zeigt deine Punkte und deinen Platz. <span class="cmd">!ask punkte löschen</span> löscht deine Punkte.</p></div>
     </div>
-    <p class="note" style="margin-top:12px">Die Spiele laufen ohne KI und zählen nicht zu den Tageslimits. Zwischen zwei Spielen einer Person liegen 5 Sekunden. Gewinne sind rein virtuell.</p>
+    <p class="note" style="margin-top:12px">Die Spiele laufen ohne KI und zählen nicht zu den Tageslimits. Zwischen zwei Spielen einer Person liegen 5 Sekunden. Gewinne und Punkte sind rein virtuell. Die Rangliste beginnt jeden Monat neu.</p>
   </section>
 
   <section>
@@ -124,6 +127,8 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
       <div class="row"><code>!ask cooldown</code><p>Zeigt die Pause zwischen zwei Fragen.</p></div>
       <div class="row"><code>!ask cooldown 20</code><p>Setzt die Pause auf 20 Sekunden. Erlaubt sind 5 bis 600 Sekunden.</p></div>
       <div class="row"><code>!ask cooldown reset</code><p>Setzt die Pause auf den Standardwert zurück.</p></div>
+      <div class="row"><code>!ask clips on</code><p>Schaltet Clips und Roast-Sammlung im Kanal ein (<span class="cmd">!ask clips off</span> wieder aus, Standard: aus). Roast-Antworten landen dann ohne Namen bei VenoX für kurze Videos.</p></div>
+      <div class="row"><code>!ask clip</code><p>Erstellt einen Twitch-Clip der letzten Sekunden (nur live, höchstens alle 30 Sekunden). Der Link erscheint im Chat und geht an VenoX.</p></div>
       <div class="row"><code>!ask spiele off</code><p>Schaltet die Minispiele in deinem Chat aus. Mit <span class="cmd">!ask spiele on</span> sind sie wieder an.</p></div>
       <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur du als Streamer kannst ihn in deinem eigenen Chat abrufen.</p></div>
     </div>
@@ -159,7 +164,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
   </section>
 
   <footer>
-    VenoX_Bot · Betrieben von VenoX · Stand 21.10.2026
+    VenoX_Bot · Betrieben von VenoX · Stand 23.10.2026
   </footer>
 </main>
 

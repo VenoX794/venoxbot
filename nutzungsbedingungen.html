@@ -96,11 +96,11 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <p>Die Antworten werden von einer KI erzeugt und können falsch, unvollständig oder unpassend sein. Sie sind keine Beratung, auch nicht zu Recht, Gesundheit oder Geld. Wichtige Dinge solltest du selbst prüfen. Für den Inhalt der Antworten wird keine Verantwortung übernommen, soweit das gesetzlich zulässig ist.</p>
 
     <h3>5. Verantwortung des Streamers</h3>
-    <p>Bevor der Bot in deinen Twitch-Kanal kommt, bestätigst du diese Bedingungen mit <code>!join akzeptieren</code> im Chat des Bots. Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen die KI-Antworten pausieren, die Abklingzeit ändern und die Minispiele aus- und einschalten.</p>
+    <p>Bevor der Bot in deinen Twitch-Kanal kommt, bestätigst du diese Bedingungen mit <code>!join akzeptieren</code> im Chat des Bots. Du bleibst für deinen Chat und deinen Server verantwortlich. Du kannst den Bot jederzeit entfernen (Twitch: <code>!leave</code> im Chat des Bots, Discord: Bot rauswerfen). Moderatoren dürfen die KI-Antworten pausieren, die Abklingzeit ändern und die Minispiele aus- und einschalten. Auf Twitch können Streamer und Moderatoren mit <code>!ask clips on</code> Clips (<code>!ask clip</code>) und die Roast-Sammlung einschalten (Standard: aus). Dann landen Roast-Antworten ohne Namen und Clip-Links bei VenoX, der daraus kurze Videos für TikTok oder YouTube Shorts machen kann.</p>
 
     <h3>6. Regeln für die Nutzung</h3>
     <ul>
-      <li>Keine Beleidigungen, keine Werbung, keine Versuche, den Bot zu Verbotenem zu bringen.</li>
+      <li>Keine Beleidigungen, keine Werbung, keine Versuche, den Bot zu Verbotenem zu bringen. Das gilt auch für <code>!ask feedback</code>: höchstens 300 Zeichen und einmal pro Stunde.</li>
       <li>Pro Person gilt eine Pause zwischen zwei Fragen. Standard sind 10 Sekunden. Streamer, Moderatoren und Server-Betreiber können sie im eigenen Kanal ändern. Zwischen zwei Minispielen liegen 5 Sekunden.</li>
       <li>Eine Nachricht darf mehrere Fragen enthalten. Sie werden nummeriert beantwortet, auf Twitch in bis zu drei Nachrichten.</li>
       <li>Pro Kanal beantwortet der Bot eine Frage nach der anderen. Bis zu drei weitere Fragen warten in einer Warteschlange. Ist sie voll, bekommst du einen Hinweis und kannst es gleich nochmal versuchen.</li>
@@ -109,6 +109,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
 
     <h3>7. Minispiele</h3>
     <p>Die Minispiele (<code>!ask würfel</code>, <code>!ask münze</code>, <code>!ask orakel</code>, <code>!ask duell</code>, <code>!ask loot</code>, <code>!ask rate</code> und <code>!ask quiz</code>) dienen nur der Unterhaltung. Die Ergebnisse sind zufällig und werden ohne KI erzeugt. Es gibt keine Einsätze und keine echten Gewinne. Gegenstände aus der Lootbox und Siege im Duell sind rein virtuell und haben keinen Wert. Das Orakel ist ein Spaß und ersetzt keinen Rat. Bei ernsten Themen gibt es keine Zufallsantwort.</p>
+      <p>Wer im Quiz, beim Zahlenraten oder im Duell gewinnt, bekommt Punkte (Quiz und Zahlenraten je 3, Duell 1, höchstens 10 Duell-Punkte pro Tag). <code>!ask rangliste</code> zeigt die besten fünf des Monats im Kanal bzw. auf dem Server, <code>!ask punkte</code> die eigenen Punkte. Am Monatsanfang beginnt die Rangliste neu. Punkte haben keinen Wert und können nicht eingetauscht werden. Mit <code>!ask punkte löschen</code> löschst du deine Punkte selbst.</p>
 
     <h3>8. Ausschluss</h3>
     <p>VenoX kann einzelne Kanäle oder Server ausschließen, zum Beispiel bei Missbrauch, ohne Angabe von Gründen.</p>
@@ -133,16 +134,19 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <ul>
       <li><strong>a) Chat-Nachrichten.</strong> Der Bot erhält technisch alle Nachrichten in Kanälen, in denen er aktiv ist. <strong>Er wertet nur Befehle aus, zum Beispiel <code>!ask</code> (auch für die Minispiele) und <code>!info</code>.</strong> Alle anderen Nachrichten werden sofort verworfen und nicht gespeichert.</li>
       <li><strong>b) Deine Frage.</strong> Der Text deiner Frage wird zur Beantwortung an einen KI-Anbieter geschickt (siehe Punkt 5). Ein Benutzername wird dabei nicht mitgeschickt. Bis zur Antwort wartet die Frage gegebenenfalls kurz in einer Warteschlange im Arbeitsspeicher. Befehle für Minispiele gehen nicht an den KI-Anbieter.</li>
-      <li><strong>c) Benutzerkennung für Pause und Minispiele.</strong> Damit pro Person eine Pause gilt und Minispiele wie Duell oder Quiz funktionieren, merkt sich der Bot kurzzeitig deinen Twitch-Namen bzw. deine Discord-Kennung, beim Duell auch die des Gegners. Das geschieht nur im Arbeitsspeicher und endet spätestens, wenn der Bot neu gestartet wird.</li>
+      <li><strong>c) Benutzerkennung für Pause und Minispiele.</strong> Damit pro Person eine Pause gilt und Minispiele wie Duell oder Quiz funktionieren, merkt sich der Bot kurzzeitig deinen Twitch-Namen bzw. deine Discord-Kennung, beim Duell auch die des Gegners. Das geschieht nur im Arbeitsspeicher und endet spätestens, wenn der Bot neu gestartet wird. Gewinnst du ein Spiel, gilt zusätzlich Punkt i.</li>
       <li><strong>d) Zähler.</strong> Der Bot speichert den Zeitpunkt jeder Anfrage, auf Twitch zusätzlich die Anzahl der verbrauchten Tokens. Das dient den Tageslimits. Fragetext und Namen werden dabei nicht gespeichert. Einträge, die älter als 24 Stunden sind, werden bei der nächsten Anfrage entfernt.</li>
       <li><strong>e) Protokoll.</strong> Während der Bot läuft, gibt er Meldungen aus, darunter deinen Namen, deine Frage und die Antwort. Das dient der Fehlersuche. Der Bot legt dafür keine eigene Datei an. Die Meldungen erscheinen in der Konsole des Rechners, auf dem der Bot läuft, bzw. im Systemprotokoll, wenn er als Dienst läuft. Wie lange sie dort bleiben, richtet sich nach den Einstellungen dieses Rechners.</li>
       <li><strong>f) Kanalliste und Einstellungen.</strong> Lädt ein Streamer den Bot ein, werden seine Twitch-Kanalkennung und sein Kanalname gespeichert, bis er den Bot mit <code>!leave</code> wieder aus seinem Kanal entfernt. Pause- und Abklingzeit-Einstellungen sowie die Einstellung, ob die Minispiele an oder aus sind, bleiben auch danach gespeichert. Eine Löschung kannst du unter der Kontaktadresse in Punkt 1 verlangen.</li>
       <li><strong>g) Bestätigung auf der Infoseite.</strong> Bestätigst du unten die Nutzungsbedingungen, speichert nur dein eigener Browser einen Vermerk mit dem Stand der Bedingungen (im lokalen Speicher des Browsers). Er wird nicht an uns übertragen und dient nur dazu, dass du die Befehle-Seite öffnen kannst, ohne jedes Mal neu zu bestätigen. Du kannst ihn jederzeit löschen, indem du die Websitedaten in deinem Browser löschst.</li>
       <li><strong>h) Bestätigung durch Streamer.</strong> Bestätigst du als Streamer mit <code>!join akzeptieren</code> die Nutzungsbedingungen, speichert der Bot deine Twitch-Kennung, deinen Twitch-Namen, den Stand der Bedingungen und Datum und Uhrzeit. Verlässt du den Bot mit <code>!leave</code>, wird auch dieses Datum vermerkt. Drei Jahre danach wird der Eintrag automatisch gelöscht.</li>
+      <li><strong>i) Punkte und Rangliste.</strong> Gewinnst du im Quiz, beim Zahlenraten oder im Duell, speichert der Bot für die Rangliste deines Kanals bzw. Discord-Servers deinen Twitch-Namen bzw. deine Discord-Kennung, deinen Anzeigenamen, deine Punkte im laufenden Monat und wie viele Duell-Punkte du heute bekommen hast. Nachrichten, Uhrzeiten und Gegner werden dafür nicht gespeichert. Name und Punkte sind über <code>!ask rangliste</code> für alle im Chat sichtbar, wenn du unter den besten fünf bist. Mit Beginn eines neuen Monats wird alles gelöscht. Vorher kannst du deine Daten jederzeit selbst mit <code>!ask punkte löschen</code> entfernen. Die ganze Rangliste eines Kanals wird gelöscht, wenn der Streamer den Bot mit <code>!leave</code> entfernt, die eines Discord-Servers, wenn der Bot den Server verlässt.</li>
+      <li><strong>j) Feedback.</strong> Schreibst du <code>!ask feedback</code> mit einem Text, schickt der Bot deinen Text, deinen Twitch-Namen bzw. Discord-Anzeigenamen, die Plattform und den Kanal bzw. Server als Beitrag in einen nicht öffentlichen Discord-Kanal von VenoX. Dort lesen ihn nur VenoX und die Personen, die VenoX dafür freigibt. Der Text geht nicht an den KI-Anbieter. Damit niemand den Kanal überflutet, merkt sich der Bot eine Stunde lang im Arbeitsspeicher, dass du Feedback geschickt hast. Die Beiträge bleiben, bis VenoX sie löscht. Eine Löschung kannst du unter der Kontaktadresse in Punkt 1 verlangen.</li>
+      <li><strong>k) Clips und Roast-Sammlung (nur Twitch).</strong> Nur in Kanälen, in denen der Streamer oder ein Moderator das mit <code>!ask clips on</code> eingeschaltet hat: Ist eine Antwort des Bots ein Roast, schickt der Bot die Frage, die Antwort, den Kanalnamen und die Zeit seit Streamstart in einen Kanal auf dem Discord-Server von VenoX, den alle Mitglieder des Servers sehen können. <strong>Der Name der fragenden Person wird dabei nicht mitgeschickt.</strong> Schreibt ein Streamer oder Moderator <code>!ask clip</code>, erstellt der Bot über Twitch einen Clip der letzten Sekunden des Streams. Der Clip liegt bei Twitch im Kanal des Streamers und ist dort wie jeder Twitch-Clip öffentlich. Der Link und der Name der Person, die den Clip ausgelöst hat, gehen ebenfalls in diesen Discord-Kanal und sind dort für alle Mitglieder des Servers sichtbar. Die Beiträge bleiben, bis VenoX sie löscht, Clips bis der Streamer oder VenoX sie bei Twitch löscht. VenoX nutzt sie, um daraus kurze Videos zum Beispiel für TikTok oder YouTube Shorts zu schneiden. Eine Löschung kannst du unter der Kontaktadresse in Punkt 1 verlangen.</li>
     </ul>
 
     <h3>4. Zweck und Rechtsgrundlage</h3>
-    <p>Zweck ist die Beantwortung deiner Fragen, der sichere Betrieb des Bots. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO. Die Bestätigung aus Punkt 3h dient als Nachweis, dass die Bedingungen akzeptiert wurden (ebenfalls Art. 6 Abs. 1 lit. f DSGVO). Der Vermerk aus Punkt 3g ist für die von dir gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
+    <p>Zweck ist die Beantwortung deiner Fragen, der sichere Betrieb des Bots. Rechtsgrundlage ist unser berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO. Die Bestätigung aus Punkt 3h dient als Nachweis, dass die Bedingungen akzeptiert wurden (ebenfalls Art. 6 Abs. 1 lit. f DSGVO). Die Daten aus Punkt 3i dienen der Rangliste der Minispiele, also einer Funktion, die du durch das Mitspielen selbst nutzt (ebenfalls Art. 6 Abs. 1 lit. f DSGVO). Du kannst jederzeit widersprechen, indem du <code>!ask punkte löschen</code> schreibst und nicht mehr mitspielst. Das Feedback aus Punkt 3j nutzt VenoX, um den Bot zu verbessern (ebenfalls Art. 6 Abs. 1 lit. f DSGVO). Clips und Roast-Sammlung aus Punkt 3k dienen der Erstellung kurzer Videos über den Stream, nur wenn der Streamer das eingeschaltet hat (ebenfalls Art. 6 Abs. 1 lit. f DSGVO). Der Vermerk aus Punkt 3g ist für die von dir gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
 
     <h3>5. Empfänger und Übermittlung in Drittländer</h3>
     <ul>
@@ -152,7 +156,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     </ul>
 
     <h3>6. Speicherdauer</h3>
-    <p>Zähler: siehe Punkt 3d. Protokoll: siehe Punkt 3e. Kanalliste und Einstellungen: siehe Punkt 3f. Bestätigung im Browser: siehe Punkt 3g. Bestätigung durch Streamer: siehe Punkt 3h. Groq protokolliert Ein- und Ausgaben nach eigenen Angaben nur zur Fehlerdiagnose oder bei Verdacht auf Missbrauch, höchstens 30 Tage lang. Diese Protokollierung lässt sich in den Data-Controls-Einstellungen von Groq abschalten (<a href="https://console.groq.com/docs/your-data" target="_blank" rel="noopener">Groq-Dokumentation</a>).</p>
+    <p>Zähler: siehe Punkt 3d. Protokoll: siehe Punkt 3e. Kanalliste und Einstellungen: siehe Punkt 3f. Bestätigung im Browser: siehe Punkt 3g. Bestätigung durch Streamer: siehe Punkt 3h. Punkte und Rangliste: bis zum Monatsende, siehe Punkt 3i. Feedback: siehe Punkt 3j. Clips und Roast-Sammlung: siehe Punkt 3k. Groq protokolliert Ein- und Ausgaben nach eigenen Angaben nur zur Fehlerdiagnose oder bei Verdacht auf Missbrauch, höchstens 30 Tage lang. Diese Protokollierung lässt sich in den Data-Controls-Einstellungen von Groq abschalten (<a href="https://console.groq.com/docs/your-data" target="_blank" rel="noopener">Groq-Dokumentation</a>).</p>
 
     <h3>7. Deine Rechte</h3>
     <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und <strong>Widerspruch</strong>. Du kannst dich bei einer Datenschutzaufsichtsbehörde beschweren. Schreib dafür an venoxbot@web.de.</p>
@@ -164,7 +168,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
     <p>Der Bot richtet sich an die Nutzer von Twitch und Discord. Es gelten deren Altersgrenzen.</p>
 
     <h3>10. Änderungen</h3>
-    <p>Diese Erklärung kann angepasst werden. Stand: 21.10.2026.</p>
+    <p>Diese Erklärung kann angepasst werden. Stand: 23.10.2026.</p>
   </section>
 
   <section id="bestaetigen">
@@ -180,14 +184,14 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px;
   </section>
 
   <footer>
-    VenoX_Bot · Betrieben von VenoX · Stand 21.10.2026
+    VenoX_Bot · Betrieben von VenoX · Stand 23.10.2026
   </footer>
 </main>
 
 <script>
 (function () {
   // Stand der Bedingungen. Wird er geändert, muss man neu bestätigen.
-  var STAND = "2026-10-21";
+  var STAND = "2026-10-23";
   var KEY = "venoxbot-bedingungen";
   var agree = document.getElementById("agree");
   var go = document.getElementById("go");
