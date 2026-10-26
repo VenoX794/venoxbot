@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>VenoX_Bot Info</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 :root {
   --bg: #0b0b0b; --fg: #f2f0ec; --muted: #9a958d; --card: #151413; --line: #2a2724;
@@ -68,7 +70,8 @@ a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; overflow
 footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: 14px; }
 /* Stil wie die Befehle-Website (befehle.venoxbot.workers.dev) */
 header.hero { border-bottom: 1px solid var(--line); padding-top: 26px; padding-bottom: 24px; }
-.kicker::before { content: "💀🎧 "; letter-spacing: 0; }
+/* Bot-Emblem vor der Überschriftzeile (früher die Emojis 💀🎧) */
+.kicker::before { content: ""; display: inline-block; width: 26px; height: 26px; margin-right: 10px; vertical-align: middle; background: url(logo.png) center / contain no-repeat; filter: drop-shadow(0 0 5px rgba(255, 30, 30, .45)); }
 h1 { font-weight: 800; letter-spacing: -.01em; line-height: 1.1; font-size: clamp(30px, 6vw, 40px); }
 h2 { font-weight: 800; font-size: 24px; letter-spacing: -.005em; text-transform: none; border-left: 0; padding-left: 0; }
 .card { border-radius: 8px; }
