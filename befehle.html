@@ -12,7 +12,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-23-3", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-27-1", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -69,7 +69,11 @@
       <div class="row"><code>!ask rate</code><p>Startet Zahlenraten von 1 bis 100. Getippt wird mit <span class="cmd">!ask rate 50</span>.</p></div>
       <div class="row"><code>!ask quiz</code><p>Stellt eine Quizfrage. Wer zuerst mit <span class="cmd">!ask antwort Lösung</span> richtig liegt, gewinnt. Zeit: 60 Sekunden.</p></div>
       <div class="row"><code>!ask rangliste</code><p>Zeigt die besten fünf des Monats. Punkte gibt es für Quiz und Zahlenraten (je 3) und Duelle (1, höchstens 10 pro Tag).</p></div>
-      <div class="row"><code>!ask punkte</code><p>Zeigt deine Punkte und deinen Platz. <span class="cmd">!ask punkte löschen</span> löscht deine Punkte.</p></div>
+      <div class="row"><code>!ask punkte</code><p>Zeigt deine Punkte und deinen Platz im Monat und im Jahr. <span class="cmd">!ask punkte löschen</span> löscht deine Punkte.</p></div>
+      <div class="row"><code>!ask jahresrangliste</code><p>Zeigt die besten fünf des Jahres. Dafür zählen Minispiel-Punkte und Zuschau-Punkte zusammen: Wer im Live-Stream zuschaut, bekommt alle 10 Minuten 10 Punkte (nur Twitch).</p></div>
+      <div class="row"><code>!ask punkte aus</code><p>Du sammelst keine Jahrespunkte mehr, deine bisherigen werden gelöscht. Mit <span class="cmd">!ask punkte an</span> sammelst du wieder.</p></div>
+      <div class="row"><code>!join</code><p>Läuft auf Twitch gerade eine Verlosung, bist du damit dabei. Kostenlos, mehr Jahrespunkte bedeuten bessere Chancen.</p></div>
+      <div class="row"><code>!ask verlosung</code><p>Zeigt, ob gerade eine Verlosung läuft.</p></div>
     </div>
     <p class="note" style="margin-top:12px">Die Spiele laufen ohne KI und zählen nicht zu den Tageslimits. Zwischen zwei Spielen einer Person liegen 5 Sekunden. Gewinne und Punkte sind rein virtuell. Die Rangliste beginnt jeden Monat neu.</p>
   </section>
@@ -79,6 +83,8 @@
     <div class="card">
       <div class="row"><code>!ask on</code><p>Schaltet die KI-Antworten in deinem Chat ein.</p></div>
       <div class="row"><code>!ask off</code><p>Pausiert die KI-Antworten in deinem Chat.</p></div>
+      <div class="row"><code>!ask verlosung start Preis</code><p>Startet eine Verlosung (auch Moderatoren). Zuschauer machen mit <span class="cmd">!join</span> mit. Den Preis vergibst du selbst.</p></div>
+      <div class="row"><code>!ask verlosung ziehen</code><p>Zieht den Gewinner und beendet die Verlosung. <span class="cmd">!ask verlosung stopp</span> bricht ab.</p></div>
       <div class="row"><code>!ask cooldown</code><p>Zeigt die Pause zwischen zwei Fragen.</p></div>
       <div class="row"><code>!ask cooldown 20</code><p>Setzt die Pause auf 20 Sekunden. Erlaubt sind 5 bis 600 Sekunden.</p></div>
       <div class="row"><code>!ask cooldown reset</code><p>Setzt die Pause auf den Standardwert zurück.</p></div>
@@ -135,7 +141,7 @@
 </main>
 
 <footer class="fuss">
-  <span class="fuss-stand">VenoX_Bot · Betrieben von VenoX · Stand 23.10.2026</span>
+  <span class="fuss-stand">VenoX_Bot · Betrieben von VenoX · Stand 27.10.2026</span>
   <a href="nutzungsbedingungen.html">Nutzungsbedingungen &amp; Datenschutz</a>
   <a href="mailto:venoxbot@web.de">venoxbot@web.de</a>
 </footer>
