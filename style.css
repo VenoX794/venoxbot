@@ -1,0 +1,599 @@
+/* VenoX_Bot – rundes, dunkles Design (Mischung der Entwürfe 4, 6 und 9 vom 27.10.2026):
+   am PC eine schwebende Seitenleiste, auf dem Handy eine runde Menüleiste unten wie in einer App.
+   Schwebende Flächen mit Schatten statt Rahmen, roter Schein hinter dem Bot-Bild.
+   Nur Systemschriften, nichts von fremden Servern. */
+:root {
+  --bg: #0b0b0b;
+  --karte: #151413;
+  --linie: #2a2724;
+  --linie-hell: #3a3633;
+  --text: #f2f0ec;
+  --blass: #9a958d;
+  --rot: #c8102e;
+  --rot-hell: #de2342;
+  --platz: #e8a0aa;
+  --leiste-bg: #050505;
+  --fehler-bg: #1f0c0f;
+  --fehler-text: #ffd9de;
+  --schrift: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", "DejaVu Sans Mono", Menlo, Consolas, monospace;
+  --leiste-h: 3.25rem;
+  --flaeche: #1a1918;
+  --rund: 24px;
+  --rund-klein: 14px;
+  --schwebe: 0 18px 50px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .05);
+  --schein: rgba(200, 16, 46, .28);
+  color-scheme: dark;
+}
+
+/* Heller Modus (thema.js setzt data-thema="hell" am <html>): gleiche Variablen, helle Werte */
+:root[data-thema="hell"] {
+  --bg: #f6f4f1;
+  --karte: #ffffff;
+  --linie: #e2ddd7;
+  --linie-hell: #cbc3ba;
+  --text: #1a1816;
+  --blass: #67615a;
+  --rot: #c8102e;
+  --rot-hell: #a50d26;
+  --platz: #9b2a3a;
+  --leiste-bg: #ece8e3;
+  --fehler-bg: #fde8eb;
+  --fehler-text: #7a0a1c;
+  --flaeche: #ffffff;
+  --schwebe: 0 10px 30px rgba(40, 25, 20, .10);
+  --schein: rgba(200, 16, 46, .14);
+  color-scheme: light;
+}
+:root[data-thema="hell"] .zeile.aus { background: #efebe6; }
+:root[data-thema="hell"] .chip:hover { background: #efebe6; }
+:root[data-thema="hell"] .chat { background: #ffffff; border-color: #dedee3; }
+:root[data-thema="hell"] .chat-kopf { color: #53535f; border-bottom-color: #dedee3; }
+:root[data-thema="hell"] .discord { background: #eceefe; border-color: #b7bcf5; }
+:root[data-thema="hell"] .discord p { color: #2c2f7a; }
+
+/* Hell/Dunkel-Umschalter: Pille mit Mond und Sonne, der rote Punkt liegt unter dem aktiven Zeichen */
+.thema-knopf {
+  position: relative; display: inline-flex; align-items: center; gap: .1rem; flex: none;
+  padding: .18rem; border: 1px solid var(--linie-hell); border-radius: 999px; background: var(--karte); cursor: pointer;
+}
+.thema-knopf span {
+  position: relative; z-index: 1; display: grid; place-items: center; width: 1.6rem; height: 1.6rem;
+  font-size: .9rem; line-height: 1; opacity: .45; transition: opacity .2s;
+}
+.thema-knopf::before {
+  content: ""; position: absolute; top: .18rem; left: .18rem; width: 1.6rem; height: 1.6rem;
+  border-radius: 50%; background: var(--rot); transition: transform .2s;
+}
+.thema-knopf[aria-pressed="true"]::before { transform: translateX(1.7rem); }
+.thema-knopf[aria-pressed="false"] span:first-child,
+.thema-knopf[aria-pressed="true"] span:last-child { opacity: 1; }
+.thema-knopf:focus-visible { outline: 2px solid var(--rot); outline-offset: 2px; }
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { background: var(--bg); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font: 15px/1.5 var(--schrift);
+  color: var(--text);
+  background: var(--bg);
+  padding-bottom: calc(var(--leiste-unten, var(--leiste-h)) + 1rem);
+  overflow-x: hidden;
+}
+
+a { color: var(--text); text-decoration-color: var(--rot); text-underline-offset: 3px; }
+a:hover { color: var(--platz); }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+code { font-family: var(--mono); font-size: .9em; }
+
+.unsichtbar {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* Kopf: Grundform (Tablet) eine Leiste oben; am PC Seitenleiste, auf dem Handy Menü unten (siehe unten) */
+.kopf {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .75rem 1rem;
+  max-width: 1040px; margin: 1rem auto 0; padding: .7rem 1rem;
+  background: var(--flaeche); border-radius: var(--rund); box-shadow: var(--schwebe);
+}
+.logo { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; color: var(--text); margin-right: auto; }
+.logo:hover { color: var(--text); }
+/* Bot-Emblem (rund, transparent) vor dem Schriftzug; der rote Schein passt zum Neon-Look des Profilbilds */
+.logo-zeichen { display: block; width: 40px; height: 40px; flex: none; filter: drop-shadow(0 0 8px rgba(255, 30, 30, .5)); }
+.logo-wort { font-weight: 800; font-size: 1.2rem; letter-spacing: .1em; }
+.logo-strich { color: var(--rot); }
+/* Menü: Bereiche (nur angemeldet) und feste Links. „Start“ gibt es nur ohne Anmeldung. */
+.menue { display: flex; flex-wrap: wrap; gap: .25rem; }
+.nav { display: flex; gap: .25rem; }
+.nav-knopf, .menue-link {
+  font: 600 .93rem var(--schrift); color: var(--blass); background: transparent; cursor: pointer;
+  border: 0; border-radius: 999px; padding: .6rem 1rem; text-decoration: none; text-align: left;
+}
+.nav-knopf:hover, .menue-link:hover { color: var(--text); background: var(--bg); }
+.nav-knopf[aria-pressed="true"], .menue-link.nur-gast {
+  color: #fff; background: var(--rot); box-shadow: 0 8px 24px rgba(200, 16, 46, .35);
+}
+#nav:not([hidden]) ~ .nur-gast { display: none; }
+.konto { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; min-width: 0; }
+.wer { color: var(--blass); font-size: .9rem; overflow-wrap: anywhere; }
+.kanalwahl select {
+  font: inherit; color: var(--text); background: var(--bg);
+  border: 1px solid var(--linie); border-radius: 999px; padding: .45rem .8rem; max-width: 14rem;
+}
+/* Anmelde-Kasten für Gäste; verschwindet, sobald das Konto angezeigt wird */
+.seite-login { display: flex; align-items: center; gap: .6rem; }
+.seite-login p { margin: 0; color: var(--blass); font-size: .88rem; }
+.konto:not([hidden]) ~ .seite-login { display: none; }
+
+main { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem 2rem; }
+
+/* Knöpfe */
+.knopf {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  font: inherit; font-weight: 600; font-size: .93rem; color: #fff; background: var(--rot);
+  border: 1px solid var(--rot); border-radius: 999px; padding: .55rem 1.15rem;
+  cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(200, 16, 46, .3);
+}
+.knopf:hover { background: var(--rot-hell); border-color: var(--rot-hell); color: #fff; }
+.knopf:disabled { opacity: .55; cursor: wait; }
+.knopf:disabled:hover { background: var(--rot); border-color: var(--rot); }
+.knopf.leise { color: var(--text); background: var(--bg); border-color: var(--linie); box-shadow: none; }
+.knopf.leise:hover { border-color: var(--blass); color: var(--text); background: transparent; }
+.knopf.klein { padding: .4rem .9rem; font-size: .85rem; }
+.knopf.gross { font-size: 1.05rem; padding: .85rem 1.7rem; }
+.knopf.gefahr { background: var(--rot); border-color: var(--rot); }
+
+/* Hinweise */
+.hinweis {
+  margin: 0 0 1rem; padding: .65rem .9rem; border-radius: var(--rund);
+  border: 1px solid var(--linie); background: var(--karte); color: var(--blass);
+}
+.hinweis.fehler { border-color: var(--rot); color: var(--fehler-text); background: var(--fehler-bg); }
+main > .hinweis.fehler:first-child { margin-top: 1.5rem; }
+
+/* Seitentitel */
+.seiten-titel { font-size: 1.9rem; line-height: 1.2; letter-spacing: -.01em; margin: 1.8rem 0 .25rem; overflow-wrap: anywhere; }
+.akzent { color: var(--rot); }
+.unterzeile { color: var(--blass); margin: 0 0 1.25rem; }
+
+/* Streamer-Übersicht */
+.karten {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1.1rem;
+}
+.karte {
+  min-width: 0; padding: 1rem 1.1rem;
+  background: var(--flaeche); border-radius: var(--rund); box-shadow: var(--schwebe);
+}
+.karte.live { box-shadow: 0 0 0 1.5px var(--rot), 0 24px 60px rgba(200, 16, 46, .2); }
+.karte-kopf { display: flex; align-items: center; gap: .55rem; min-width: 0; }
+.karte-name {
+  font-weight: 700; font-size: 1.07rem; text-decoration: none; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+}
+.karte-name:hover { color: var(--text); text-decoration: underline; text-decoration-color: var(--rot); }
+.abzeichen {
+  flex: none; font-size: .73rem; font-weight: 800; letter-spacing: .06em;
+  padding: .1rem .45rem; border-radius: 999px; background: var(--rot); color: #fff;
+}
+.abzeichen.aus { background: var(--linie); color: var(--blass); }
+.karte-meta {
+  color: var(--blass); font-size: .87rem; margin-top: .35rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.karte-meta b { color: var(--text); font-weight: 600; }
+/* Live-Karten über die ganze Breite, mit Platzhalter bzw. Twitch-Player (16:9) */
+.karte.live { grid-column: 1 / -1; }
+.player {
+  margin-top: .75rem; aspect-ratio: 16 / 9; max-width: 56rem;
+  background: #000; border-radius: var(--rund-klein); overflow: hidden;
+}
+.player iframe { display: block; width: 100%; height: 100%; border: 0; }
+.player-platzhalter {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .6rem; padding: 1rem; text-align: center;
+}
+.player-hinweis { margin: 0; max-width: 26rem; color: var(--blass); font-size: .8rem; line-height: 1.4; }
+.auf-twitch { display: inline-block; margin-top: .6rem; text-decoration: none; }
+
+/* Anmelden (nur ohne Anmeldung, unter der Übersicht) */
+.start { margin-top: 2.25rem; padding: 1.8rem; background: var(--flaeche); border-radius: var(--rund); box-shadow: var(--schwebe); }
+.start > * { max-width: 40rem; }
+.start-titel { font-size: 1.5rem; line-height: 1.2; margin: 0 0 .6rem; letter-spacing: -.01em; }
+.start-text { color: var(--blass); margin: 0 0 1.4rem; max-width: 36rem; }
+.start-klein { font-size: .85rem; color: var(--blass); margin: 1.2rem 0 0; max-width: 32rem; }
+
+.leer { padding: 2.5rem 0; max-width: 36rem; }
+.leer h1 { margin: 0 0 .5rem; }
+
+/* Befehlsliste */
+.befehle-kopf { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1rem; margin: 1.6rem 0 1rem; }
+.befehle-kopf h1 { margin: 0; font-size: 1.6rem; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.anzahl { color: var(--blass); font-size: .9rem; }
+.befehle-kopf .knopf { margin-left: auto; }
+
+.liste { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.zeile {
+  display: grid;
+  grid-template-columns: minmax(7rem, 9.5rem) minmax(0, 1fr) auto auto auto;
+  grid-template-areas: "name text info aktionen schalter";
+  align-items: center; gap: .25rem 1rem;
+  padding: .7rem .9rem;
+  border-radius: var(--rund-klein);
+  background: var(--flaeche); box-shadow: var(--schwebe);
+}
+.zeile.aus { background: #100f0e; }
+.zeile.aus .zeile-name, .zeile.aus .zeile-text { opacity: .7; }
+.zeile-name { grid-area: name; font-family: var(--mono); font-weight: 700; overflow-wrap: anywhere; }
+.zeile-text { grid-area: text; overflow-wrap: anywhere; min-width: 0; }
+.zeile-info { grid-area: info; display: flex; gap: .4rem; justify-self: end; white-space: nowrap; }
+.zeile .schalter { grid-area: schalter; justify-self: end; }
+.zeile-aktionen { grid-area: aktionen; display: flex; gap: .4rem; justify-self: end; flex-wrap: wrap; }
+.zeile.bearbeitet { display: none; }
+
+.marke {
+  font-size: .73rem; font-weight: 600; padding: .05rem .5rem; border-radius: 999px;
+  border: 1px solid var(--linie); color: var(--blass);
+}
+.marke.mod { color: var(--text); border-color: var(--linie-hell); }
+
+.platz { font-family: var(--mono); font-size: .88em; color: var(--platz); }
+.emote-im-text { height: 1.6em; width: auto; vertical-align: middle; margin: -.2em 0; }
+
+/* Schalter */
+.schalter {
+  position: relative; width: 2.6rem; height: 1.45rem; flex: none;
+  border-radius: 999px; border: 0; background: var(--linie-hell);
+  cursor: pointer; padding: 0;
+}
+.schalter::after {
+  content: ""; position: absolute; top: 3px; left: 3px;
+  width: calc(1.45rem - 6px); height: calc(1.45rem - 6px); border-radius: 50%;
+  background: var(--blass); transition: transform .15s ease;
+}
+.schalter[aria-checked="true"] { background: var(--rot); }
+.schalter[aria-checked="true"]::after { transform: translateX(1.15rem); background: #fff; }
+.schalter:disabled { cursor: wait; opacity: .6; }
+
+/* Rückfrage beim Löschen */
+.rueckfrage { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; justify-content: flex-end; }
+.rueckfrage span { margin-right: auto; }
+
+.leer-liste { color: var(--blass); padding: 1.5rem 0; }
+
+/* Editor */
+.editor {
+  margin: 0 0 .5rem; padding: 1rem;
+  border-radius: var(--rund); background: var(--flaeche);
+  box-shadow: 0 0 0 1.5px var(--rot), var(--schwebe);
+}
+.editor h2 { margin: 0 0 .8rem; font-size: 1.1rem; font-family: var(--mono); overflow-wrap: anywhere; }
+.feld { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .8rem; }
+.feld-name { font-weight: 700; font-size: .9rem; }
+.feld-hilfe { font-size: .8rem; color: var(--blass); margin: 0; }
+.name-eingabe {
+  display: flex; align-items: stretch; max-width: 20rem;
+  border: 1px solid var(--linie-hell); border-radius: var(--rund-klein); background: var(--bg); overflow: hidden;
+}
+.name-eingabe:focus-within { border-color: var(--text); }
+.ausruf { padding: .45rem 0 .45rem .7rem; font-family: var(--mono); font-weight: 700; color: var(--rot); }
+.name-eingabe input {
+  flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--text);
+  font: 700 1rem var(--mono); padding: .45rem .7rem .45rem .1rem;
+}
+.editor textarea {
+  width: 100%; resize: vertical; min-height: 5rem;
+  font: inherit; color: var(--text); background: var(--bg);
+  border: 1px solid var(--linie-hell); border-radius: var(--rund-klein); padding: .55rem .7rem;
+}
+.editor textarea:focus { border-color: var(--text); outline: none; }
+.unter-text { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .5rem; margin: -.4rem 0 .3rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .3rem; flex: 1; min-width: 0; }
+.chip {
+  font: .8rem var(--mono); color: var(--platz); background: transparent;
+  border: 1px solid var(--linie); border-radius: 999px; padding: .15rem .45rem; cursor: pointer;
+}
+.chip:hover { border-color: var(--linie-hell); background: #1d1b19; }
+.zaehler { font-size: .85rem; color: var(--blass); font-variant-numeric: tabular-nums; margin-left: auto; }
+.zaehler.voll { color: var(--platz); font-weight: 700; }
+#chip-hilfe { min-height: 1.2em; margin-bottom: .6rem; }
+.editor-optionen { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 0 0 .9rem; }
+.haken { display: inline-flex; align-items: center; gap: .45rem; cursor: pointer; }
+.haken input { width: 1.1rem; height: 1.1rem; accent-color: var(--rot); }
+.editor-knoepfe { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+/* Emote-Leiste unten */
+.emoteleiste {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  background: var(--leiste-bg); border-top: 2px solid var(--rot);
+  box-shadow: 0 -6px 18px #000c;
+}
+.leiste-kopf {
+  display: flex; align-items: center; gap: .5rem;
+  max-width: 980px; margin: 0 auto; padding: .5rem 1.5rem; min-height: var(--leiste-h);
+}
+.leiste-auf {
+  font: inherit; font-weight: 700; color: var(--text); background: none; border: 0;
+  padding: .3rem .2rem; cursor: pointer; white-space: nowrap;
+}
+.leiste-auf::after { content: " ▴"; color: var(--rot); }
+.leiste-auf[aria-expanded="true"]::after { content: " ▾"; }
+.tabs { display: flex; gap: .25rem; flex: none; }
+.tab {
+  font: 700 .8rem var(--schrift); color: var(--blass); background: none; cursor: pointer;
+  border: 1px solid var(--linie); border-radius: 999px; padding: .25rem .6rem;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] { color: #fff; background: var(--rot); border-color: var(--rot); }
+.suche { flex: 1; min-width: 0; }
+.suche input {
+  width: 100%; font: inherit; font-size: .9rem; color: var(--text); background: var(--bg);
+  border: 1px solid var(--linie); border-radius: 999px; padding: .3rem .6rem;
+}
+.suche input:focus { border-color: var(--text); outline: none; }
+.leiste-inhalt { max-width: 980px; margin: 0 auto; padding: .6rem 1.5rem 0; }
+.leiste-info { margin: 0 0 .4rem; font-size: .85rem; color: var(--blass); }
+.leiste-info:empty { display: none; }
+.emotes {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(4.2rem, 1fr)); gap: .3rem;
+  align-content: start;
+  max-height: min(34vh, 15rem); overflow-y: auto; overscroll-behavior: contain;
+}
+.emote {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem;
+  min-height: 3.4rem; padding: .3rem .2rem; cursor: pointer;
+  color: var(--blass); background: var(--karte); border: 1px solid transparent; border-radius: var(--rund-klein);
+  font: .68rem var(--schrift);
+}
+.emote:hover, .emote:focus-visible { border-color: var(--linie-hell); color: var(--text); }
+.emote img { height: 28px; width: auto; max-width: 100%; }
+.emote span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Fuß */
+.fuss {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.5rem;
+  max-width: 1040px; margin: 1rem auto 0; padding: 1.25rem 1.5rem; font-size: .85rem;
+}
+.fuss a { color: var(--blass); text-decoration: none; }
+.fuss a:hover { color: var(--text); text-decoration: underline; }
+
+/* kurze Meldung */
+.meldung {
+  position: fixed; left: 50%; bottom: calc(var(--leiste-unten, var(--leiste-h)) + 1rem); transform: translateX(-50%); z-index: 20;
+  max-width: calc(100vw - 2rem); padding: .6rem 1.2rem; border-radius: 999px;
+  background: var(--flaeche); border: 1px solid var(--rot); box-shadow: 0 10px 30px #000a;
+}
+body.ohne-leiste .meldung { bottom: 1rem; }
+body.ohne-leiste { padding-bottom: 0; }
+
+/* PC: Kopf wird zur schwebenden Seitenleiste links (Entwurf 6), Inhalt und Fuß rechts daneben */
+@media (min-width: 60rem) {
+  body {
+    display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); grid-template-rows: 1fr auto;
+    column-gap: 1.5rem; padding-top: 1.25rem; padding-left: 1.25rem; padding-right: 1.25rem;
+  }
+  .kopf {
+    grid-row: 1 / span 2; align-self: start; position: sticky; top: 1.25rem;
+    flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: .35rem;
+    width: auto; margin: 0; padding: 1.1rem; max-height: calc(100vh - 2.5rem); overflow-y: auto;
+  }
+  .logo { margin: 0 0 1rem; padding: .2rem .3rem; }
+  .menue, .nav { flex-direction: column; flex-wrap: nowrap; }
+  .thema-knopf { align-self: flex-start; margin: .9rem 0 0 .3rem; }
+  .konto { flex-direction: column; align-items: stretch; margin-top: .6rem; }
+  .kanalwahl select { width: 100%; max-width: none; }
+  .wer { padding: 0 .3rem; }
+  .seite-login {
+    flex-direction: column; align-items: stretch; gap: .7rem;
+    margin-top: 1.2rem; padding: 1rem; background: var(--bg); border-radius: var(--rund-klein);
+  }
+  .seite-login .knopf { white-space: nowrap; font-size: .88rem; padding: .6rem .8rem; }
+  main, .fuss { grid-column: 2; width: 100%; box-sizing: border-box; }
+}
+
+/* Sehr schmale Handys: Logo enger, damit es nicht in „Abmelden“ läuft */
+@media (max-width: 22rem) {
+  .kopf .logo-wort { font-size: 1rem; letter-spacing: .04em; }
+  .kopf .logo { gap: .3rem; min-width: 0; }
+  .kopf #abmelden { padding: .35rem .6rem; }
+}
+
+/* Handy */
+@media (max-width: 40rem) {
+  /* Kompakter Kopf oben: Logo, Hell/Dunkel und Abmelden bzw. Anmelden, darunter die Kanalwahl. Der Name fällt weg. */
+  .kopf {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center;
+    gap: .55rem .6rem; margin: .75rem .75rem 0; padding: .6rem .7rem .6rem .9rem;
+  }
+  .konto { display: contents; }
+  .logo { grid-column: 1; grid-row: 1; }
+  .thema-knopf { grid-column: 2; grid-row: 1; }
+  #abmelden { grid-column: 3; grid-row: 1; }
+  /* Anmelden steht auf dem Handy groß im Startbereich, oben wäre es zu eng */
+  .seite-login { display: none; }
+  .kanalwahl { grid-column: 1 / 4; grid-row: 2; justify-self: end; }
+  .kanalwahl select { max-width: 12rem; padding: .35rem .7rem; }
+  /* Menü als runde Leiste unten am Bildschirm, über der Emote-Leiste (wie in einer App, Entwurf 10) */
+  .menue {
+    position: fixed; z-index: 15; left: .75rem; right: .75rem;
+    bottom: calc(var(--leiste-unten, 0px) + .6rem + env(safe-area-inset-bottom));
+    display: flex; flex-wrap: nowrap; gap: .2rem; padding: .35rem;
+    background: var(--flaeche); border-radius: 999px;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .06);
+  }
+  .menue .nav:not([hidden]) { display: contents; }
+  .nav-knopf, .menue-link { flex: 1 1 0; min-width: 0; text-align: center; padding: .75rem .3rem; font-size: .88rem; }
+  /* Platz unten für die Menüleiste (und ggf. die Emote-Leiste darunter) */
+  body { padding-bottom: calc(var(--leiste-unten, var(--leiste-h)) + 5rem + env(safe-area-inset-bottom)); }
+  body.ohne-leiste { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); }
+  .meldung, body.ohne-leiste .meldung { bottom: calc(var(--leiste-unten, 0px) + 5rem + env(safe-area-inset-bottom)); }
+  .wer { display: none; }
+  .logo-zeichen { width: 34px; height: 34px; }
+  main { padding: 0 1rem 2rem; }
+  .logo-wort { font-size: 1.05rem; }
+  .held-titel { font-size: 1.95rem; }
+  .held-bild { width: 92px; height: 92px; }
+  .cta { padding: 1.3rem; }
+  .seiten-titel { font-size: 1.55rem; margin-top: 1.4rem; }
+  .karten { grid-template-columns: minmax(0, 1fr); }
+  .zeile {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "name schalter" "text text" "info aktionen";
+    gap: .45rem .75rem;
+  }
+  .zeile-info { justify-self: start; }
+  .zeile-aktionen { justify-self: end; }
+  .leiste-kopf { flex-wrap: wrap; padding: .45rem .75rem; }
+  .suche { flex-basis: 100%; order: 3; }
+  .tab { padding: .25rem .45rem; }
+  .leiste-inhalt { padding: .5rem .75rem 0; }
+  :root { --leiste-h: 5.6rem; }
+  .befehle-kopf .knopf { margin-left: 0; }
+  /* Offene Leiste höchstens 28 % der Bildschirmhöhe, damit der Editor darüber Platz behält */
+  .emoteleiste.offen {
+    display: flex; flex-direction: column;
+    max-height: max(28vh, calc(var(--leiste-h) + 4.5rem));
+  }
+  .emoteleiste.offen .leiste-kopf { flex: none; width: 100%; }
+  .emoteleiste.offen .leiste-inhalt { flex: 1 1 auto; min-height: 0; width: 100%; display: flex; flex-direction: column; }
+  .emotes { flex: 1 1 auto; min-height: 0; max-height: none; grid-template-columns: repeat(auto-fill, minmax(3.8rem, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Zustimmung zu automatischen Live-Streams */
+.twitch-frage {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem;
+  margin: 0 0 1rem; padding: .85rem 1rem;
+  background: var(--flaeche); border-radius: var(--rund); box-shadow: var(--schwebe);
+}
+.twitch-frage p { margin: 0; flex: 1 1 22rem; color: var(--blass); font-size: .9rem; }
+.twitch-frage strong { color: var(--text); }
+.twitch-knoepfe { display: flex; flex-wrap: wrap; gap: .5rem; }
+.fuss-knopf {
+  font: inherit; color: var(--blass); background: none; border: 0; padding: 0; cursor: pointer;
+}
+.fuss-knopf:hover { color: var(--text); text-decoration: underline; }
+
+/* Startseite: Kopfbereich, Bühne mit Beispiel-Chat, Zahlen, Spalten */
+.held { position: relative; padding: 2.5rem 0 1rem; text-align: center; }
+.held > * { position: relative; }
+.held::before {
+  content: ""; position: absolute; left: 50%; top: -3rem; width: min(46rem, 100%); height: 26rem;
+  transform: translateX(-50%); pointer-events: none;
+  background: radial-gradient(closest-side, var(--schein), transparent);
+}
+.held-bild {
+  display: block; width: 112px; height: 112px; margin: 0 auto 1.2rem;
+  filter: drop-shadow(0 0 22px rgba(222, 35, 66, .6));
+}
+.held-titel { font-size: 3.1rem; line-height: 1.06; letter-spacing: -.025em; margin: 0 auto .7rem; max-width: 46rem; }
+.held .unterzeile { font-size: 1.08rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
+.held-knoepfe { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-bottom: 1.8rem; }
+
+.buehne { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 1.1rem; align-items: start; }
+.buehne-links { min-width: 0; }
+.buehne .karten { grid-template-columns: 1fr; }
+.buehne-leer {
+  display: grid; place-content: center; text-align: center; aspect-ratio: 16 / 9;
+  background: var(--flaeche); border-radius: var(--rund); box-shadow: var(--schwebe); padding: 1rem;
+}
+.buehne-leer p { margin: .15rem 0; color: var(--blass); }
+.buehne-leer strong { color: var(--text); }
+
+.chat {
+  margin: 0; min-width: 0; padding: .8rem .9rem;
+  background: #18181b; border: 1px solid #2f2f35; border-radius: var(--rund); font-size: .9rem; line-height: 1.45;
+  box-shadow: var(--schwebe);
+}
+.chat-kopf {
+  display: flex; justify-content: space-between; gap: .5rem; color: #adadb8; font-size: .78rem;
+  border-bottom: 1px solid #2f2f35; padding-bottom: .5rem; margin-bottom: .3rem;
+}
+.chat-zeile { margin: .35rem 0; overflow-wrap: anywhere; }
+.chat-zeile code { color: var(--platz); }
+.chat-name { font-weight: 700; }
+.chat-zeile.vom-bot { background: rgba(200, 16, 46, .15); padding: .4rem .7rem; border-radius: 14px 14px 4px 14px; }
+.chat-zeile.vom-bot .chat-name { color: var(--rot-hell); }
+@media (prefers-reduced-motion: no-preference) {
+  .chat-zeile.neu { animation: chat-rein .35s ease-out; }
+  @keyframes chat-rein { from { opacity: 0; transform: translateY(6px); } }
+}
+
+.zahlen { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.6rem 0 0; }
+.zahlen > div {
+  padding: 1rem; display: flex; flex-direction: column-reverse; text-align: center;
+  background: var(--flaeche); border-radius: var(--rund-klein); box-shadow: var(--schwebe);
+}
+.zahlen dt { color: var(--blass); font-size: .85rem; }
+.zahlen dd { margin: 0; font-size: 2rem; font-weight: 800; line-height: 1.15; }
+.zahl-live dd { color: var(--rot-hell); }
+
+.spalten { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: 1.5rem; align-items: start; }
+.spalte-seite { display: grid; gap: .8rem; margin-top: 2.4rem; }
+.abschnitt { font-size: 1.45rem; letter-spacing: -.01em; margin: 2.6rem 0 1rem; scroll-margin-top: 1.5rem; }
+.kasten { background: var(--flaeche); border-radius: var(--rund); padding: 1.2rem; box-shadow: var(--schwebe); }
+.kasten h2 { font-size: 1rem; margin: 0 0 .55rem; }
+.kasten p { margin: 0 0 .8rem; color: var(--blass); font-size: .9rem; }
+.neuigkeiten { list-style: none; margin: 0; padding: 0; }
+.neuigkeiten li { padding: .5rem 0; border-top: 1px solid var(--linie); font-size: .92rem; font-weight: 600; }
+.neuigkeiten li:first-child { border-top: 0; padding-top: 0; }
+.discord { background: #24265e; }
+.discord p { color: #c9cbf5; }
+.discord-knopf { background: #5865f2; border-color: #5865f2; }
+.discord-knopf:hover { background: #4752c4; border-color: #4752c4; }
+
+.funktionen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1.1rem; }
+.funktionen li { background: var(--flaeche); border-radius: var(--rund); padding: 1.2rem; box-shadow: var(--schwebe); }
+.funktionen h3 { margin: 0 0 .3rem; font-size: 1rem; }
+.funktionen p { margin: 0 0 .6rem; color: var(--blass); font-size: .9rem; }
+.funktionen code { color: var(--platz); }
+.fkt-zeichen { display: block; font-size: 1.4rem; line-height: 1; margin-bottom: .5rem; }
+
+.schritte { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; counter-reset: schritt; }
+.cta {
+  margin-top: 2.6rem; padding: 1.8rem; color: #fff; background: var(--rot);
+  border-radius: var(--rund); box-shadow: 0 24px 60px rgba(200, 16, 46, .3);
+}
+.cta .abschnitt { margin-top: 0; color: #fff; }
+.cta a, .cta a:hover { color: #fff; text-decoration-color: #fff; }
+.schritte li { background: rgba(0, 0, 0, .22); border-radius: var(--rund-klein); padding: 1.1rem; }
+.schritte li::before {
+  counter-increment: schritt; content: counter(schritt);
+  display: grid; place-items: center; width: 1.9rem; height: 1.9rem; margin-bottom: .6rem;
+  border-radius: 50%; background: #fff; color: var(--rot); font-weight: 800;
+}
+.schritte h3 { margin: 0 0 .3rem; font-size: 1rem; }
+.schritte p { margin: 0; color: rgba(255, 255, 255, .9); font-size: .9rem; }
+.schritte code { color: #fff; font-weight: 700; }
+
+/* Karten: Profilbuchstabe und Befehlsnamen */
+.avatar {
+  flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
+  color: #fff; font-weight: 800; font-size: .9rem; position: relative; overflow: hidden;
+}
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.karte-befehle { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin-top: .65rem; }
+.befehl-chip { color: var(--platz); border: 1px solid var(--linie-hell); border-radius: 999px; padding: .08rem .45rem; font-size: .82rem; }
+.befehle-mehr { color: var(--blass); font-size: .82rem; }
+
+@media (max-width: 760px) {
+  .held-titel { font-size: 2.1rem; }
+  .buehne, .spalten { grid-template-columns: 1fr; }
+  .spalte-seite { margin-top: 1.4rem; }
+  .zahlen { grid-template-columns: repeat(2, 1fr); }
+  .schritte { grid-template-columns: 1fr; }
+}
+
+/* Offline-Seite der App (offline.html) */
+body.offline-seite { display: block; padding: 0; }
+.offline { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem; text-align: center; padding: 2rem 1.5rem; box-sizing: border-box; }
+.offline h1 { margin: 0; font-size: 1.8rem; }
+.offline p { margin: 0 0 1.2rem; color: var(--blass); max-width: 26rem; }

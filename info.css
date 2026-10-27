@@ -1,0 +1,78 @@
+/* Ergänzungen für die Info-Seiten auf GitHub Pages (Start, Befehle, Nutzungsbedingungen).
+   Grundlage ist style.css: eine genaue Kopie aus der Befehle-Website (venoxbot-web/public/style.css),
+   damit beide Seiten gleich aussehen. Bei Design-Änderungen dort die Datei hierher neu kopieren.
+   Hier stehen nur die Bausteine, die es nur auf den Info-Seiten gibt. */
+
+/* Menü: die gerade offene Seite rot hervorheben (wie „Start“ auf der Befehle-Website) */
+.menue-link.aktiv { color: #fff; background: var(--rot); box-shadow: 0 8px 24px rgba(200, 16, 46, .35); }
+
+/* Startbereich der Unterseiten etwas kleiner als auf der Startseite */
+.kicker { color: var(--rot); letter-spacing: .22em; font-size: .8rem; font-weight: 700; text-transform: uppercase; margin: 0 0 .5rem; }
+.held.klein { padding-top: 1.6rem; }
+.held.klein .held-titel { font-size: 2.4rem; }
+
+/* Fließtext der Abschnitte */
+main h2 { font-size: 1.45rem; letter-spacing: -.01em; margin: 2.6rem 0 1rem; scroll-margin-top: 1.5rem; text-wrap: balance; }
+main h3 { font-size: 1.05rem; margin: 1.3rem 0 .4rem; }
+main p { margin: 0 0 .8rem; max-width: 70ch; }
+main section > ul, main section > ol { padding-left: 1.3rem; margin: 0 0 .8rem; }
+main li { margin: 0 0 .45rem; }
+main a { color: var(--text); font-weight: 600; overflow-wrap: anywhere; }
+main code, .cmd {
+  font-family: var(--mono); font-size: .88em; color: var(--platz); background: var(--bg);
+  padding: .1rem .55rem; border-radius: 999px; white-space: nowrap;
+}
+.note { color: var(--blass); font-size: .92rem; }
+
+/* Schwebende Karte (wie die Kästen der Befehle-Website); im Kartenhintergrund hebt sich Code ab */
+.card { background: var(--flaeche); border-radius: var(--rund); padding: 1.3rem 1.4rem; box-shadow: var(--schwebe); margin: 0 0 1rem; }
+.card code, .card .cmd { background: var(--bg); }
+
+/* Knöpfe wie .knopf der Befehle-Website */
+.btns { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font: inherit; font-weight: 600; font-size: .93rem; color: #fff; background: var(--rot);
+  border: 1px solid var(--rot); border-radius: 999px; padding: .65rem 1.25rem;
+  cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(200, 16, 46, .3);
+}
+main a.btn { color: #fff; }
+.btn:hover { background: var(--rot-hell); border-color: var(--rot-hell); }
+.btn.ghost, main a.btn.ghost { color: var(--text); background: var(--bg); border-color: var(--linie); box-shadow: none; }
+.btn.ghost:hover { border-color: var(--blass); }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn:disabled:hover { background: var(--rot); border-color: var(--rot); }
+
+/* Schritte „Für Streamer“: roter Kreis mit Nummer */
+.step { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: .9rem; margin: 0 0 1.1rem; align-items: start; }
+.num { width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; background: var(--rot); color: #fff; font-weight: 800; }
+.step h3 { margin: .35rem 0 .2rem; }
+.step p { margin: 0; }
+
+/* Kontakt */
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1rem; }
+.contact .addr { font-weight: 700; font-size: 1.1rem; overflow-wrap: anywhere; user-select: all; min-width: 0; }
+
+/* Befehlsliste (befehle.html): Befehl links, Erklärung rechts, auf dem Handy untereinander */
+.row { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: .4rem 1.2rem; padding: .85rem 0; border-bottom: 1px solid var(--linie); }
+.row:last-child { border-bottom: 0; }
+.row p { margin: 0; }
+@media (max-width: 35rem) { .row { grid-template-columns: minmax(0, 1fr); } }
+
+/* Bestätigen der Nutzungsbedingungen: roter Ring wie der Editor der Befehle-Website */
+.confirm { box-shadow: 0 0 0 1.5px var(--rot), var(--schwebe); }
+.check { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .8rem; align-items: start; cursor: pointer; margin: 0 0 1rem; }
+.check input { width: 1.3rem; height: 1.3rem; margin: .15rem 0 0; accent-color: var(--rot); cursor: pointer; }
+.status { color: var(--blass); font-size: .92rem; margin: .8rem 0 0; min-height: 1.5em; }
+
+/* Fuß: Stand-Zeile über den Links */
+.fuss-stand { flex-basis: 100%; text-align: center; color: var(--blass); }
+
+/* Befehl in der Befehlsliste nur so breit wie sein Text, nicht über die ganze Spalte */
+.row > code, .row > .cmd { justify-self: start; align-self: start; }
+
+/* Handy: lange Befehle und Wörter umbrechen, damit nichts über den Rand ragt */
+@media (max-width: 40rem) {
+  main code, .cmd { white-space: normal; overflow-wrap: anywhere; }
+  .held.klein .held-titel { font-size: 1.75rem; hyphens: auto; overflow-wrap: anywhere; }
+}
