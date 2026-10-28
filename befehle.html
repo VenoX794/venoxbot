@@ -12,7 +12,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-28-1", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-28-2", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -103,7 +103,7 @@
       <div class="row"><code>!ask liste aus</code><p>Nimmt deinen Kanal aus der öffentlichen Streamer-Liste auf der Befehle-Website. Mit <span class="cmd">!ask liste an</span> steht er wieder drin.</p></div>
       <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur du als Streamer kannst ihn in deinem eigenen Chat abrufen.</p></div>
     </div>
-    <p class="note" style="margin-top:12px"><span class="cmd">!ask on</span>, <span class="cmd">!ask off</span>, <span class="cmd">!ask cooldown</span>, <span class="cmd">!ask spiele off/on</span>, Timer, Umfragen, Shoutouts und Filter können auch Moderatoren nutzen.</p>
+    <p class="note" style="margin-top:12px"><span class="cmd">!ask on</span>, <span class="cmd">!ask off</span>, <span class="cmd">!ask cooldown</span>, <span class="cmd">!ask spiele off/on</span>, Timer, Umfragen, Shoutouts und Filter können auch Moderatoren nutzen. Statt der Kurzformen gehen auch die langen: <span class="cmd">!ask verlosung start Preis</span> (auch <span class="cmd">raffle</span> oder <span class="cmd">gewinnspiel</span>), <span class="cmd">!ask verlosung ziehen</span>, <span class="cmd">!ask verlosung stopp</span>, <span class="cmd">!ask zuschaupunkte 25</span>, <span class="cmd">!ask shoutout @name</span>, <span class="cmd">!ask permit @name</span> und <span class="cmd">!ask poll A | B</span>.</p>
     <div class="card" style="margin-top:12px">
       <div class="row"><code>!join akzeptieren</code><p>Schreibst du im <a href="https://www.twitch.tv/venox_bot" target="_blank" rel="noopener">Chat des Bots</a>. Damit bestätigst du die Nutzungsbedingungen, und der Bot kommt in deinen Chat. Vorher musst du in deinem Chat <span class="cmd">/mod VenoX_Bot</span> schreiben. Hast du schon bestätigt, reicht <span class="cmd">!join</span>.</p></div>
       <div class="row"><code>!leave</code><p>Schreibst du im Chat des Bots. Der Bot verlässt dann deinen Chat.</p></div>
