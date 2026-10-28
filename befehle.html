@@ -12,7 +12,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-27-1", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-28-1", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -72,7 +72,9 @@
       <div class="row"><code>!ask punkte</code><p>Zeigt deine Punkte und deinen Platz im Monat und im Jahr. <span class="cmd">!ask punkte löschen</span> löscht deine Punkte.</p></div>
       <div class="row"><code>!ask jahr</code><p>Jahresrangliste: zeigt die besten fünf des Jahres. Dafür zählen Minispiel-Punkte und Zuschau-Punkte zusammen: Wer im Live-Stream zuschaut, bekommt alle 10 Minuten 10 Punkte (nur Twitch).</p></div>
       <div class="row"><code>!ask punkte aus</code><p>Du sammelst keine Jahrespunkte mehr, deine bisherigen werden gelöscht. Mit <span class="cmd">!ask punkte an</span> sammelst du wieder.</p></div>
-      <div class="row"><code>!join</code><p>Läuft auf Twitch gerade eine Verlosung, bist du damit dabei. Kostenlos, mehr Jahrespunkte bedeuten bessere Chancen.</p></div>
+      <div class="row"><code>!join</code><p>Läuft auf Twitch gerade eine Verlosung, bist du damit dabei. Kostenlos, alle haben die gleiche Chance.</p></div>
+      <div class="row"><code>!ask gib @name 50</code><p>Verschenkt 50 deiner Jahrespunkte an jemand anderen im Kanal (nur Twitch).</p></div>
+      <div class="row"><code>1, 2, …</code><p>Läuft eine Umfrage, stimmst du einfach mit der Zahl im Chat ab. <span class="cmd">!ask umfrage</span> zeigt sie.</p></div>
       <div class="row"><code>!ask verlosung</code><p>Zeigt, ob gerade eine Verlosung läuft.</p></div>
     </div>
     <p class="note" style="margin-top:12px">Die Spiele laufen ohne KI und zählen nicht zu den Tageslimits. Zwischen zwei Spielen einer Person liegen 5 Sekunden. Gewinne und Punkte sind rein virtuell. Die Rangliste beginnt jeden Monat neu.</p>
@@ -83,8 +85,14 @@
     <div class="card">
       <div class="row"><code>!ask on</code><p>Schaltet die KI-Antworten in deinem Chat ein.</p></div>
       <div class="row"><code>!ask off</code><p>Pausiert die KI-Antworten in deinem Chat.</p></div>
-      <div class="row"><code>!ask los Preis</code><p>Startet eine Verlosung (auch Moderatoren). Zuschauer machen mit <span class="cmd">!join</span> mit. Den Preis vergibst du selbst.</p></div>
-      <div class="row"><code>!ask ziehen</code><p>Zieht den Gewinner und beendet die Verlosung. <span class="cmd">!ask stopp</span> bricht ab.</p></div>
+      <div class="row"><code>!ask los Preis</code><p>Startet eine Verlosung für 60 Sekunden (auch Moderatoren). Zuschauer machen mit <span class="cmd">!join</span> mit, danach zieht der Bot bis zu 3 Gewinner. Ist der Preis eine Zahl wie <span class="cmd">!ask los 300</span>, werden Punkte gleich aufgeteilt. Andere Preise vergibst du selbst.</p></div>
+      <div class="row"><code>!ask ziehen</code><p>Zieht sofort, ohne die 60 Sekunden abzuwarten. <span class="cmd">!ask stopp</span> bricht ab.</p></div>
+      <div class="row"><code>!ask timer add name 15 Text</code><p>Schreibt den Text alle 15 Minuten (5 bis 120) im Live-Stream, wenn im Chat etwas los ist. Höchstens 5 Timer. <span class="cmd">!ask timer</span> zeigt die Liste, <span class="cmd">!ask timer del name</span> löscht.</p></div>
+      <div class="row"><code>!ask umfrage A | B</code><p>Startet eine Umfrage mit 2 bis 5 Antworten, 60 Sekunden lang. Mit Frage: <span class="cmd">!ask umfrage Was spielen wir? | Minecraft | Fortnite</span>. <span class="cmd">!ask umfrage stopp</span> beendet sofort.</p></div>
+      <div class="row"><code>!so @name</code><p>Shoutout: empfiehlt den Kanal mit seinem letzten Spiel und Link (auch <span class="cmd">!ask so @name</span>).</p></div>
+      <div class="row"><code>!ask so auto an</code><p>Bei jedem Raid bedankt sich der Bot automatisch und macht den Shoutout für den Raider. Mit <span class="cmd">!ask so auto aus</span> wieder aus (Standard: aus).</p></div>
+      <div class="row"><code>!ask filter links an</code><p>Löscht Links von Zuschauern (Streamer, Moderatoren und VIPs ausgenommen). <span class="cmd">!ask erlaube @name</span> erlaubt einen Link für 60 Sekunden. <span class="cmd">!ask filter</span> zeigt, was an ist.</p></div>
+      <div class="row"><code>!ask filter wörter an</code><p>Löscht Nachrichten mit gesperrten Wörtern (Beleidigungen, Hetze). Beide Filter sind aus, bis du sie einschaltest, und mit <span class="cmd">aus</span> wieder abschaltbar.</p></div>
       <div class="row"><code>!ask zp 25</code><p>Legt fest, wie viele Zuschau-Punkte es alle 10 Minuten gibt (0 bis 1000, 0 = aus, auch Moderatoren). <span class="cmd">!ask zp</span> zeigt den Wert, <span class="cmd">!ask zp reset</span> stellt den Standard 10 wieder her.</p></div>
       <div class="row"><code>!ask cooldown</code><p>Zeigt die Pause zwischen zwei Fragen.</p></div>
       <div class="row"><code>!ask cooldown 20</code><p>Setzt die Pause auf 20 Sekunden. Erlaubt sind 5 bis 600 Sekunden.</p></div>
@@ -95,7 +103,7 @@
       <div class="row"><code>!ask liste aus</code><p>Nimmt deinen Kanal aus der öffentlichen Streamer-Liste auf der Befehle-Website. Mit <span class="cmd">!ask liste an</span> steht er wieder drin.</p></div>
       <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur du als Streamer kannst ihn in deinem eigenen Chat abrufen.</p></div>
     </div>
-    <p class="note" style="margin-top:12px"><span class="cmd">!ask on</span>, <span class="cmd">!ask off</span>, <span class="cmd">!ask cooldown</span> und <span class="cmd">!ask spiele off/on</span> können auch Moderatoren nutzen.</p>
+    <p class="note" style="margin-top:12px"><span class="cmd">!ask on</span>, <span class="cmd">!ask off</span>, <span class="cmd">!ask cooldown</span>, <span class="cmd">!ask spiele off/on</span>, Timer, Umfragen, Shoutouts und Filter können auch Moderatoren nutzen.</p>
     <div class="card" style="margin-top:12px">
       <div class="row"><code>!join akzeptieren</code><p>Schreibst du im <a href="https://www.twitch.tv/venox_bot" target="_blank" rel="noopener">Chat des Bots</a>. Damit bestätigst du die Nutzungsbedingungen, und der Bot kommt in deinen Chat. Vorher musst du in deinem Chat <span class="cmd">/mod VenoX_Bot</span> schreiben. Hast du schon bestätigt, reicht <span class="cmd">!join</span>.</p></div>
       <div class="row"><code>!leave</code><p>Schreibst du im Chat des Bots. Der Bot verlässt dann deinen Chat.</p></div>
