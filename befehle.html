@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>VenoxBot Befehle</title>
+<title>Befehle – VenoxBot</title>
+<meta name="description" content="Alle Befehle von VenoxBot für Twitch und Discord: KI-Fragen, Minispiele, Punkte, Verlosungen, Umfragen und Werkzeuge für Streamer.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Befehle – VenoxBot">
+<meta property="og:description" content="Alle Befehle von VenoxBot für Twitch und Discord: KI-Fragen, Minispiele, Punkte, Verlosungen, Umfragen und Werkzeuge für Streamer.">
+<meta property="og:image" content="https://venox794.github.io/venoxbot/bot.jpg">
+<meta name="theme-color" content="#070606">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="thema.js"></script>
@@ -82,8 +88,8 @@
   <section>
     <h2>Für Streamer auf Twitch</h2>
     <div class="card">
-      <div class="row"><code>!ask on</code><p>Schaltet die KI-Antworten in deinem Chat ein.</p></div>
-      <div class="row"><code>!ask off</code><p>Pausiert die KI-Antworten in deinem Chat.</p></div>
+      <div class="row"><code>!ask an</code><p>Schaltet die KI-Antworten in deinem Chat ein (auch <span class="cmd">!ask on</span>).</p></div>
+      <div class="row"><code>!ask aus</code><p>Pausiert die KI-Antworten in deinem Chat (auch <span class="cmd">!ask off</span>).</p></div>
       <div class="row"><code>!ask los Preis</code><p>Startet eine Verlosung für 60 Sekunden (auch Moderatoren). Zuschauer machen mit <span class="cmd">!join</span> mit, danach zieht der Bot bis zu 3 Gewinner. Ist der Preis eine Zahl wie <span class="cmd">!ask los 300</span>, werden Punkte gleich aufgeteilt. Andere Preise vergibst du selbst.</p></div>
       <div class="row"><code>!ask ziehen</code><p>Zieht sofort, ohne die 60 Sekunden abzuwarten. <span class="cmd">!ask stopp</span> bricht ab.</p></div>
       <div class="row"><code>!ask timer add name 15 Text</code><p>Schreibt den Text alle 15 Minuten (5 bis 120) im Live-Stream, wenn im Chat etwas los ist. Höchstens 5 Timer. <span class="cmd">!ask timer</span> zeigt die Liste, <span class="cmd">!ask timer del name</span> löscht.</p></div>
@@ -96,13 +102,13 @@
       <div class="row"><code>!ask cooldown</code><p>Zeigt die Pause zwischen zwei Fragen.</p></div>
       <div class="row"><code>!ask cooldown 20</code><p>Setzt die Pause auf 20 Sekunden. Erlaubt sind 5 bis 600 Sekunden.</p></div>
       <div class="row"><code>!ask cooldown reset</code><p>Setzt die Pause auf den Standardwert zurück.</p></div>
-      <div class="row"><code>!ask clips on</code><p>Schaltet Clips und Roast-Sammlung im Kanal ein (<span class="cmd">!ask clips off</span> wieder aus, Standard: aus). Roast-Antworten landen dann ohne Namen bei VenoX für kurze Videos.</p></div>
+      <div class="row"><code>!ask clips an</code><p>Schaltet Clips und Roast-Sammlung im Kanal ein (<span class="cmd">!ask clips aus</span> wieder aus, Standard: aus). Roast-Antworten landen dann ohne Namen bei VenoX für kurze Videos.</p></div>
       <div class="row"><code>!ask clip</code><p>Erstellt einen Twitch-Clip der letzten Sekunden (nur live, höchstens alle 30 Sekunden). Der Link erscheint im Chat und geht an VenoX.</p></div>
-      <div class="row"><code>!ask spiele off</code><p>Schaltet die Minispiele in deinem Chat aus. Mit <span class="cmd">!ask spiele on</span> sind sie wieder an.</p></div>
+      <div class="row"><code>!ask spiele aus</code><p>Schaltet die Minispiele in deinem Chat aus. Mit <span class="cmd">!ask spiele an</span> sind sie wieder an.</p></div>
       <div class="row"><code>!ask liste aus</code><p>Nimmt deinen Kanal aus der öffentlichen Streamer-Liste auf der Befehle-Website. Mit <span class="cmd">!ask liste an</span> steht er wieder drin.</p></div>
       <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur du als Streamer kannst ihn in deinem eigenen Chat abrufen.</p></div>
     </div>
-    <p class="note" style="margin-top:12px"><span class="cmd">!ask on</span>, <span class="cmd">!ask off</span>, <span class="cmd">!ask cooldown</span>, <span class="cmd">!ask spiele off/on</span>, Timer, Umfragen, Shoutouts und Filter können auch Moderatoren nutzen. Statt der Kurzformen gehen auch die langen: <span class="cmd">!ask verlosung start Preis</span> (auch <span class="cmd">raffle</span> oder <span class="cmd">gewinnspiel</span>), <span class="cmd">!ask verlosung ziehen</span>, <span class="cmd">!ask verlosung stopp</span>, <span class="cmd">!ask zuschaupunkte 25</span>, <span class="cmd">!ask shoutout @name</span>, <span class="cmd">!ask permit @name</span> und <span class="cmd">!ask poll A | B</span>.</p>
+    <p class="note" style="margin-top:12px"><span class="cmd">!ask an</span>, <span class="cmd">!ask aus</span>, <span class="cmd">!ask cooldown</span>, <span class="cmd">!ask spiele an/aus</span>, Timer, Umfragen, Shoutouts und Filter können auch Moderatoren nutzen. Statt der Kurzformen gehen auch die langen: <span class="cmd">!ask verlosung start Preis</span> (auch <span class="cmd">raffle</span> oder <span class="cmd">gewinnspiel</span>), <span class="cmd">!ask verlosung ziehen</span>, <span class="cmd">!ask verlosung stopp</span>, <span class="cmd">!ask zuschaupunkte 25</span>, <span class="cmd">!ask shoutout @name</span>, <span class="cmd">!ask permit @name</span> und <span class="cmd">!ask poll A | B</span>.</p>
     <div class="card" style="margin-top:12px">
       <div class="row"><code>!join akzeptieren</code><p>Schreibst du im <a href="https://www.twitch.tv/venox_bot" target="_blank" rel="noopener">Chat des Bots</a>. Damit bestätigst du die Nutzungsbedingungen, und der Bot kommt in deinen Chat. Vorher musst du in deinem Chat <span class="cmd">/mod VenoX_Bot</span> schreiben. Hast du schon bestätigt, reicht <span class="cmd">!join</span>.</p></div>
       <div class="row"><code>!leave</code><p>Schreibst du im Chat des Bots. Der Bot verlässt dann deinen Chat.</p></div>
@@ -111,11 +117,12 @@
 
   <section>
     <h2>Für Server-Betreiber auf Discord</h2>
+    <p class="note">Den Bot auf deinen Server holen: <a href="https://discord.com/oauth2/authorize?client_id=1561630701747703908&amp;scope=bot&amp;permissions=117760" target="_blank" rel="noopener">VenoxBot zu Discord einladen</a>. Er braucht nur Nachrichten lesen und schreiben, Links einbetten und Dateien anhängen.</p>
     <div class="card">
-      <div class="row"><code>!ask on</code><p>Schaltet die KI-Antworten im Kanal ein. Erlaubt für den Server-Eigentümer und alle mit der Berechtigung „Nachrichten verwalten“.</p></div>
-      <div class="row"><code>!ask off</code><p>Pausiert die KI-Antworten im Kanal. Gleiche Berechtigung wie bei <span class="cmd">!ask on</span>.</p></div>
+      <div class="row"><code>!ask an</code><p>Schaltet die KI-Antworten im Kanal ein. Erlaubt für den Server-Eigentümer und alle mit der Berechtigung „Nachrichten verwalten“.</p></div>
+      <div class="row"><code>!ask aus</code><p>Pausiert die KI-Antworten im Kanal. Gleiche Berechtigung wie bei <span class="cmd">!ask an</span>.</p></div>
       <div class="row"><code>!ask cooldown</code><p>Zeigt die Pause zwischen zwei Fragen. Mit einer Zahl von 5 bis 600 setzt du sie, mit <span class="cmd">reset</span> setzt du sie zurück.</p></div>
-      <div class="row"><code>!ask spiele off</code><p>Schaltet die Minispiele im Kanal aus, <span class="cmd">!ask spiele on</span> wieder ein. Gleiche Berechtigung wie bei <span class="cmd">!ask on</span>.</p></div>
+      <div class="row"><code>!ask spiele aus</code><p>Schaltet die Minispiele im Kanal aus, <span class="cmd">!ask spiele an</span> wieder ein. Gleiche Berechtigung wie bei <span class="cmd">!ask an</span>.</p></div>
       <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur der Server-Eigentümer.</p></div>
     </div>
     <p class="note" style="margin-top:12px">Discord hat ein Tageslimit für alle Server zusammen. Es zählt die letzten 24 Stunden. Ist es erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.</p>
