@@ -1,28 +1,29 @@
-/* VenoX_Bot – rundes, dunkles Design (Mischung der Entwürfe 4, 6 und 9 vom 27.10.2026):
-   am PC eine schwebende Seitenleiste, auf dem Handy eine runde Menüleiste unten wie in einer App.
-   Schwebende Flächen mit Schatten statt Rahmen, roter Schein hinter dem Bot-Bild.
-   Nur Systemschriften, nichts von fremden Servern. */
+/* VenoxBot – Neon-Design (Vorlage vom 28.10.2026): fast schwarzer Grund, Neon-Rot mit Leuchten,
+   Karten mit feinem Rand. Am PC eine Leiste oben (Logo, Menü, Anmelden), auf dem Handy eine runde
+   Menüleiste unten mit Symbolen wie in einer App. Nur Systemschriften, nichts von fremden Servern
+   (die Content-Security-Policy erlaubt nur eigene Dateien). */
 :root {
-  --bg: #0b0b0b;
-  --karte: #151413;
-  --linie: #2a2724;
-  --linie-hell: #3a3633;
-  --text: #f2f0ec;
-  --blass: #9a958d;
-  --rot: #c8102e;
-  --rot-hell: #de2342;
-  --platz: #e8a0aa;
-  --leiste-bg: #050505;
+  --bg: #070606;
+  --karte: #120e0e;
+  --linie: #2b2020;
+  --linie-hell: #3e2c2d;
+  --text: #f4efea;
+  --blass: #aaa29b;
+  --rot: #e3192b;
+  --rot-hell: #ff3b4a;
+  --platz: #ffb3ba;
+  --leiste-bg: #050404;
   --fehler-bg: #1f0c0f;
   --fehler-text: #ffd9de;
   --schrift: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
   --mono: ui-monospace, "Cascadia Mono", "DejaVu Sans Mono", Menlo, Consolas, monospace;
   --leiste-h: 3.25rem;
-  --flaeche: #1a1918;
-  --rund: 24px;
-  --rund-klein: 14px;
-  --schwebe: 0 18px 50px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .05);
-  --schein: rgba(200, 16, 46, .28);
+  --flaeche: #141010;
+  --rund: 18px;
+  --rund-klein: 12px;
+  --schwebe: 0 18px 50px rgba(0, 0, 0, .6), inset 0 0 0 1px #2b2020;
+  --schein: rgba(227, 25, 43, .36);
+  --leuchten: 0 0 26px rgba(255, 45, 61, .45);
   color-scheme: dark;
 }
 
@@ -34,23 +35,20 @@
   --linie-hell: #cbc3ba;
   --text: #1a1816;
   --blass: #67615a;
-  --rot: #c8102e;
-  --rot-hell: #a50d26;
+  --rot: #d0142a;
+  --rot-hell: #a50d22;
   --platz: #9b2a3a;
   --leiste-bg: #ece8e3;
   --fehler-bg: #fde8eb;
   --fehler-text: #7a0a1c;
   --flaeche: #ffffff;
-  --schwebe: 0 10px 30px rgba(40, 25, 20, .10);
-  --schein: rgba(200, 16, 46, .14);
+  --schwebe: 0 10px 30px rgba(40, 25, 20, .10), inset 0 0 0 1px #e8dfd8;
+  --schein: rgba(208, 20, 42, .16);
+  --leuchten: 0 0 18px rgba(208, 20, 42, .25);
   color-scheme: light;
 }
 :root[data-thema="hell"] .zeile.aus { background: #efebe6; }
 :root[data-thema="hell"] .chip:hover { background: #efebe6; }
-:root[data-thema="hell"] .chat { background: #ffffff; border-color: #dedee3; }
-:root[data-thema="hell"] .chat-kopf { color: #53535f; border-bottom-color: #dedee3; }
-:root[data-thema="hell"] .discord { background: #eceefe; border-color: #b7bcf5; }
-:root[data-thema="hell"] .discord p { color: #2c2f7a; }
 
 /* Hell/Dunkel-Umschalter: Pille mit Mond und Sonne, der rote Punkt liegt unter dem aktiven Zeichen */
 .thema-knopf {
@@ -73,7 +71,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 
-html { background: var(--bg); }
+html { background: var(--bg); overflow-x: clip; }
 body {
   margin: 0;
   min-height: 100vh;
@@ -94,50 +92,55 @@ code { font-family: var(--mono); font-size: .9em; }
   clip: rect(0 0 0 0); white-space: nowrap;
 }
 
-/* Kopf: Grundform (Tablet) eine Leiste oben; am PC Seitenleiste, auf dem Handy Menü unten (siehe unten) */
+/* Kopf: Leiste oben über die ganze Breite (Logo links, Menü Mitte, Konto bzw. Anmelden rechts).
+   Auf dem Handy wird das Menü zur Leiste unten (siehe Handy). */
 .kopf {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: .75rem 1rem;
-  max-width: 1040px; margin: 1rem auto 0; padding: .7rem 1rem;
-  background: var(--flaeche); border-radius: var(--rund); box-shadow: var(--schwebe);
+  position: sticky; top: 0; z-index: 30;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem;
+  padding: .85rem max(1.5rem, calc((100vw - 1240px) / 2));
+  background: rgba(7, 6, 6, .9); border-bottom: 1px solid var(--linie);
+  backdrop-filter: blur(10px);
 }
-.logo { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; color: var(--text); margin-right: auto; }
+:root[data-thema="hell"] .kopf { background: rgba(246, 244, 241, .92); }
+.logo { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--text); }
 .logo:hover { color: var(--text); }
-/* Bot-Emblem (rund, transparent) vor dem Schriftzug; der rote Schein passt zum Neon-Look des Profilbilds */
-.logo-zeichen { display: block; width: 40px; height: 40px; flex: none; filter: drop-shadow(0 0 8px rgba(255, 30, 30, .5)); }
-.logo-wort { font-weight: 800; font-size: 1.2rem; letter-spacing: .1em; }
-.logo-strich { color: var(--rot); }
-/* Menü: Bereiche (nur angemeldet) und feste Links. „Start“ gibt es nur ohne Anmeldung. */
-.menue { display: flex; flex-wrap: wrap; gap: .25rem; }
-.nav { display: flex; gap: .25rem; }
+/* Bot-Emblem vor dem Schriftzug, mit rotem Leuchten wie im Profilbild */
+.logo-zeichen { display: block; width: 42px; height: 42px; flex: none; filter: drop-shadow(0 0 10px rgba(255, 30, 40, .6)); }
+.logo-wort { font-weight: 800; font-size: 1.3rem; letter-spacing: .04em; }
+.logo-strich { color: var(--rot-hell); }
+/* Menü: Bereiche (nur angemeldet) und feste Links. Start, Funktionen und FAQ gibt es nur ohne Anmeldung. */
+.menue { display: flex; flex-wrap: wrap; justify-content: center; gap: .15rem; margin: 0 auto; }
+.nav { display: flex; gap: .15rem; }
 .nav-knopf, .menue-link {
-  font: 600 .93rem var(--schrift); color: var(--blass); background: transparent; cursor: pointer;
-  border: 0; border-radius: 999px; padding: .6rem 1rem; text-decoration: none; text-align: left;
+  display: inline-flex; align-items: center; gap: .45rem;
+  font: 500 .95rem var(--schrift); color: var(--text); background: transparent; cursor: pointer;
+  border: 0; border-radius: 0; padding: .7rem .85rem; text-decoration: none;
 }
-.nav-knopf:hover, .menue-link:hover { color: var(--text); background: var(--bg); }
-.nav-knopf[aria-pressed="true"], .menue-link.nur-gast {
-  color: #fff; background: var(--rot); box-shadow: 0 8px 24px rgba(200, 16, 46, .35);
+.nav-knopf:hover, .menue-link:hover { color: var(--rot-hell); }
+.nav-knopf[aria-pressed="true"], .menue-link.aktiv, .menue-link[aria-current="page"] {
+  color: var(--rot-hell); font-weight: 700; box-shadow: inset 0 -2px 0 var(--rot);
 }
 #nav:not([hidden]) ~ .nur-gast { display: none; }
+/* Symbole im Menü nur auf dem Handy */
+.menue-zeichen { display: none; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .konto { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; min-width: 0; }
 .wer { color: var(--blass); font-size: .9rem; overflow-wrap: anywhere; }
 .kanalwahl select {
-  font: inherit; color: var(--text); background: var(--bg);
-  border: 1px solid var(--linie); border-radius: 999px; padding: .45rem .8rem; max-width: 14rem;
+  font: inherit; color: var(--text); background: var(--karte);
+  border: 1px solid var(--linie-hell); border-radius: 10px; padding: .45rem .8rem; max-width: 14rem;
 }
-/* Anmelde-Kasten für Gäste; verschwindet, sobald das Konto angezeigt wird */
+/* Anmelden für Gäste; verschwindet, sobald das Konto angezeigt wird */
 .seite-login { display: flex; align-items: center; gap: .6rem; }
-.seite-login p { margin: 0; color: var(--blass); font-size: .88rem; }
 .konto:not([hidden]) ~ .seite-login { display: none; }
 
-main { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem 2rem; }
+main { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem 2rem; }
 
 /* Knöpfe */
 .knopf {
   display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
-  font: inherit; font-weight: 600; font-size: .93rem; color: #fff; background: var(--rot);
-  border: 1px solid var(--rot); border-radius: 999px; padding: .55rem 1.15rem;
-  cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(200, 16, 46, .3);
+  font: inherit; font-weight: 700; font-size: .95rem; color: #fff; background: var(--rot);
+  border: 1.5px solid var(--rot); border-radius: 10px; padding: .6rem 1.2rem;
+  cursor: pointer; text-decoration: none; box-shadow: 0 10px 28px rgba(227, 25, 43, .38);
 }
 .knopf:hover { background: var(--rot-hell); border-color: var(--rot-hell); color: #fff; }
 .knopf:disabled { opacity: .55; cursor: wait; }
@@ -145,7 +148,11 @@ main { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem 2rem; }
 .knopf.leise { color: var(--text); background: var(--bg); border-color: var(--linie); box-shadow: none; }
 .knopf.leise:hover { border-color: var(--blass); color: var(--text); background: transparent; }
 .knopf.klein { padding: .4rem .9rem; font-size: .85rem; }
-.knopf.gross { font-size: 1.05rem; padding: .85rem 1.7rem; }
+.knopf.gross { font-size: 1.02rem; padding: .95rem 1.5rem; }
+/* Rahmen-Knopf (Anmelden oben rechts): roter Rand mit Leuchten */
+.knopf.rahmen { color: var(--text); background: transparent; border-color: var(--rot); box-shadow: 0 0 18px rgba(255, 45, 61, .25); }
+.knopf.rahmen:hover { background: var(--rot); color: #fff; }
+.knopf-zeichen { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .knopf.gefahr { background: var(--rot); border-color: var(--rot); }
 
 /* Hinweise */
@@ -167,10 +174,10 @@ main > .hinweis.fehler:first-child { margin-top: 1.5rem; }
   display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1.1rem;
 }
 .karte {
-  min-width: 0; padding: 1rem 1.1rem;
-  background: var(--flaeche); border-radius: var(--rund); box-shadow: var(--schwebe);
+  min-width: 0; padding: 1rem 1.1rem; border: 1px solid var(--linie);
+  background: linear-gradient(180deg, var(--flaeche), var(--karte)); border-radius: var(--rund);
 }
-.karte.live { box-shadow: 0 0 0 1.5px var(--rot), 0 24px 60px rgba(200, 16, 46, .2); }
+.karte.live { border-color: #7a1a22; box-shadow: 0 0 40px rgba(227, 25, 43, .2); }
 .karte-kopf { display: flex; align-items: center; gap: .55rem; min-width: 0; }
 .karte-name {
   font-weight: 700; font-size: 1.07rem; text-decoration: none; color: var(--text);
@@ -355,12 +362,22 @@ main > .hinweis.fehler:first-child { margin-top: 1.5rem; }
 .emote span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Fuß */
+/* Fuß: Logo mit Namen, Links, Spruch in Rot */
 .fuss {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.5rem;
-  max-width: 1040px; margin: 1rem auto 0; padding: 1.25rem 1.5rem; font-size: .85rem;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem 2rem;
+  max-width: 1240px; margin: 3rem auto 0; padding: 2.2rem 1.5rem; border-top: 1px solid var(--linie); font-size: .9rem;
 }
+.fuss-marke { display: flex; align-items: center; gap: .9rem; }
+.fuss-marke img { width: 56px; height: 56px; filter: drop-shadow(0 0 12px rgba(255, 30, 40, .5)); }
+.fuss-marke strong { display: block; font-size: 1.15rem; }
+.fuss-marke span { color: var(--blass); font-size: .88rem; }
+.fuss-links { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; }
 .fuss a { color: var(--blass); text-decoration: none; }
-.fuss a:hover { color: var(--text); text-decoration: underline; }
+.fuss a:hover { color: var(--text); text-decoration: underline; text-decoration-color: var(--rot); }
+.fuss-spruch {
+  margin: 0; font-family: "Brush Script MT", "Segoe Script", cursive; font-size: 1.9rem; color: var(--rot-hell);
+  transform: rotate(-6deg); text-shadow: var(--leuchten);
+}
 
 /* kurze Meldung */
 .meldung {
@@ -370,31 +387,6 @@ main > .hinweis.fehler:first-child { margin-top: 1.5rem; }
 }
 body.ohne-leiste .meldung { bottom: 1rem; }
 body.ohne-leiste { padding-bottom: 0; }
-
-/* PC: Kopf wird zur schwebenden Seitenleiste links (Entwurf 6), Inhalt und Fuß rechts daneben */
-@media (min-width: 60rem) {
-  body {
-    display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); grid-template-rows: 1fr auto;
-    column-gap: 1.5rem; padding-top: 1.25rem; padding-left: 1.25rem; padding-right: 1.25rem;
-  }
-  .kopf {
-    grid-row: 1 / span 2; align-self: start; position: sticky; top: 1.25rem;
-    flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: .35rem;
-    width: auto; margin: 0; padding: 1.1rem; max-height: calc(100vh - 2.5rem); overflow-y: auto;
-  }
-  .logo { margin: 0 0 1rem; padding: .2rem .3rem; }
-  .menue, .nav { flex-direction: column; flex-wrap: nowrap; }
-  .thema-knopf { align-self: flex-start; margin: .9rem 0 0 .3rem; }
-  .konto { flex-direction: column; align-items: stretch; margin-top: .6rem; }
-  .kanalwahl select { width: 100%; max-width: none; }
-  .wer { padding: 0 .3rem; }
-  .seite-login {
-    flex-direction: column; align-items: stretch; gap: .7rem;
-    margin-top: 1.2rem; padding: 1rem; background: var(--bg); border-radius: var(--rund-klein);
-  }
-  .seite-login .knopf { white-space: nowrap; font-size: .88rem; padding: .6rem .8rem; }
-  main, .fuss { grid-column: 2; width: 100%; box-sizing: border-box; }
-}
 
 /* Sehr schmale Handys: Logo enger, damit es nicht in „Abmelden“ läuft */
 @media (max-width: 22rem) {
@@ -406,9 +398,10 @@ body.ohne-leiste { padding-bottom: 0; }
 /* Handy */
 @media (max-width: 40rem) {
   /* Kompakter Kopf oben: Logo, Hell/Dunkel und Abmelden bzw. Anmelden, darunter die Kanalwahl. Der Name fällt weg. */
+  /* Ohne Unschärfe-Filter: der würde die feste Menüleiste unten im Kopf festhalten */
   .kopf {
     display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center;
-    gap: .55rem .6rem; margin: .75rem .75rem 0; padding: .6rem .7rem .6rem .9rem;
+    gap: .55rem .6rem; padding: .6rem .9rem; backdrop-filter: none; background: var(--bg);
   }
   .konto { display: contents; }
   .logo { grid-column: 1; grid-row: 1; }
@@ -422,12 +415,29 @@ body.ohne-leiste { padding-bottom: 0; }
   .menue {
     position: fixed; z-index: 15; left: .75rem; right: .75rem;
     bottom: calc(var(--leiste-unten, 0px) + .6rem + env(safe-area-inset-bottom));
-    display: flex; flex-wrap: nowrap; gap: .2rem; padding: .35rem;
-    background: var(--flaeche); border-radius: 999px;
-    box-shadow: 0 12px 34px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .06);
+    display: flex; flex-wrap: nowrap; gap: .15rem; padding: .35rem; margin: 0;
+    background: var(--flaeche); border-radius: 22px;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, .6), inset 0 0 0 1px var(--linie);
   }
   .menue .nav:not([hidden]) { display: contents; }
-  .nav-knopf, .menue-link { flex: 1 1 0; min-width: 0; text-align: center; padding: .75rem .3rem; font-size: .88rem; }
+  /* Weicher Übergang hinter der Menüleiste: Der Inhalt blendet in den Hintergrund aus, statt direkt
+     unter der Leiste zu verschwinden. Nur ohne Emote-Leiste (die hat einen eigenen festen Hintergrund). */
+  body.ohne-leiste::after {
+    content: ""; position: fixed; z-index: 14; left: 0; right: 0; bottom: 0; pointer-events: none;
+    height: calc(8.5rem + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--bg) 0, var(--bg) 4.4rem, transparent 100%);
+  }
+  /* Jeder Eintrag: Symbol oben, kurzer Text darunter, gleich breit; so überlappt nichts */
+  .nav-knopf, .menue-link {
+    flex: 1 1 0; min-width: 0; flex-direction: column; gap: .2rem;
+    padding: .5rem .1rem; border-radius: 16px; font-size: .68rem; font-weight: 600; color: var(--blass);
+  }
+  .nav-knopf span, .menue-link span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .menue-zeichen { display: block; }
+  .nav-knopf[aria-pressed="true"], .menue-link.aktiv, .menue-link[aria-current="page"] {
+    color: #fff; background: rgba(227, 25, 43, .2); box-shadow: none;
+  }
+  .nav-knopf[aria-pressed="true"] .menue-zeichen, .menue-link.aktiv .menue-zeichen, .menue-link[aria-current="page"] .menue-zeichen { color: var(--rot-hell); }
   /* Platz unten für die Menüleiste (und ggf. die Emote-Leiste darunter) */
   body { padding-bottom: calc(var(--leiste-unten, var(--leiste-h)) + 5rem + env(safe-area-inset-bottom)); }
   body.ohne-leiste { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); }
@@ -436,9 +446,7 @@ body.ohne-leiste { padding-bottom: 0; }
   .logo-zeichen { width: 34px; height: 34px; }
   main { padding: 0 1rem 2rem; }
   .logo-wort { font-size: 1.05rem; }
-  .held-titel { font-size: 1.95rem; }
-  .held-bild { width: 92px; height: 92px; }
-  .cta { padding: 1.3rem; }
+  .held-titel { font-size: 2.1rem; }
   .seiten-titel { font-size: 1.55rem; margin-top: 1.4rem; }
   .karten { grid-template-columns: minmax(0, 1fr); }
   .zeile {
@@ -482,97 +490,129 @@ body.ohne-leiste { padding-bottom: 0; }
 }
 .fuss-knopf:hover { color: var(--text); text-decoration: underline; }
 
-/* Startseite: Kopfbereich, Bühne mit Beispiel-Chat, Zahlen, Spalten */
-.held { position: relative; padding: 2.5rem 0 1rem; text-align: center; }
-.held > * { position: relative; }
+/* Startseite: Held (Text links, Bot-Bild mit Live-Chat rechts), Kacheln, Live-Bereich, Schritte, FAQ */
+.held {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 2.5rem; align-items: center; padding: 3.5rem 0 3rem;
+}
 .held::before {
-  content: ""; position: absolute; left: 50%; top: -3rem; width: min(46rem, 100%); height: 26rem;
-  transform: translateX(-50%); pointer-events: none;
+  content: ""; position: absolute; z-index: -1; right: 0; top: -2rem; width: 70%; height: 120%; pointer-events: none;
   background: radial-gradient(closest-side, var(--schein), transparent);
 }
+.held-text { display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem; min-width: 0; }
+.held-marke {
+  padding: .3rem .75rem; border-radius: 6px; background: var(--rot); color: #fff;
+  font-size: .75rem; font-weight: 800; letter-spacing: .08em;
+}
+.held-titel { font-size: 3.6rem; line-height: 1.04; letter-spacing: -.02em; margin: 0; font-weight: 800; }
+.held-rot { display: block; color: var(--rot-hell); text-shadow: var(--leuchten); }
+.held .unterzeile { font-size: 1.12rem; line-height: 1.6; max-width: 34rem; margin: 0; color: var(--blass); }
+.held .unterzeile code { color: var(--platz); }
+.held-knoepfe { display: flex; flex-wrap: wrap; gap: .8rem; }
+.vertrauen { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; list-style: none; margin: 0; padding: 0; color: var(--blass); font-size: .85rem; }
+.vertrauen li { display: inline-flex; align-items: center; gap: .45rem; }
+.punkt-gruen { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; }
+.held-buehne { position: relative; display: flex; justify-content: center; align-items: center; min-height: 26rem; min-width: 0; }
 .held-bild {
-  display: block; width: 112px; height: 112px; margin: 0 auto 1.2rem;
-  filter: drop-shadow(0 0 22px rgba(222, 35, 66, .6));
+  display: block; width: min(25rem, 82%); height: auto; aspect-ratio: 1; border-radius: 50%;
+  box-shadow: 0 0 90px rgba(255, 30, 50, .5), 0 0 0 2px rgba(255, 45, 61, .35);
 }
-.held-titel { font-size: 3.1rem; line-height: 1.06; letter-spacing: -.025em; margin: 0 auto .7rem; max-width: 46rem; }
-.held .unterzeile { font-size: 1.08rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
-.held-knoepfe { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-bottom: 1.8rem; }
-
-.buehne { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 1.1rem; align-items: start; }
-.buehne-links { min-width: 0; }
-.buehne .karten { grid-template-columns: 1fr; }
-.buehne-leer {
-  display: grid; place-content: center; text-align: center; aspect-ratio: 16 / 9;
-  background: var(--flaeche); border-radius: var(--rund); box-shadow: var(--schwebe); padding: 1rem;
-}
-.buehne-leer p { margin: .15rem 0; color: var(--blass); }
-.buehne-leer strong { color: var(--text); }
-
+/* Beispiel-Chat schwebt leicht gedreht über dem Bot-Bild */
 .chat {
-  margin: 0; min-width: 0; padding: .8rem .9rem;
-  background: #18181b; border: 1px solid #2f2f35; border-radius: var(--rund); font-size: .9rem; line-height: 1.45;
-  box-shadow: var(--schwebe);
+  position: absolute; right: 0; bottom: 0; width: min(21rem, 70%); margin: 0; padding: .9rem 1rem;
+  background: rgba(14, 11, 11, .92); border: 1px solid #3a2224; border-radius: var(--rund);
+  font-size: .86rem; line-height: 1.45; transform: rotate(-2deg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .6), 0 0 30px rgba(227, 25, 43, .15);
 }
+:root[data-thema="hell"] .chat { background: rgba(255, 255, 255, .95); border-color: #e8d4d6; }
 .chat-kopf {
-  display: flex; justify-content: space-between; gap: .5rem; color: #adadb8; font-size: .78rem;
-  border-bottom: 1px solid #2f2f35; padding-bottom: .5rem; margin-bottom: .3rem;
+  display: flex; justify-content: space-between; gap: .5rem; color: var(--blass); font-size: .78rem;
+  border-bottom: 1px solid var(--linie); padding-bottom: .5rem; margin-bottom: .3rem;
 }
+.chat-kopf > span:first-child { display: inline-flex; align-items: center; gap: .45rem; color: var(--text); font-weight: 700; font-size: .9rem; }
+.live-punkt { width: 8px; height: 8px; border-radius: 50%; background: var(--rot-hell); box-shadow: 0 0 8px var(--rot-hell); }
+.chat-zeilen { max-height: 15rem; overflow: hidden; }
 .chat-zeile { margin: .35rem 0; overflow-wrap: anywhere; }
 .chat-zeile code { color: var(--platz); }
 .chat-name { font-weight: 700; }
-.chat-zeile.vom-bot { background: rgba(200, 16, 46, .15); padding: .4rem .7rem; border-radius: 14px 14px 4px 14px; }
+.chat-zeile.vom-bot { background: rgba(227, 25, 43, .14); padding: .4rem .7rem; border-radius: 12px 12px 4px 12px; }
 .chat-zeile.vom-bot .chat-name { color: var(--rot-hell); }
 @media (prefers-reduced-motion: no-preference) {
   .chat-zeile.neu { animation: chat-rein .35s ease-out; }
   @keyframes chat-rein { from { opacity: 0; transform: translateY(6px); } }
 }
 
-.zahlen { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.6rem 0 0; }
+/* Kleine rote Überschrift über einem Abschnitt */
+.kicker { margin: 0 0 .5rem; color: var(--rot-hell); font-size: .8rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.kicker.abstand { margin-top: 3.5rem; }
+.abschnitt { font-size: 2.1rem; line-height: 1.15; letter-spacing: -.01em; margin: 2.8rem 0 1rem; scroll-margin-top: 6rem; font-weight: 800; }
+.abschnitt.nah { margin-top: 0; }
+.akzent { color: var(--rot-hell); }
+
+/* Funktionen: Text links, Kacheln rechts */
+.funktionen-bereich {
+  display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: 2.5rem; align-items: center;
+  padding: 3rem 0; border-top: 1px solid var(--linie); border-bottom: 1px solid var(--linie); scroll-margin-top: 5rem;
+}
+.funktionen-text .abschnitt { margin-top: 0; }
+.funktionen-text .unterzeile { margin: 0; }
+.funktionen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 1rem; }
+.funktionen li {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: .5rem;
+  padding: 1.5rem 1rem; border-radius: var(--rund); border: 1px solid var(--linie);
+  background: linear-gradient(180deg, var(--flaeche), var(--karte));
+  transition: border-color .2s, box-shadow .2s;
+}
+.funktionen li:hover { border-color: #6a1a22; box-shadow: 0 0 26px rgba(227, 25, 43, .18); }
+.funktionen h3 { margin: 0; font-size: 1.05rem; }
+.funktionen p { margin: 0; color: var(--blass); font-size: .88rem; line-height: 1.5; }
+.funktionen code { margin-top: auto; color: var(--platz); font-size: .8rem; }
+.fkt-zeichen { width: 42px; height: 42px; fill: none; stroke: var(--rot-hell); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px rgba(255, 45, 61, .45)); }
+
+/* Live-Bereich */
+.buehne { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+.buehne .karten { grid-template-columns: 1fr; }
+.buehne-leer {
+  display: grid; place-content: center; text-align: center; min-height: 14rem; padding: 1rem;
+  border-radius: var(--rund); border: 1px solid #4a1a20;
+  background: radial-gradient(60% 80% at 50% 40%, rgba(227, 25, 43, .16), transparent 70%), var(--karte);
+}
+.buehne-leer p { margin: .15rem 0; color: var(--blass); }
+.buehne-leer strong { color: var(--text); }
+
+.zahlen { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.4rem 0 0; }
 .zahlen > div {
-  padding: 1rem; display: flex; flex-direction: column-reverse; text-align: center;
-  background: var(--flaeche); border-radius: var(--rund-klein); box-shadow: var(--schwebe);
+  padding: 1.1rem; display: flex; flex-direction: column-reverse; text-align: center;
+  background: var(--karte); border: 1px solid var(--linie); border-radius: var(--rund-klein);
 }
 .zahlen dt { color: var(--blass); font-size: .85rem; }
 .zahlen dd { margin: 0; font-size: 2rem; font-weight: 800; line-height: 1.15; }
-.zahl-live dd { color: var(--rot-hell); }
+.zahl-live { border-color: #5a1a20 !important; }
+.zahl-live dd { color: var(--rot-hell); text-shadow: var(--leuchten); }
 
-.spalten { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: 1.5rem; align-items: start; }
-.spalte-seite { display: grid; gap: .8rem; margin-top: 2.4rem; }
-.abschnitt { font-size: 1.45rem; letter-spacing: -.01em; margin: 2.6rem 0 1rem; scroll-margin-top: 1.5rem; }
-.kasten { background: var(--flaeche); border-radius: var(--rund); padding: 1.2rem; box-shadow: var(--schwebe); }
-.kasten h2 { font-size: 1rem; margin: 0 0 .55rem; }
-.kasten p { margin: 0 0 .8rem; color: var(--blass); font-size: .9rem; }
-.neuigkeiten { list-style: none; margin: 0; padding: 0; }
-.neuigkeiten li { padding: .5rem 0; border-top: 1px solid var(--linie); font-size: .92rem; font-weight: 600; }
-.neuigkeiten li:first-child { border-top: 0; padding-top: 0; }
-.discord { background: #24265e; }
-.discord p { color: #c9cbf5; }
-.discord-knopf { background: #5865f2; border-color: #5865f2; }
-.discord-knopf:hover { background: #4752c4; border-color: #4752c4; }
-
-.funktionen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1.1rem; }
-.funktionen li { background: var(--flaeche); border-radius: var(--rund); padding: 1.2rem; box-shadow: var(--schwebe); }
-.funktionen h3 { margin: 0 0 .3rem; font-size: 1rem; }
-.funktionen p { margin: 0 0 .6rem; color: var(--blass); font-size: .9rem; }
-.funktionen code { color: var(--platz); }
-.fkt-zeichen { display: block; font-size: 1.4rem; line-height: 1; margin-bottom: .5rem; }
-
-.schritte { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; counter-reset: schritt; }
-.cta {
-  margin-top: 2.6rem; padding: 1.8rem; color: #fff; background: var(--rot);
-  border-radius: var(--rund); box-shadow: 0 24px 60px rgba(200, 16, 46, .3);
-}
-.cta .abschnitt { margin-top: 0; color: #fff; }
-.cta a, .cta a:hover { color: #fff; text-decoration-color: #fff; }
-.schritte li { background: rgba(0, 0, 0, .22); border-radius: var(--rund-klein); padding: 1.1rem; }
+/* In 3 Schritten: Kreise mit roter Kante */
+.cta { margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--linie); }
+.schritte { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; counter-reset: schritt; }
+.schritte li { padding: 1.4rem; border-radius: var(--rund); border: 1px solid var(--linie); background: linear-gradient(180deg, var(--flaeche), var(--karte)); }
 .schritte li::before {
   counter-increment: schritt; content: counter(schritt);
-  display: grid; place-items: center; width: 1.9rem; height: 1.9rem; margin-bottom: .6rem;
-  border-radius: 50%; background: #fff; color: var(--rot); font-weight: 800;
+  display: grid; place-items: center; width: 2.8rem; height: 2.8rem; margin-bottom: .9rem;
+  border-radius: 50%; border: 2px solid var(--rot); color: var(--rot-hell); font-weight: 800; font-size: 1.15rem;
+  box-shadow: 0 0 18px rgba(227, 25, 43, .35);
 }
-.schritte h3 { margin: 0 0 .3rem; font-size: 1rem; }
-.schritte p { margin: 0; color: rgba(255, 255, 255, .9); font-size: .9rem; }
-.schritte code { color: #fff; font-weight: 700; }
+.schritte h3 { margin: 0 0 .35rem; font-size: 1.1rem; }
+.schritte p { margin: 0; color: var(--blass); font-size: .92rem; line-height: 1.55; }
+.schritte code { color: var(--platz); }
+
+/* Häufige Fragen zum Aufklappen */
+.faq { margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--linie); max-width: 52rem; }
+.faq details { border: 1px solid var(--linie); border-radius: 14px; background: var(--karte); padding: 0 1.3rem; margin-bottom: .75rem; }
+.faq summary { cursor: pointer; padding: 1.05rem 0; font-size: 1.02rem; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--rot-hell); font-size: 1.4rem; line-height: 1; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { margin: 0 0 1.1rem; color: var(--blass); line-height: 1.6; }
+.faq code { color: var(--platz); }
 
 /* Karten: Profilbuchstabe und Befehlsnamen */
 .avatar {
@@ -584,16 +624,59 @@ body.ohne-leiste { padding-bottom: 0; }
 .befehl-chip { color: var(--platz); border: 1px solid var(--linie-hell); border-radius: 999px; padding: .08rem .45rem; font-size: .82rem; }
 .befehle-mehr { color: var(--blass); font-size: .82rem; }
 
-@media (max-width: 760px) {
-  .held-titel { font-size: 2.1rem; }
-  .buehne, .spalten { grid-template-columns: 1fr; }
-  .spalte-seite { margin-top: 1.4rem; }
+@media (max-width: 860px) {
+  .held { grid-template-columns: 1fr; padding-top: 2rem; gap: 1.5rem; }
+  .held-titel { font-size: 2.5rem; }
+  .held-buehne { flex-direction: column; min-height: 0; gap: 1rem; }
+  .held-bild { width: min(15rem, 70%); }
+  .chat { position: static; width: 100%; transform: none; }
+  .funktionen-bereich { grid-template-columns: 1fr; gap: 1.5rem; }
+  .funktionen { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+  .funktionen li { padding: 1.1rem .7rem; }
+  .abschnitt { font-size: 1.7rem; }
   .zahlen { grid-template-columns: repeat(2, 1fr); }
   .schritte { grid-template-columns: 1fr; }
 }
+
+/* Tipp „Als App aufs Handy“ (nur auf dem Handy sichtbar, steuert app.js) */
+.app-tipp {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1rem; margin: 0 0 1.4rem; padding: 1.1rem;
+  background: var(--flaeche); border-radius: var(--rund); box-shadow: 0 0 0 1.5px var(--rot), var(--schwebe);
+}
+.app-tipp-bild { flex: none; width: 56px; height: 56px; border-radius: 14px; }
+.app-tipp-text { flex: 1 1 12rem; min-width: 0; }
+.app-tipp h2 { margin: 0 0 .25rem; font-size: 1.05rem; }
+.app-tipp p { margin: 0; color: var(--blass); font-size: .9rem; }
+.app-tipp b { color: var(--text); }
+.app-tipp-knoepfe { display: flex; flex-wrap: wrap; gap: .5rem; flex-basis: 100%; }
 
 /* Offline-Seite der App (offline.html) */
 body.offline-seite { display: block; padding: 0; }
 .offline { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem; text-align: center; padding: 2rem 1.5rem; box-sizing: border-box; }
 .offline h1 { margin: 0; font-size: 1.8rem; }
 .offline p { margin: 0 0 1.2rem; color: var(--blass); max-width: 26rem; }
+
+/* Befehlsliste (nur angemeldet): Karten wie auf der Infoseite, Befehl links, Erklärung rechts,
+   auf dem Handy untereinander. Gleiche Regeln wie info.css der GitHub-Seite, hier auf .befehlsliste begrenzt. */
+.befehlsliste { max-width: 56rem; margin: 0 auto; }
+.befehlsliste-intro { color: var(--blass); margin: 0 0 1.4rem; }
+.befehlsliste h2 { margin: 1.8rem 0 .8rem; }
+.befehlsliste code, .befehlsliste .cmd {
+  font-family: var(--mono); font-size: .88em; color: var(--platz); background: var(--bg);
+  padding: .1rem .55rem; border-radius: 999px; white-space: nowrap;
+}
+.befehlsliste .card { background: var(--flaeche); border-radius: var(--rund); padding: 1.3rem 1.4rem; box-shadow: var(--schwebe); margin: 0 0 1rem; }
+.befehlsliste .row { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: .4rem 1.2rem; padding: .85rem 0; border-bottom: 1px solid var(--linie); }
+.befehlsliste .row:last-child { border-bottom: 0; }
+.befehlsliste .row p { margin: 0; }
+.befehlsliste .row > code { justify-self: start; align-self: start; }
+.befehlsliste .note { color: var(--blass); font-size: .92rem; }
+.befehlsliste .card + .note { margin-top: 12px; }
+.befehlsliste ul { padding-left: 1.3rem; }
+.befehlsliste li { margin: 0 0 .45rem; }
+.befehlsliste a { color: var(--text); font-weight: 600; overflow-wrap: anywhere; }
+.menue-link[aria-current="page"] { color: var(--text); background: var(--bg); }
+@media (max-width: 40rem) {
+  .befehlsliste .row { grid-template-columns: minmax(0, 1fr); }
+  .befehlsliste code, .befehlsliste .cmd { white-space: normal; overflow-wrap: anywhere; }
+}
