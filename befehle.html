@@ -18,7 +18,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-31-2", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-31-3", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -100,6 +100,7 @@
       <div class="row"><code>!so @name</code><p>Shoutout: empfiehlt den Kanal mit seinem letzten Spiel und Link (auch <span class="cmd">!ask so @name</span>).</p></div>
       <div class="row"><code>!ask so auto an</code><p>Bei jedem Raid bedankt sich der Bot automatisch und macht den Shoutout für den Raider. Mit <span class="cmd">!ask so auto aus</span> wieder aus (Standard: aus).</p></div>
       <div class="row"><code>!ask live aus</code><p>Der Bot meldet nicht mehr auf dem VenoxBot-Discord (#live-jetzt), wenn dein Stream startet, und postet danach keinen Stream-Rückblick. Mit <span class="cmd">!ask live an</span> wieder an (Standard: an).</p></div>
+      <div class="row"><code>!ask willkommen an</code><p>Begrüßt Leute, die zum ersten Mal in deinem Chat schreiben (Streamer, Moderatoren, VIPs und Abonnenten nicht). Die ersten 7 Tage merkt sich der Bot nur still, wer schon da ist, damit Stammzuschauer nicht als neu gelten. Eigener Gruß mit <span class="cmd">!ask willkommen text Hey {user}, schön dass du da bist!</span>, zurück zum Standard mit <span class="cmd">!ask willkommen text reset</span>. Aus mit <span class="cmd">!ask willkommen aus</span> (Standard: aus).</p></div>
       <div class="row"><code>!ask filter links an</code><p>Löscht Links von Zuschauern (Streamer, Moderatoren und VIPs ausgenommen). <span class="cmd">!ask erlaube @name</span> erlaubt einen Link für 60 Sekunden. <span class="cmd">!ask filter</span> zeigt, was an ist.</p></div>
       <div class="row"><code>!ask filter wörter an</code><p>Löscht Nachrichten mit gesperrten Wörtern (Beleidigungen, Hetze).</p></div>
       <div class="row"><code>!ask filter caps an</code><p>Löscht Nachrichten, die fast nur aus Großbuchstaben bestehen (ab 15 Buchstaben, davon mindestens 70 % groß, Emotes zählen nicht). Alle drei Filter sind aus, bis du sie einschaltest, und mit <span class="cmd">aus</span> wieder abschaltbar.</p></div>
