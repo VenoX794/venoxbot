@@ -266,7 +266,7 @@ window.VENOX_EN = {
     "Setzt die Pause auf 20 Sekunden. Erlaubt sind 5 bis 600 Sekunden.": "Sets the pause to 20 seconds. 5 to 600 seconds are allowed.",
     "Setzt die Pause auf den Standardwert zurück.": "Resets the pause to the default.",
     "Der Bot spricht in deinem Chat Englisch: KI-Antworten und Meldungen kommen auf Englisch, englische Befehlswörter wie": "The bot speaks English in your chat: AI answers and messages come in English, English command words like",
-    "gehen zusätzlich. Quizfragen und Sprüche bleiben vorerst deutsch. Zurück mit": "work as well. Quiz questions and sayings stay in German for now. Back with",
+    "gehen zusätzlich, und Quiz, Rätsel, Galgenmännchen und Sprüche haben eigene englische Inhalte. Zurück mit": "work as well, and the quiz, puzzles, hangman and sayings have their own English content. Back with",
     "(Standard: Deutsch). Auf Discord für Server-Betreiber.": "(default: German). On Discord for server owners.",
     "Schaltet Clips und Roast-Sammlung im Kanal ein (": "Turns on clips and the roast collection in the channel (",
     "wieder aus, Standard: aus). Roast-Antworten landen dann ohne Namen bei VenoX für kurze Videos.":
