@@ -67,6 +67,16 @@
 .thema-knopf[aria-pressed="false"] span:first-child,
 .thema-knopf[aria-pressed="true"] span:last-child { opacity: 1; }
 .thema-knopf:focus-visible { outline: 2px solid var(--rot); outline-offset: 2px; }
+/* Sprachknopf „DE | EN“: gleiche Pille, Buchstaben statt Mond und Sonne (aria-pressed true = Englisch) */
+.kopf-schalter { display: inline-flex; align-items: center; gap: .45rem; flex: none; }
+.sprach-knopf span { font-size: .66rem; font-weight: 800; letter-spacing: .02em; color: var(--text); }
+.sprach-knopf[aria-pressed="false"] span:first-child,
+.sprach-knopf[aria-pressed="true"] span:last-child { color: #fff; }
+/* Bis sprache.js die Seite übersetzt hat, nichts zeigen (nur bei Englisch, sonst kein Aufblitzen auf Deutsch) */
+html.sprache-laedt body { visibility: hidden; }
+/* Nur auf Englisch: Hinweis, dass rechtlich die deutsche Fassung gilt */
+.nur-en { display: none; }
+html[lang="en"] .nur-en { display: block; margin-top: .9rem; }
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -405,7 +415,7 @@ body.ohne-leiste { padding-bottom: 0; }
   }
   .konto { display: contents; }
   .logo { grid-column: 1; grid-row: 1; }
-  .thema-knopf { grid-column: 2; grid-row: 1; }
+  .kopf-schalter { grid-column: 2; grid-row: 1; gap: .35rem; }
   #abmelden { grid-column: 3; grid-row: 1; }
   /* Anmelden steht auf dem Handy groß im Startbereich, oben wäre es zu eng */
   .seite-login { display: none; }
