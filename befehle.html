@@ -18,7 +18,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-31-1", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-31-2", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -78,7 +78,7 @@
       <div class="row"><code>!ask rangliste</code><p>Zeigt die besten fünf des Monats. Punkte gibt es für Quiz und Zahlenraten (je 3) und Duelle (1, höchstens 10 pro Tag).</p></div>
       <div class="row"><code>!ask punkte</code><p>Zeigt deine Punkte und deinen Platz im Monat und im Jahr. <span class="cmd">!ask punkte löschen</span> löscht deine Punkte.</p></div>
       <div class="row"><code>!ask jahr</code><p>Jahresrangliste: zeigt die besten fünf des Jahres. Dafür zählen Minispiel-Punkte und Zuschau-Punkte zusammen: Wer im Live-Stream zuschaut, bekommt alle 10 Minuten 10 Punkte (nur Twitch).</p></div>
-      <div class="row"><code>!ask punkte aus</code><p>Du sammelst keine Jahrespunkte mehr, deine bisherigen werden gelöscht. Mit <span class="cmd">!ask punkte an</span> sammelst du wieder.</p></div>
+      <div class="row"><code>!ask punkte aus</code><p>Du sammelst keine Jahrespunkte mehr, deine bisherigen werden gelöscht, und du stehst nicht mehr unter den fleißigsten Chattern im Stream-Rückblick. Mit <span class="cmd">!ask punkte an</span> sammelst du wieder.</p></div>
       <div class="row"><code>!join</code><p>Läuft auf Twitch gerade eine Verlosung, bist du damit dabei. Kostenlos, alle haben die gleiche Chance.</p></div>
       <div class="row"><code>!ask gib @name 50</code><p>Verschenkt 50 deiner Jahrespunkte an jemand anderen im Kanal (nur Twitch).</p></div>
       <div class="row"><code>1, 2, …</code><p>Läuft eine Umfrage, stimmst du einfach mit der Zahl im Chat ab. <span class="cmd">!ask umfrage</span> zeigt sie.</p></div>
