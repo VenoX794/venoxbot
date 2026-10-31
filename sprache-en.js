@@ -265,6 +265,9 @@ window.VENOX_EN = {
     "Zeigt die Pause zwischen zwei Fragen.": "Shows the pause between two questions.",
     "Setzt die Pause auf 20 Sekunden. Erlaubt sind 5 bis 600 Sekunden.": "Sets the pause to 20 seconds. 5 to 600 seconds are allowed.",
     "Setzt die Pause auf den Standardwert zurück.": "Resets the pause to the default.",
+    "Der Bot spricht in deinem Chat Englisch: KI-Antworten und Meldungen kommen auf Englisch, englische Befehlswörter wie": "The bot speaks English in your chat: AI answers and messages come in English, English command words like",
+    "gehen zusätzlich. Quizfragen und Sprüche bleiben vorerst deutsch. Zurück mit": "work as well. Quiz questions and sayings stay in German for now. Back with",
+    "(Standard: Deutsch). Auf Discord für Server-Betreiber.": "(default: German). On Discord for server owners.",
     "Schaltet Clips und Roast-Sammlung im Kanal ein (": "Turns on clips and the roast collection in the channel (",
     "wieder aus, Standard: aus). Roast-Antworten landen dann ohne Namen bei VenoX für kurze Videos.":
       "turns it off again, default: off). Roast answers are then sent to VenoX without names for short videos.",
@@ -365,6 +368,7 @@ window.VENOX_EN = {
     "Einstellungen": "Settings",
     "KI und Spiele": "AI and games",
     "KI-Antworten auf !ask": "AI answers to !ask",
+    "Bot spricht Englisch (KI-Antworten und Meldungen im Chat)": "Bot speaks English (AI answers and messages in chat)",
     "Pause zwischen zwei Fragen pro Person (Sekunden)": "Pause between two questions per person (seconds)",
     "Minispiele (Quiz, Galgenmännchen, Duell …)": "Mini games (quiz, hangman, duel …)",
     "Clips mit !ask clip und Roast-Sammlung": "Clips with !ask clip and roast collection",
