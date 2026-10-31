@@ -18,7 +18,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-29-2", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-31-1", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -100,7 +100,8 @@
       <div class="row"><code>!ask so auto an</code><p>Bei jedem Raid bedankt sich der Bot automatisch und macht den Shoutout für den Raider. Mit <span class="cmd">!ask so auto aus</span> wieder aus (Standard: aus).</p></div>
       <div class="row"><code>!ask live aus</code><p>Der Bot meldet nicht mehr auf dem VenoxBot-Discord (#live-jetzt), wenn dein Stream startet, und postet danach keinen Stream-Rückblick. Mit <span class="cmd">!ask live an</span> wieder an (Standard: an).</p></div>
       <div class="row"><code>!ask filter links an</code><p>Löscht Links von Zuschauern (Streamer, Moderatoren und VIPs ausgenommen). <span class="cmd">!ask erlaube @name</span> erlaubt einen Link für 60 Sekunden. <span class="cmd">!ask filter</span> zeigt, was an ist.</p></div>
-      <div class="row"><code>!ask filter wörter an</code><p>Löscht Nachrichten mit gesperrten Wörtern (Beleidigungen, Hetze). Beide Filter sind aus, bis du sie einschaltest, und mit <span class="cmd">aus</span> wieder abschaltbar.</p></div>
+      <div class="row"><code>!ask filter wörter an</code><p>Löscht Nachrichten mit gesperrten Wörtern (Beleidigungen, Hetze).</p></div>
+      <div class="row"><code>!ask filter caps an</code><p>Löscht Nachrichten, die fast nur aus Großbuchstaben bestehen (ab 15 Buchstaben, davon mindestens 70 % groß, Emotes zählen nicht). Alle drei Filter sind aus, bis du sie einschaltest, und mit <span class="cmd">aus</span> wieder abschaltbar.</p></div>
       <div class="row"><code>!ask zp 25</code><p>Legt fest, wie viele Zuschau-Punkte es alle 10 Minuten gibt (0 bis 1000, 0 = aus, auch Moderatoren). <span class="cmd">!ask zp</span> zeigt den Wert, <span class="cmd">!ask zp reset</span> stellt den Standard 10 wieder her.</p></div>
       <div class="row"><code>!ask cooldown</code><p>Zeigt die Pause zwischen zwei Fragen.</p></div>
       <div class="row"><code>!ask cooldown 20</code><p>Setzt die Pause auf 20 Sekunden. Erlaubt sind 5 bis 600 Sekunden.</p></div>
@@ -160,7 +161,7 @@
 </main>
 
 <footer class="fuss">
-  <span class="fuss-stand">VenoxBot · Betrieben von VenoX · Stand 29.10.2026</span>
+  <span class="fuss-stand">VenoxBot · Betrieben von VenoX · Stand 31.10.2026</span>
   <a href="nutzungsbedingungen.html">Nutzungsbedingungen &amp; Datenschutz</a>
   <a href="mailto:venoxbot@web.de">venoxbot@web.de</a>
 </footer>
