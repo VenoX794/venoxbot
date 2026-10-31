@@ -18,7 +18,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-31-3", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-10-31-4", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -76,6 +76,7 @@
       <div class="row"><code>!ask rate</code><p>Startet Zahlenraten von 1 bis 100. Getippt wird mit <span class="cmd">!ask rate 50</span>.</p></div>
       <div class="row"><code>!ask quiz</code><p>Stellt eine Quizfrage. Wer zuerst mit <span class="cmd">!ask antwort Lösung</span> richtig liegt, gewinnt. Zeit: 60 Sekunden.</p></div>
       <div class="row"><code>!ask rangliste</code><p>Zeigt die besten fünf des Monats. Punkte gibt es für Quiz und Zahlenraten (je 3) und Duelle (1, höchstens 10 pro Tag).</p></div>
+      <div class="row"><code>!ask geburtstag 14.03</code><p>Trägt deinen Geburtstag ein (nur Tag und Monat, nur Twitch). An dem Tag gratuliert dir der Bot in Kanälen, die Geburtstagsgrüße eingeschaltet haben. <span class="cmd">!ask geburtstag</span> zeigt deinen Eintrag, <span class="cmd">!ask geburtstag löschen</span> löscht ihn.</p></div>
       <div class="row"><code>!ask punkte</code><p>Zeigt deine Punkte und deinen Platz im Monat und im Jahr. <span class="cmd">!ask punkte löschen</span> löscht deine Punkte.</p></div>
       <div class="row"><code>!ask stats</code><p>Deine Statistik: Punkte und Platz im Monat und im Jahr, wie viele Punkte dir bis zum nächsten Platz fehlen und ungefähr, wie lange du schon zugeschaut hast. Streamer und Moderatoren sehen mit <span class="cmd">!ask stats @name</span> auch die Statistik von anderen.</p></div>
       <div class="row"><code>!ask jahr</code><p>Jahresrangliste: zeigt die besten fünf des Jahres. Dafür zählen Minispiel-Punkte und Zuschau-Punkte zusammen: Wer im Live-Stream zuschaut, bekommt alle 10 Minuten 10 Punkte (nur Twitch).</p></div>
@@ -100,6 +101,7 @@
       <div class="row"><code>!so @name</code><p>Shoutout: empfiehlt den Kanal mit seinem letzten Spiel und Link (auch <span class="cmd">!ask so @name</span>).</p></div>
       <div class="row"><code>!ask so auto an</code><p>Bei jedem Raid bedankt sich der Bot automatisch und macht den Shoutout für den Raider. Mit <span class="cmd">!ask so auto aus</span> wieder aus (Standard: aus).</p></div>
       <div class="row"><code>!ask live aus</code><p>Der Bot meldet nicht mehr auf dem VenoxBot-Discord (#live-jetzt), wenn dein Stream startet, und postet danach keinen Stream-Rückblick. Mit <span class="cmd">!ask live an</span> wieder an (Standard: an).</p></div>
+      <div class="row"><code>!ask geburtstage an</code><p>Der Bot gratuliert Zuschauern, die ihren Geburtstag mit <span class="cmd">!ask geburtstag 14.03</span> eingetragen haben, an dem Tag bei ihrer ersten Nachricht in deinem Chat. Aus mit <span class="cmd">!ask geburtstage aus</span> (Standard: aus).</p></div>
       <div class="row"><code>!ask willkommen an</code><p>Begrüßt Leute, die zum ersten Mal in deinem Chat schreiben (Streamer, Moderatoren, VIPs und Abonnenten nicht). Die ersten 7 Tage merkt sich der Bot nur still, wer schon da ist, damit Stammzuschauer nicht als neu gelten. Eigener Gruß mit <span class="cmd">!ask willkommen text Hey {user}, schön dass du da bist!</span>, zurück zum Standard mit <span class="cmd">!ask willkommen text reset</span>. Aus mit <span class="cmd">!ask willkommen aus</span> (Standard: aus).</p></div>
       <div class="row"><code>!ask filter links an</code><p>Löscht Links von Zuschauern (Streamer, Moderatoren und VIPs ausgenommen). <span class="cmd">!ask erlaube @name</span> erlaubt einen Link für 60 Sekunden. <span class="cmd">!ask filter</span> zeigt, was an ist.</p></div>
       <div class="row"><code>!ask filter wörter an</code><p>Löscht Nachrichten mit gesperrten Wörtern (Beleidigungen, Hetze).</p></div>
