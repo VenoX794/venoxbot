@@ -19,6 +19,9 @@
 <script src="sprache.js"></script>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="info.css">
+<!-- 3D-Bühne und Sprung-Chips (Kopien aus venoxbot-web/public: effekte.js, liste.js; three.js in vendor/three) -->
+<script type="module" src="effekte.js"></script>
+<script type="module" src="liste.js"></script>
 </head>
 <body class="ohne-leiste">
 
@@ -44,7 +47,7 @@
   </div>
 </header>
 
-<main id="inhalt">
+<main id="inhalt" data-inhalt>
   <div class="held klein">
     <h1 class="held-titel">Nutzungsbedingungen und Datenschutz</h1>
     <!-- Nur auf Englisch sichtbar (style.css, html[lang=en]): rechtlich gilt die deutsche Fassung -->

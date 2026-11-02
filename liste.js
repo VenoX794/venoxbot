@@ -1,5 +1,5 @@
 // Befehlsliste im Neon-Look (02.11.2026), gleiche Datei auf der Befehle-Website (.befehlsliste) und auf der
-// GitHub-Seite (befehle.html, <main data-befehlsliste>). Die Liste selbst bleibt unverändert (Quelle ist
+// GitHub-Seite (befehle.html, <main data-befehlsliste>; nutzungsbedingungen.html, <main data-inhalt>: nur Chips). Die Liste selbst bleibt unverändert (Quelle ist
 // befehle.html, tools/befehlsliste.mjs kopiert sie); dieses Skript ergänzt nur:
 //   - Suchfeld, das Befehle und Erklärungen filtert (ohne KI, rein im Browser; auf der Befehle-Website
 //     filtert das vorhandene Feld aus app.js, es bekommt nur das neue Aussehen)
@@ -7,11 +7,14 @@
 //   - Anzahl der Befehle neben jeder Abschnitts-Überschrift
 // Englische Texte kommen über sprache.js (MutationObserver übersetzt auch eingefügte Elemente).
 (() => {
-  const bereich = document.querySelector(".befehlsliste, [data-befehlsliste]");
+  const bereich = document.querySelector(".befehlsliste, [data-befehlsliste], [data-inhalt]");
+  // data-inhalt (Nutzungsbedingungen und Datenschutz): nur Sprung-Chips, keine Suche und keine Anzahl
+  const nurChips = bereich?.hasAttribute("data-inhalt");
   if (!bereich) return;
   const abschnitte = [...bereich.querySelectorAll("section")].filter((s) => s.querySelector(":scope > h2"));
   if (!abschnitte.length) return;
   bereich.classList.add("liste-bereich");
+  if (nurChips) bereich.classList.add("inhalt");
 
   const el = (tag, klasse, text) => {
     const e = document.createElement(tag);
@@ -28,7 +31,9 @@
   const lupe = '<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>';
   const vorhanden = bereich.querySelector(".liste-suche");
   let suche, feld, leer = null;
-  if (vorhanden) {
+  if (nurChips) {
+    suche = null;
+  } else if (vorhanden) {
     suche = vorhanden;
     feld = suche.querySelector("input");
   } else {
@@ -43,11 +48,11 @@
     leer = el("p", "liste-leer", "Keine Befehle gefunden.");
     leer.hidden = true;
   }
-  suche.insertAdjacentHTML("afterbegin", lupe);
+  if (suche) suche.insertAdjacentHTML("afterbegin", lupe);
   const chips = el("nav", "liste-chips");
   chips.setAttribute("aria-label", "Abschnitte");
   abschnitte[0].before(leiste);
-  leiste.append(suche, chips);
+  leiste.append(...(suche ? [suche] : []), chips);
   if (leer) leiste.after(leer);
 
   const chipFuer = new Map();
@@ -56,7 +61,7 @@
     const titel = h2.textContent.trim();
     if (!s.id) s.id = kennung(titel);
     const zeilen = s.querySelectorAll(".row").length;
-    if (zeilen) h2.append(el("span", "liste-anzahl", zeilen === 1 ? "1 Befehl" : `${zeilen} Befehle`));
+    if (zeilen && !nurChips) h2.append(el("span", "liste-anzahl", zeilen === 1 ? "1 Befehl" : `${zeilen} Befehle`));
     const chip = el("a", "liste-chip", titel);
     chip.href = "#" + s.id;
     chip.addEventListener("click", (e) => {
@@ -73,6 +78,8 @@
     for (const e of eintraege) if (e.isIntersecting) chipFuer.forEach((c, s) => c.classList.toggle("aktiv", s === e.target));
   }, { rootMargin: "-40% 0px -55% 0px" });
   abschnitte.forEach((s) => beob.observe(s));
+
+  if (nurChips) return;
 
   // Befehle-Website: app.js filtert selbst; danach nur die Chips an die ausgeblendeten Abschnitte anpassen
   if (vorhanden) {

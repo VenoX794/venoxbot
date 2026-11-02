@@ -74,3 +74,21 @@ main a.btn { color: #fff; }
   main code, .cmd { white-space: normal; overflow-wrap: anywhere; }
   .held.klein .held-titel { font-size: 1.75rem; hyphens: auto; overflow-wrap: anywhere; }
 }
+
+/* Nutzungsbedingungen und Datenschutz im Neon-Look (02.11.2026, liste.js mit data-inhalt): jeder große
+   Abschnitt als Glas-Karte über der 3D-Bühne, Unterpunkte mit roter Marke. Der Text selbst bleibt gleich. */
+.liste-bereich.inhalt > section:not(#bestaetigen) {
+  position: relative; margin: 0 0 1.5rem; padding: .4rem 1.6rem 1.2rem; border: 1px solid var(--linie); border-radius: var(--rund);
+  background: color-mix(in srgb, var(--flaeche) 86%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+}
+.liste-bereich.inhalt > section:not(#bestaetigen)::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--rot-hell), transparent); opacity: .7;
+}
+.liste-bereich.inhalt > section > h2 { margin-top: 1.4rem; }
+.liste-bereich.inhalt > section, .liste-bereich.inhalt .liste-werkzeug { max-width: 54rem; }
+.liste-bereich.inhalt h3 { display: flex; align-items: baseline; gap: .55rem; margin-top: 1.6rem; scroll-margin-top: 6rem; }
+.liste-bereich.inhalt h3::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 2px; transform: rotate(45deg) translateY(-1px); background: var(--rot-hell); box-shadow: 0 0 10px var(--rot-hell); }
+.liste-bereich.inhalt .confirm { background: color-mix(in srgb, var(--flaeche) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+@media (max-width: 40rem) { .liste-bereich.inhalt > section:not(#bestaetigen) { padding: .2rem 1rem 1rem; } }
