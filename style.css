@@ -690,3 +690,63 @@ body.offline-seite { display: block; padding: 0; }
   .befehlsliste .row { grid-template-columns: minmax(0, 1fr); }
   .befehlsliste code, .befehlsliste .cmd { white-space: normal; overflow-wrap: anywhere; }
 }
+
+/* Aus venoxbot-web/public/style.css übernommen (02.11.2026); die 3D-Bühne und das Kippen der Karten gibt es nur dort (effekte.js) */
+/* Neon-Vorlage 02.11.2026: 3D-Bühne (effekte.js), Glas-Chat, Knopf-Druck, Kachel-Leuchtfleck, weiche FAQ.
+   Bewegung nur über transform und opacity; "Bewegung reduzieren" schaltet alles ab (Regel weiter oben). */
+.held { isolation: isolate; }
+/* Fest stehendes 3D-Canvas hinter der ganzen Startseite; body wird dafür durchsichtig (html behält --bg) */
+.buehne-3d { position: fixed; inset: 0; z-index: -1; width: 100vw; height: 100vh; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s .8s; }
+.buehne-3d.da { opacity: 1; visibility: visible; transition: opacity .8s ease; }
+body:has(.buehne-3d.da) { background: transparent; }
+.held.mit-3d::before { opacity: .45; }
+.held-knoepfe .knopf span[aria-hidden] { display: inline-block; transition: transform .16s cubic-bezier(.22, 1, .36, 1); }
+.knopf { touch-action: manipulation; transition: transform .16s cubic-bezier(.22, 1, .36, 1), background-color .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.knopf:active:not(:disabled) { transform: scale(.97); transition-duration: 0s; }
+@media (hover: hover) and (pointer: fine) {
+  .held-knoepfe .knopf:hover span[aria-hidden] { transform: translateX(4px); }
+  .held-knoepfe .knopf:not(.leise):hover { box-shadow: 0 12px 40px rgba(255, 45, 61, .55); }
+}
+.chat { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+:root:not([data-thema="hell"]) .chat { background: rgba(14, 11, 11, .78); }
+@media (min-width: 861px) {
+  .held-buehne { perspective: 1200px; }
+  .chat { transform: rotateY(-7deg) rotateX(3deg); transform-origin: 30% 50%; }
+}
+.live-punkt { animation: live-puls 1.8s ease-in-out infinite; }
+@keyframes live-puls { 50% { opacity: .35; transform: scale(.8); } }
+.funktionen li { position: relative; transition: transform .2s cubic-bezier(.22, 1, .36, 1), border-color .2s, box-shadow .2s; }
+.funktionen li::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s ease;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 45, 61, .16), transparent 45%);
+}
+@media (hover: hover) and (pointer: fine) {
+  .funktionen li:hover { transform: translateY(-4px); }
+  .funktionen li:hover::before { opacity: 1; }
+}
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .faq details::details-content { block-size: 0; overflow: hidden; transition: block-size .28s cubic-bezier(.22, 1, .36, 1), content-visibility .28s allow-discrete; }
+  .faq details[open]::details-content { block-size: auto; }
+}
+@media (max-width: 860px) { .buehne-3d.da { opacity: .6; } }
+
+/* Karten, die per effekte.js in 3D zur Maus kippen: schnelles Nachziehen, beim Verlassen weich zurück */
+.schritte li { position: relative; transition: transform .35s cubic-bezier(.22, 1, .36, 1), border-color .2s, box-shadow .2s; }
+.kippt { transform-style: preserve-3d; will-change: transform; }
+.kippt:hover { transition-duration: .08s, .2s, .2s; box-shadow: 0 18px 40px rgba(0, 0, 0, .35), 0 0 30px rgba(227, 25, 43, .2); }
+.schritte li::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s ease;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 45, 61, .14), transparent 45%);
+}
+@media (hover: hover) and (pointer: fine) { .schritte li:hover::before { opacity: 1; } }
+/* Kopfbereich: Text steigt beim Laden nacheinander auf (einmal, nur ohne "Bewegung reduzieren") */
+@media (prefers-reduced-motion: no-preference) {
+  .held-text > * { animation: held-rein .7s cubic-bezier(.22, 1, .36, 1) backwards; }
+  .held-text > :nth-child(2) { animation-delay: .06s; } .held-text > :nth-child(3) { animation-delay: .12s; }
+  .held-text > :nth-child(4) { animation-delay: .18s; } .held-text > :nth-child(5) { animation-delay: .24s; }
+  .held-text > :nth-child(6) { animation-delay: .3s; }
+  .held-buehne { animation: held-buehne-rein .9s cubic-bezier(.22, 1, .36, 1) .15s backwards; }
+  @keyframes held-rein { from { opacity: 0; transform: translateY(18px); } }
+  @keyframes held-buehne-rein { from { opacity: 0; transform: translateY(30px) scale(.96); } }
+}
