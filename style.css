@@ -750,3 +750,53 @@ body:has(.buehne-3d.da) { background: transparent; }
   @keyframes held-rein { from { opacity: 0; transform: translateY(18px); } }
   @keyframes held-buehne-rein { from { opacity: 0; transform: translateY(30px) scale(.96); } }
 }
+
+/* Befehlsliste im Neon-Look (02.11.2026, liste.js): Glas-Karten über der 3D-Bühne, Suchfeld, Sprung-Chips,
+   Anzahl je Abschnitt, Zeilen leuchten beim Drüberfahren. Gilt auf der Befehle-Website und der GitHub-Seite. */
+.liste-bereich [hidden] { display: none !important; }
+.liste-werkzeug { display: grid; gap: .8rem; margin: 1.2rem 0 .4rem; }
+.liste-suche {
+  display: flex; align-items: center; gap: .6rem; max-width: 30rem; padding: .2rem 1rem;
+  border: 1px solid var(--linie-hell); border-radius: 999px; cursor: text;
+  background: color-mix(in srgb, var(--flaeche) 80%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.liste-suche:focus-within { border-color: var(--rot-hell); box-shadow: 0 0 0 3px rgba(255, 59, 74, .2), 0 0 26px rgba(255, 45, 61, .25); }
+.liste-suche svg { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--blass); stroke-width: 2; stroke-linecap: round; }
+.liste-suche input { flex: 1; min-width: 0; max-width: none; margin: 0; font: inherit; font-size: 1rem; color: var(--text); background: transparent; border: 0; border-radius: 0; outline: 0; padding: .65rem 0; }
+.liste-suche input:focus { box-shadow: none; }
+.liste-chips { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .3rem; scrollbar-width: thin; }
+.liste-chip {
+  flex: none; padding: .4rem .9rem; border-radius: 999px; border: 1px solid var(--linie); font-size: .85rem; font-weight: 600;
+  color: var(--blass); text-decoration: none; background: color-mix(in srgb, var(--flaeche) 70%, transparent);
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.liste-bereich a.liste-chip { color: var(--blass); font-weight: 600; }
+.liste-bereich a.liste-chip.aktiv { color: #fff; background: var(--rot); border-color: var(--rot); box-shadow: 0 0 18px rgba(255, 45, 61, .45); }
+@media (hover: hover) and (pointer: fine) { .liste-bereich a.liste-chip:hover { color: var(--text); border-color: var(--rot); } }
+.liste-leer { color: var(--blass); padding: 2rem 0; text-align: center; }
+
+.liste-bereich section > h2 { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; scroll-margin-top: 6rem; }
+.liste-bereich section > h2::before { content: ""; width: 4px; height: 1.1em; border-radius: 2px; background: var(--rot-hell); box-shadow: 0 0 12px var(--rot-hell); }
+.liste-anzahl { font-size: .72rem; font-weight: 700; letter-spacing: .04em; color: var(--blass); border: 1px solid var(--linie-hell); border-radius: 999px; padding: .15rem .55rem; }
+.liste-bereich .card {
+  position: relative; overflow: hidden; border: 1px solid var(--linie);
+  background: color-mix(in srgb, var(--flaeche) 84%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+}
+.liste-bereich .card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--rot-hell), transparent); opacity: .7;
+}
+.liste-bereich .row { margin: 0 -.8rem; padding: .85rem .8rem; border-radius: 12px; transition: background-color .2s ease; }
+.liste-bereich .row code { transition: box-shadow .2s ease, color .2s ease; }
+@media (hover: hover) and (pointer: fine) {
+  .liste-bereich .row:hover { background: rgba(227, 25, 43, .07); }
+  .liste-bereich .row:hover > code, .liste-bereich .row:hover .befehl-zelle > code { color: #fff; box-shadow: 0 0 0 1px rgba(255, 59, 74, .5), 0 0 16px rgba(255, 45, 61, .35); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .liste-bereich section { animation: liste-rein .6s cubic-bezier(.22, 1, .36, 1) backwards; }
+  .liste-bereich section:nth-of-type(2) { animation-delay: .05s; } .liste-bereich section:nth-of-type(3) { animation-delay: .1s; }
+  .liste-bereich section:nth-of-type(4) { animation-delay: .15s; } .liste-bereich section:nth-of-type(n+5) { animation-delay: .2s; }
+  @keyframes liste-rein { from { opacity: 0; transform: translateY(16px); } }
+}

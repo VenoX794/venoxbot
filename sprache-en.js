@@ -12,6 +12,12 @@ window.VENOX_EN = {
     "Menü": "Menu",
     "Bereiche": "Sections",
     "Befehle": "Commands",
+    // Befehlsliste (liste.js)
+    "Befehl suchen, z. B. quiz": "Search commands, e.g. quiz",
+    "Befehle durchsuchen": "Search commands",
+    "Abschnitte": "Sections",
+    "Keine Befehle gefunden.": "No commands found.",
+    "1 Befehl": "1 command",
     "Funktionen": "Features",
     "Anleitung": "Guide",
     "Befehlsliste": "Command list",
@@ -428,6 +434,8 @@ window.VENOX_EN = {
 
   // Texte mit Zahlen oder Namen. Reihenfolge zählt: das erste passende Muster gewinnt.
   muster: [
+    // Anzahl je Abschnitt der Befehlsliste (liste.js)
+    [/^(\d+) Befehle$/, "$1 commands"],
     [/^Befehle in (.+)$/, "Commands in $1"],
     [/^Eigene Befehle in (.+)$/, "Custom commands in $1"],
     [/^(\d+) von (\d+)$/, "$1 of $2"],

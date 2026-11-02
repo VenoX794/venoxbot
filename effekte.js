@@ -6,7 +6,7 @@
 // 2. Karten (Funktionen, Schritte) kippen in 3D zur Maus und haben einen Leuchtfleck.
 // Läuft auf der Befehle-Website (Startseite #uebersicht, anfangs versteckt) und auf der GitHub-Seite (ohne
 // #uebersicht, dort immer sichtbar). Pfade sind relativ zu dieser Datei, weil die GitHub-Seite unter /venoxbot/ liegt.
-// three.js wird erst geladen, wenn die Startseite sichtbar ist, WebGL geht und der Browser keine
+// three.js wird erst geladen, wenn die Startseite oder die Befehlsliste sichtbar ist, WebGL geht und der Browser keine
 // reduzierte Bewegung wünscht. Ohne WebGL bleibt die Seite wie vorher (Leuchten aus CSS).
 
 const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -34,8 +34,9 @@ const webgl = (() => {
   try { return !!document.createElement("canvas").getContext("webgl2"); } catch { return false; }
 })();
 
-// Startseite gerade zu sehen? Ohne #uebersicht (GitHub-Seite) immer
-const startseiteSichtbar = () => !uebersicht || !uebersicht.hidden;
+// Bühne zeigen, solange die Startseite oder die Befehlsliste zu sehen ist; ohne #uebersicht (GitHub-Seite) immer
+const liste = document.getElementById("befehlsliste");
+const startseiteSichtbar = () => !uebersicht || !uebersicht.hidden || (liste && !liste.hidden);
 
 if (held && webgl && !ruhig) {
   // Erst laden, wenn der Kopfbereich wirklich zu sehen ist (die Übersicht ist anfangs versteckt)
@@ -45,6 +46,7 @@ if (held && webgl && !ruhig) {
     import(new URL("vendor/three/three.module.min.js", import.meta.url).href).then(starte3D).catch(() => { /* ohne 3D weiter */ });
   });
   warten.observe(held);
+  if (liste) warten.observe(liste);
 }
 
 // Weicher runder Farbverlauf als Bild (für Schein, Funken und Druckwelle)
@@ -92,7 +94,7 @@ function starte3D(THREE) {
   document.body.prepend(canvas);
   held.classList.add("mit-3d");
   const zeigen = () => canvas.classList.toggle("da", startseiteSichtbar());
-  if (uebersicht) new MutationObserver(zeigen).observe(uebersicht, { attributes: true, attributeFilter: ["hidden"] });
+  for (const b of [uebersicht, liste]) if (b) new MutationObserver(zeigen).observe(b, { attributes: true, attributeFilter: ["hidden"] });
   requestAnimationFrame(zeigen);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
