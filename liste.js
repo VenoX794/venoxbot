@@ -8,9 +8,11 @@
 // Englische Texte kommen über sprache.js (MutationObserver übersetzt auch eingefügte Elemente).
 (() => {
   const bereich = document.querySelector(".befehlsliste, [data-befehlsliste], [data-inhalt]");
-  // data-inhalt (Nutzungsbedingungen und Datenschutz): nur Sprung-Chips, keine Suche und keine Anzahl
-  const nurChips = bereich?.hasAttribute("data-inhalt");
   if (!bereich) return;
+  // data-inhalt (Nutzungsbedingungen und Datenschutz): nur Sprung-Chips, keine Suche und keine Anzahl
+  const nurChips = bereich.hasAttribute("data-inhalt");
+  // Nur die Befehle-Website steuert ihre Ansichten über den Hash; dort darf ein Chip ihn nicht ändern
+  const hashSteuerung = bereich.matches(".befehlsliste");
   const abschnitte = [...bereich.querySelectorAll("section")].filter((s) => s.querySelector(":scope > h2"));
   if (!abschnitte.length) return;
   bereich.classList.add("liste-bereich");
@@ -30,9 +32,9 @@
   const leiste = el("div", "liste-werkzeug");
   const lupe = '<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>';
   const vorhanden = bereich.querySelector(".liste-suche");
-  let suche, feld, leer = null;
+  let suche = null, feld, leer = null;
   if (nurChips) {
-    suche = null;
+    // keine Suche
   } else if (vorhanden) {
     suche = vorhanden;
     feld = suche.querySelector("input");
@@ -52,32 +54,44 @@
   const chips = el("nav", "liste-chips");
   chips.setAttribute("aria-label", "Abschnitte");
   abschnitte[0].before(leiste);
-  leiste.append(...(suche ? [suche] : []), chips);
+  if (suche) leiste.append(suche);
+  leiste.append(chips);
   if (leer) leiste.after(leer);
 
   const chipFuer = new Map();
+  const markiere = (abschnitt) => chipFuer.forEach((c, s) => c.classList.toggle("aktiv", s === abschnitt));
   for (const s of abschnitte) {
     const h2 = s.querySelector(":scope > h2");
-    const titel = h2.textContent.trim();
+    // Deutscher Text, auch wenn sprache.js die Überschrift schon übersetzt hat: sonst merkt sich
+    // sprache.js den englischen Chip-Text als Original, und die Kennung hinge von der Sprache ab
+    const titel = (window.VENOX_DEUTSCH?.(h2) ?? h2.textContent).replace(/\s+/g, " ").trim();
     if (!s.id) s.id = kennung(titel);
     const zeilen = s.querySelectorAll(".row").length;
     if (zeilen && !nurChips) h2.append(el("span", "liste-anzahl", zeilen === 1 ? "1 Befehl" : `${zeilen} Befehle`));
     const chip = el("a", "liste-chip", titel);
     chip.href = "#" + s.id;
     chip.addEventListener("click", (e) => {
-      // Ohne Hash-Wechsel springen: die Befehle-Website steuert ihre Ansichten über den Hash
+      // Weich springen (scroll-margin-top in style.css hält den Abschnitt unter dem Kopf frei). Den Hash
+      // setzen, damit Link und Zurück-Knopf funktionieren, außer auf der Befehle-Website (Ansichten per Hash).
       e.preventDefault();
       s.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      if (!hashSteuerung && location.hash !== chip.hash) history.pushState(null, "", chip.hash);
     });
     chips.append(chip);
     chipFuer.set(s, chip);
   }
 
+  const amEnde = () => innerHeight + scrollY >= document.documentElement.scrollHeight - 2;
   // Chip des Abschnitts hervorheben, der gerade in der Mitte des Fensters ist
   const beob = new IntersectionObserver((eintraege) => {
-    for (const e of eintraege) if (e.isIntersecting) chipFuer.forEach((c, s) => c.classList.toggle("aktiv", s === e.target));
+    if (amEnde()) return;
+    for (const e of eintraege) if (e.isIntersecting) markiere(e.target);
   }, { rootMargin: "-40% 0px -55% 0px" });
   abschnitte.forEach((s) => beob.observe(s));
+  // Ein kurzer letzter Abschnitt erreicht die Fenstermitte nie: ganz unten leuchtet deshalb sein Chip
+  addEventListener("scroll", () => {
+    if (amEnde()) markiere(abschnitte.filter((s) => !s.hidden).at(-1));
+  }, { passive: true });
 
   if (nurChips) return;
 

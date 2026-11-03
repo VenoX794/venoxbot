@@ -117,6 +117,13 @@
 
   // Für app.js: aktuelle Sprache (z. B. für Zahlen „1.234“ bzw. „1,234“)
   window.VENOX_SPRACHE = () => sprache;
+  // Für liste.js: deutscher Originaltext eines Elements, auch wenn es gerade auf Englisch angezeigt wird
+  window.VENOX_DEUTSCH = (el) => {
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let t = "";
+    for (let n = w.nextNode(); n; n = w.nextNode()) t += merker.get(n)?.de ?? n.nodeValue;
+    return t;
+  };
 
   document.addEventListener("DOMContentLoaded", () => {
     durchlaufe(root);
