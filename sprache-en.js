@@ -185,6 +185,8 @@ window.VENOX_EN = {
       "Sends your feedback about the bot to VenoX (up to 300 characters, once per hour). Works even when the AI is paused.",
     "Minispiele für alle": "Mini games for everyone",
     "Zeigt alle Minispiele.": "Shows all mini games.",
+    "Zeigt alle Minispiele. Mit": "Shows all mini games. With",
+    "bekommt die markierte Person die Liste.": "the tagged person gets the list.",
     "Würfelt eine Zahl von 1 bis 20. Ohne Zahl ein normaler Würfel, erlaubt sind 2 bis 1000 Seiten.":
       "Rolls a number from 1 to 20. Without a number it's a normal die; 2 to 1000 sides are allowed.",
     "Wirft eine Münze: Kopf oder Zahl.": "Flips a coin: heads or tails.",
