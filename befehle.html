@@ -25,7 +25,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-10-31-6", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-11-03-1", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -181,7 +181,7 @@
 </main>
 
 <footer class="fuss">
-  <span class="fuss-stand">VenoxBot · Betrieben von VenoX · Stand 31.10.2026</span>
+  <span class="fuss-stand">VenoxBot · Betrieben von VenoX · Stand 03.11.2026</span>
   <a href="nutzungsbedingungen.html">Nutzungsbedingungen &amp; Datenschutz</a>
   <a href="mailto:venoxbot@web.de">venoxbot@web.de</a>
 </footer>

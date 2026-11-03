@@ -252,8 +252,8 @@ Object.assign(window.VENOX_EN.texte, {
   "schreibst. Bei": ". With",
   "bzw. wenn der Bot einen Discord-Server verlässt, wird die ganze Jahresrangliste gelöscht. Machst du bei einer Verlosung mit":
     "or when the bot leaves a Discord server, the entire yearly leaderboard is deleted. If you join a giveaway with",
-  "mit, merkt sich der Bot deinen Twitch-Namen bis zur Ziehung nur im Arbeitsspeicher. Gewinnst du, nennt er deinen Namen im Chat. Schenkst du mit":
-    ", the bot remembers your Twitch name in memory only until the draw. If you win, it names you in chat. If you give points with",
+  "mit, speichert der Bot deinen Twitch-Namen und Anzeigenamen bis zur Ziehung, damit die Verlosung einen Neustart des Bots übersteht. Nach der Ziehung oder dem Abbruch werden sie sofort gelöscht (war der Bot länger als 10 Minuten aus, beim nächsten Start ohne Ziehung). Gewinnst du, nennt er deinen Namen im Chat. Schenkst du mit":
+    ", the bot stores your Twitch name and display name until the draw, so the giveaway survives a restart of the bot. They are deleted right after the draw or cancellation (if the bot was off for more than 10 minutes, at its next start without a draw). If you win, it names you in chat. If you give points with",
   "Punkte, werden sie bei dir abgezogen und beim Empfänger in der Jahresrangliste des Kanals gespeichert, mit seinem Twitch-Namen und Anzeigenamen (beides prüft der Bot bei Twitch). Der Empfänger kann seine Daten wie oben selbst löschen oder widersprechen.":
     ", they are deducted from you and stored for the recipient in the channel's yearly leaderboard, with their Twitch name and display name (the bot checks both with Twitch). The recipient can delete their data or object as described above.",
   "r) Chat-Filter, Umfragen, Timer und Shoutouts (nur Twitch).": "r) Chat filters, polls, timers and shoutouts (Twitch only).",
