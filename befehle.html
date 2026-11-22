@@ -25,7 +25,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-11-22-2", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-11-22-3", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -152,6 +152,8 @@
       <div class="row"><code>!setup</code><p>Zeigt fünf Vorlagen für deinen Server: Streamer-Community, Gaming, Community-Chat, Kreativ und Lernen. Nur für den Server-Eigentümer und Admins.</p></div>
       <div class="row"><code>!setup 2</code><p>Vorschau für Vorlage 2: welche Rollen, Kanäle und Moderationsregeln neu dazukämen und was es schon gibt. Dabei wird noch nichts geändert.</p></div>
       <div class="row"><code>!setup 2 ja</code><p>Baut Vorlage 2 auf: Rollen mit Farben und Rechten, Kategorien mit Text-, Ankündigungs- und Sprachkanälen, drei Moderationsregeln von Discord (Wortfilter, Spam- und Erwähnungs-Schutz), die Verifizierungsstufe, eine Willkommensnachricht in #regeln, ein Server-Icon (nur wenn noch keins da ist) und vier passende Emojis. Es wird nur ergänzt, nichts gelöscht oder überschrieben. Rechte wie Kicken oder Timeout gibst du den Mod-Rollen selbst, der Bot nennt sie dir.</p></div>
+      <div class="row"><code>!setup bilder Thema</code><p>Eine KI malt zu deinem Thema ein Server-Icon, ein Profilbild des Bots für deinen Server, ein Banner und vier Emojis, zum Beispiel <span class="cmd">!setup bilder Pizza-Bäckerei</span>. Du siehst sie zuerst als Vorschau im Kanal. Einmal am Tag pro Server.</p></div>
+      <div class="row"><code>!setup bilder ja</code><p>Übernimmt die Vorschau (30 Minuten lang): Server-Icon und Profilbild des Bots werden gesetzt, die Emojis angelegt. Das Banner setzt der Bot nur mit Boost-Stufe 2, sonst lädst du es aus der Vorschau selbst hoch.</p></div>
     </div>
     <p class="note" style="margin-top:12px">Discord hat ein Tageslimit für alle Server zusammen. Es zählt die letzten 24 Stunden. Ist es erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.</p>
   </section>
