@@ -25,7 +25,7 @@
 <script>
 // Die Befehle gibt es erst, wenn die Nutzungsbedingungen bestätigt wurden (siehe nutzungsbedingungen.html).
 (function () {
-  var STAND = "2026-11-22-1", KEY = "venoxbot-bedingungen", ok = false, usable = false;
+  var STAND = "2026-11-22-2", KEY = "venoxbot-bedingungen", ok = false, usable = false;
   try { usable = true; if (localStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   try { usable = true; if (sessionStorage.getItem(KEY) === STAND) ok = true; } catch (e) {}
   // Kann der Browser gar nichts speichern, wird die Seite trotzdem gezeigt.
@@ -142,7 +142,7 @@
   <section>
     <h2>Für Server-Betreiber auf Discord</h2>
     <p class="note">Den Bot auf deinen Server holen: <a href="https://discord.com/oauth2/authorize?client_id=1561630701747703908&amp;scope=bot&amp;permissions=117760" target="_blank" rel="noopener">VenoxBot zu Discord einladen</a>. Er braucht nur Nachrichten lesen und schreiben, Links einbetten und Dateien anhängen.</p>
-    <p class="note">Für <span class="cmd">!setup</span> braucht der Bot zusätzlich „Kanäle verwalten“, „Rollen verwalten“ und „Server verwalten“: <a href="https://discord.com/oauth2/authorize?client_id=1561630701747703908&amp;scope=bot&amp;permissions=268553264" target="_blank" rel="noopener">mit Rechten für Server-Vorlagen einladen</a>. Ist er schon auf deinem Server, kannst du seiner Rolle die Rechte auch selbst geben.</p>
+    <p class="note">Für <span class="cmd">!setup</span> braucht der Bot zusätzlich „Kanäle verwalten“, „Rollen verwalten“, „Server verwalten“ und „Ausdrücke erstellen“: <a href="https://discord.com/oauth2/authorize?client_id=1561630701747703908&amp;scope=bot&amp;permissions=8796361575472" target="_blank" rel="noopener">mit Rechten für Server-Vorlagen einladen</a>. Ist er schon auf deinem Server, kannst du seiner Rolle die Rechte auch selbst geben.</p>
     <div class="card">
       <div class="row"><code>!ask an</code><p>Schaltet die KI-Antworten im Kanal ein. Erlaubt für den Server-Eigentümer und alle mit der Berechtigung „Nachrichten verwalten“.</p></div>
       <div class="row"><code>!ask aus</code><p>Pausiert die KI-Antworten im Kanal. Gleiche Berechtigung wie bei <span class="cmd">!ask an</span>.</p></div>
@@ -151,7 +151,7 @@
       <div class="row"><code>!askstats</code><p>Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur der Server-Eigentümer.</p></div>
       <div class="row"><code>!setup</code><p>Zeigt fünf Vorlagen für deinen Server: Streamer-Community, Gaming, Community-Chat, Kreativ und Lernen. Nur für den Server-Eigentümer und Admins.</p></div>
       <div class="row"><code>!setup 2</code><p>Vorschau für Vorlage 2: welche Rollen, Kanäle und Moderationsregeln neu dazukämen und was es schon gibt. Dabei wird noch nichts geändert.</p></div>
-      <div class="row"><code>!setup 2 ja</code><p>Baut Vorlage 2 auf: Rollen mit Farben und Rechten, Kategorien mit Text-, Ankündigungs- und Sprachkanälen, drei Moderationsregeln von Discord (Wortfilter, Spam- und Erwähnungs-Schutz), die Verifizierungsstufe und eine Willkommensnachricht in #regeln. Es wird nur ergänzt, nichts gelöscht oder überschrieben.</p></div>
+      <div class="row"><code>!setup 2 ja</code><p>Baut Vorlage 2 auf: Rollen mit Farben und Rechten, Kategorien mit Text-, Ankündigungs- und Sprachkanälen, drei Moderationsregeln von Discord (Wortfilter, Spam- und Erwähnungs-Schutz), die Verifizierungsstufe, eine Willkommensnachricht in #regeln, ein Server-Icon (nur wenn noch keins da ist) und vier passende Emojis. Es wird nur ergänzt, nichts gelöscht oder überschrieben. Rechte wie Kicken oder Timeout gibst du den Mod-Rollen selbst, der Bot nennt sie dir.</p></div>
     </div>
     <p class="note" style="margin-top:12px">Discord hat ein Tageslimit für alle Server zusammen. Es zählt die letzten 24 Stunden. Ist es erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.</p>
   </section>

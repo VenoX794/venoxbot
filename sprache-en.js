@@ -310,8 +310,8 @@ window.VENOX_EN = {
     "Zeigt den Verbrauch der letzten 24 Stunden und die Version des Bots. Nur der Server-Eigentümer.": "Shows the usage of the last 24 hours and the bot version. Server owner only.",
     "Für":
       "For",
-    "braucht der Bot zusätzlich „Kanäle verwalten“, „Rollen verwalten“ und „Server verwalten“:":
-      "the bot also needs “Manage Channels”, “Manage Roles” and “Manage Server”:",
+    "braucht der Bot zusätzlich „Kanäle verwalten“, „Rollen verwalten“, „Server verwalten“ und „Ausdrücke erstellen“:":
+      "the bot also needs “Manage Channels”, “Manage Roles”, “Manage Server” and “Create Expressions”:",
     "mit Rechten für Server-Vorlagen einladen":
       "invite with permissions for server templates",
     ". Ist er schon auf deinem Server, kannst du seiner Rolle die Rechte auch selbst geben.":
@@ -320,8 +320,8 @@ window.VENOX_EN = {
       "Shows five templates for your server: streamer community, gaming, community chat, creative and learning. Only for the server owner and admins.",
     "Vorschau für Vorlage 2: welche Rollen, Kanäle und Moderationsregeln neu dazukämen und was es schon gibt. Dabei wird noch nichts geändert.":
       "Preview of template 2: which roles, channels and moderation rules would be added and what already exists. Nothing is changed yet.",
-    "Baut Vorlage 2 auf: Rollen mit Farben und Rechten, Kategorien mit Text-, Ankündigungs- und Sprachkanälen, drei Moderationsregeln von Discord (Wortfilter, Spam- und Erwähnungs-Schutz), die Verifizierungsstufe und eine Willkommensnachricht in #regeln. Es wird nur ergänzt, nichts gelöscht oder überschrieben.":
-      "Builds template 2: roles with colours and permissions, categories with text, announcement and voice channels, three Discord moderation rules (word filter, spam and mention protection), the verification level and a welcome message in #regeln. It only adds things, nothing is deleted or overwritten.",
+    "Baut Vorlage 2 auf: Rollen mit Farben und Rechten, Kategorien mit Text-, Ankündigungs- und Sprachkanälen, drei Moderationsregeln von Discord (Wortfilter, Spam- und Erwähnungs-Schutz), die Verifizierungsstufe, eine Willkommensnachricht in #regeln, ein Server-Icon (nur wenn noch keins da ist) und vier passende Emojis. Es wird nur ergänzt, nichts gelöscht oder überschrieben. Rechte wie Kicken oder Timeout gibst du den Mod-Rollen selbst, der Bot nennt sie dir.":
+      "Builds template 2: roles with colours and permissions, categories with text, announcement and voice channels, three Discord moderation rules (word filter, spam and mention protection), the verification level, a welcome message in #regeln, a server icon (only if there is none yet) and four matching emojis. It only adds things, nothing is deleted or overwritten. You give the mod roles permissions like kick or timeout yourself, the bot tells you which ones.",
     "Discord hat ein Tageslimit für alle Server zusammen. Es zählt die letzten 24 Stunden. Ist es erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.":
       "Discord has a daily limit for all servers together, counted over the last 24 hours. Once it's reached, the bot answers no questions until there's room again.",
     "Eigene Befehle (Streamer, Mods, Server-Betreiber)": "Custom commands (streamers, mods, server owners)",
