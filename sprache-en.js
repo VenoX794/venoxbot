@@ -322,12 +322,18 @@ window.VENOX_EN = {
       "Preview of template 2: which roles, channels and moderation rules would be added and what already exists. Nothing is changed yet.",
     "Baut Vorlage 2 auf: Rollen mit Farben und Rechten, Kategorien mit Text-, Ankündigungs- und Sprachkanälen, drei Moderationsregeln von Discord (Wortfilter, Spam- und Erwähnungs-Schutz), die Verifizierungsstufe, eine Willkommensnachricht in #regeln, ein Server-Icon (nur wenn noch keins da ist) und vier passende Emojis. Es wird nur ergänzt, nichts gelöscht oder überschrieben. Rechte wie Kicken oder Timeout gibst du den Mod-Rollen selbst, der Bot nennt sie dir.":
       "Builds template 2: roles with colours and permissions, categories with text, announcement and voice channels, three Discord moderation rules (word filter, spam and mention protection), the verification level, a welcome message in #regeln, a server icon (only if there is none yet) and four matching emojis. It only adds things, nothing is deleted or overwritten. You give the mod roles permissions like kick or timeout yourself, the bot tells you which ones.",
-    "Eine KI malt zu deinem Thema ein Server-Icon, ein Profilbild des Bots für deinen Server, ein Banner und vier Emojis, zum Beispiel":
-      "An AI paints a server icon, a bot avatar for your server, a banner and four emojis for your topic, for example",
-    ". Du siehst sie zuerst als Vorschau im Kanal. Einmal am Tag pro Server.":
-      ". You see them as a preview in the channel first. Once a day per server.",
-    "Übernimmt die Vorschau (30 Minuten lang): Server-Icon und Profilbild des Bots werden gesetzt, die Emojis angelegt. Das Banner setzt der Bot nur mit Boost-Stufe 2, sonst lädst du es aus der Vorschau selbst hoch.":
-      "Applies the preview (for 30 minutes): the server icon and the bot avatar are set and the emojis created. The bot only sets the banner with boost level 2, otherwise you upload it yourself from the preview.",
+    "Eine KI malt zu deinem Thema ein Server-Icon, ein Profilbild des Bots für deinen Server, ein Banner, vier Emojis und drei Sticker, zum Beispiel":
+      "An AI paints a server icon, a bot avatar for your server, a banner, four emojis and three stickers for your topic, for example",
+    ". Du siehst sie zuerst als Vorschau im Kanal. Pro Server gibt es 30 Bilder am Tag, also drei komplette Durchgänge.":
+      ". You see them as a preview in the channel first. Each server gets 30 images a day, that is three complete rounds.",
+    "Übernimmt die Vorschau (30 Minuten lang): Server-Icon und Profilbild des Bots werden gesetzt, Emojis und Sticker angelegt. Das Banner setzt der Bot nur mit Boost-Stufe 2, sonst lädst du es aus der Vorschau selbst hoch.":
+      "Applies the preview (for 30 minutes): the server icon and the bot avatar are set and the emojis and stickers created. The bot only sets the banner with boost level 2, otherwise you upload it yourself from the preview.",
+    "Gefällt dir die Vorschau nicht, malt die KI alles noch einmal zum selben Thema. Nur einen Teil neu:":
+      "If you don't like the preview, the AI paints everything again for the same topic. Just one part:",
+    ", ebenso mit icon, profilbild, banner oder sticker. Ein neues Thema geht mit":
+      ", likewise with icon, profilbild, banner or sticker. A new topic works with",
+    "und dem Thema.":
+      "and the topic.",
     "Discord hat ein Tageslimit für alle Server zusammen. Es zählt die letzten 24 Stunden. Ist es erreicht, beantwortet der Bot keine Fragen, bis wieder Platz frei ist.":
       "Discord has a daily limit for all servers together, counted over the last 24 hours. Once it's reached, the bot answers no questions until there's room again.",
     "Eigene Befehle (Streamer, Mods, Server-Betreiber)": "Custom commands (streamers, mods, server owners)",
