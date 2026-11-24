@@ -20,8 +20,8 @@ Object.assign(window.VENOX_EN.texte, {
   "Befehle – VenoxBot": "Commands – VenoxBot",
   "Alle Befehle": "All commands",
   "Alle Befehle für den Twitch-Chat und Discord, geordnet nach Rolle.": "All commands for Twitch chat and Discord, sorted by role. The bot answers in German.",
-  ". Höchstens 50 Befehle pro Kanal bzw. Server, 400 Zeichen pro Text, jeder Befehl höchstens alle 5 Sekunden. Texte mit gesperrten Begriffen werden nicht gespeichert. Für Twitch-Kanäle geht alles auch bequem auf der":
-    ". Up to 50 commands per channel or server, 400 characters per text, each command at most every 5 seconds. Texts with blocked words are not saved. For Twitch channels you can also do all of this on the",
+  "dem Kanal folgt, nur Twitch). Höchstens 50 Befehle pro Kanal bzw. Server, 400 Zeichen pro Text, jeder Befehl höchstens alle 5 Sekunden. Texte mit gesperrten Begriffen werden nicht gespeichert. Für Twitch-Kanäle geht alles auch bequem auf der":
+    "has been following the channel, Twitch only). Up to 50 commands per channel or server, 400 characters per text, each command at most every 5 seconds. Texts with blocked words are not saved. For Twitch channels you can also do all of this on the",
   "Befehle-Website": "commands website",
   ", mit Emote-Auswahl (Anmeldung mit Twitch, für Streamer und Mods).": ", with an emote picker (log in with Twitch, for streamers and mods).",
   "Markiert. Bitte mit Strg+C oder lange drücken kopieren.": "Selected. Please copy with Ctrl+C or a long press.",
